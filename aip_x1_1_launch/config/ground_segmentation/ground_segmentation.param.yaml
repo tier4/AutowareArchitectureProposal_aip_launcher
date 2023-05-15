@@ -1,0 +1,51 @@
+/**:
+  ros__parameters:
+    additional_lidars: []
+    ransac_input_topics: [
+      "/sensing/lidar/front_center/outlier_filtered/pointcloud"
+    ]
+    use_single_frame_filter: True
+    use_time_series_filter: False
+
+    common_crop_box_filter:
+      parameters:
+        min_x: -50.0
+        max_x: 100.0
+        min_y: -50.0
+        max_y: 50.0
+        min_z: -0.5
+        negative: False
+
+    common_ground_filter:
+      plugin: "ground_segmentation::RayGroundFilterComponent"
+      parameters:
+        initial_max_slope: 10.0
+        general_max_slope: 10.0
+        local_max_slope: 10.0
+        min_height_threshold: 0.3
+        radial_divider_angle: 1.0
+        concentric_divider_distance: 0.0
+        use_vehicle_footprint: True
+
+    short_height_obstacle_detection_area_filter:
+      parameters:
+        min_x: 0.0
+        max_x: 19.6  # max_x: 18.0m + base_link2livox_front_center distance 1.6m
+        min_y: -4.0
+        max_y: 4.0
+        min_z: -0.5
+        max_z: 0.5
+        negative: False
+
+    ransac_ground_filter:
+      parameters:
+        outlier_threshold: 0.1
+        min_points: 400
+        min_inliers: 200
+        max_iterations: 50
+        height_threshold: 0.15
+        plane_slope_threshold: 10.0
+        voxel_size_x: 0.2
+        voxel_size_y: 0.2
+        voxel_size_z: 0.2
+        debug: False
