@@ -26,6 +26,8 @@ from launch_ros.descriptions import ComposableNode
 
 def get_vehicle_info(context):
     gp = context.launch_configurations.get("ros_params", {})
+    if not gp:
+        gp = dict(context.launch_configurations.get("global_params", {}))
     p = {}
     p["vehicle_length"] = gp["front_overhang"] + gp["wheel_base"] + gp["rear_overhang"]
     p["vehicle_width"] = gp["wheel_tread"] + gp["left_overhang"] + gp["right_overhang"]
