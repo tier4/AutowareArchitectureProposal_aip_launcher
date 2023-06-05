@@ -20,6 +20,13 @@
       <arg name="launch_driver" value="$(var launch_driver)" />
     </include>
 
+    <!-- Vehicle twist -->
+    <include file="$(find-pkg-share vehicle_velocity_converter)/launch/vehicle_velocity_converter.launch.xml">
+      <arg name="input_vehicle_velocity_topic" value="/vehicle/status/velocity_status"/>
+      <arg name="output_twist_with_covariance" value="/sensing/vehicle_velocity_converter/twist_with_covariance"/>
+      <arg name="config_file" value="$(find-pkg-share individual_params)/config/$(env VEHICLE_ID default)/aip_x1_1/vehicle_velocity_converter.param.yaml" />
+    </include>
+
   </group>
 
 </launch>
