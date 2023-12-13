@@ -39,7 +39,6 @@ def get_pandar_monitor_info():
         p = yaml.safe_load(f)["/**"]["ros__parameters"]
     return p
 
-
 def launch_setup(context, *args, **kwargs):
     def create_parameter_dict(*args):
         result = {}

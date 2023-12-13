@@ -30,7 +30,10 @@ def launch_setup(context, *args, **kwargs):
         package="pointcloud_preprocessor",
         plugin="pointcloud_preprocessor::PointCloudConcatenateDataSynchronizerComponent",
         name="concatenate_data",
-        remappings=[("output", "concatenated/pointcloud")],
+        remappings=[
+            ("~/input/twist", "/sensing/vehicle_velocity_converter/twist_with_covariance"),
+            ("output", "concatenated/pointcloud")
+        ],
         parameters=[
             {
                 "input_topics": [
@@ -39,6 +42,7 @@ def launch_setup(context, *args, **kwargs):
                 ],
                 "output_frame": LaunchConfiguration("base_frame"),
                 "timeout_sec": 1.0,
+                "input_twist_topic_type": "twist",
             }
         ],
         extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
