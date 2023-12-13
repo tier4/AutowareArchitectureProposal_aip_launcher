@@ -7,6 +7,7 @@
   <arg name="vehicle_mirror_param_file" />
   <arg name="use_pointcloud_container" default="false" description="launch pointcloud container"/>
   <arg name="pointcloud_container_name" default="pointcloud_container"/>
+  <arg name="use_awsim" default="false" description="launch awsim"/>
 
   <group>
     <push-ros-namespace namespace="lidar"/>
@@ -23,7 +24,7 @@
       </include>
     </group>
 
-    <group>
+    <group unless="$(var use_awsim)">
       <push-ros-namespace namespace="front_center" />
       <include file="$(find-pkg-share aip_x1_1_launch)/launch/pandar_node_container.launch.py">
         <arg name="model" value="PandarXT-32" />
@@ -40,7 +41,7 @@
       </include>
     </group>
 
-    <include file="$(find-pkg-share aip_x1_1_launch)/launch/pointcloud_preprocessor.launch.py">
+    <include file="$(find-pkg-share aip_x1_1_launch)/launch/pointcloud_preprocessor.launch.py"  unless="$(var use_awsim)">
       <arg name="base_frame" value="base_link" />
       <arg name="use_intra_process" value="true" />
       <arg name="use_multithread" value="false" />
@@ -48,6 +49,6 @@
       <arg name="container_name" value="$(var pointcloud_container_name)"/>
     </include>
 
-    <include file="$(find-pkg-share aip_x1_1_launch)/launch/topic_state_monitor.launch.py" />
+    <include file="$(find-pkg-share aip_x1_1_launch)/launch/topic_state_monitor.launch.py"  unless="$(var use_awsim)"/>
   </group>
 </launch>
