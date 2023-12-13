@@ -6,8 +6,6 @@
   <arg name="pointcloud_container_name" default="pointcloud_container"/>
   <arg name ="vehicle_id" default="$(env VEHICLE_ID default)" />
   <arg name="use_awsim" default="false"/>
-  <let name="imu_raw_name" value="tamagawa/imu_raw" if ="$(var use_awsim)"/>
-  <let name="imu_raw_name" value="/sensing/lidar/front_center/livox/imu" unless ="$(var use_awsim)"/>
 
   <group>
     <!-- LiDAR Driver -->

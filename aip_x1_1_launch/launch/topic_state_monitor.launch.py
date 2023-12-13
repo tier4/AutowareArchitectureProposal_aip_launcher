@@ -45,7 +45,7 @@ def generate_launch_description():
         name="topic_state_monitor_top_outlier_filtered",
         parameters=[
             {
-                "topic": "/sensing/lidar/top/outlier_filtered/pointcloud",
+                "topic": "/sensing/lidar/top/pointcloud",
                 "topic_type": "sensor_msgs/msg/PointCloud2",
                 "best_effort": True,
                 "diag_name": "sensing_topic_status",
