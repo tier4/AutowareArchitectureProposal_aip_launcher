@@ -39,6 +39,23 @@ def get_pandar_monitor_info():
         p = yaml.safe_load(f)["/**"]["ros__parameters"]
     return p
 
+def get_vehicle_info(context):
+    # TODO(TIER IV): Use Parameter Substitution after we drop Galactic support
+    # https://github.com/ros2/launch_ros/blob/master/launch_ros/launch_ros/substitutions/parameter.py
+    gp = context.launch_configurations.get("ros_params", {})
+    if not gp:
+        gp = dict(context.launch_configurations.get("global_params", {}))
+    p = {}
+    p["vehicle_length"] = gp["front_overhang"] + gp["wheel_base"] + gp["rear_overhang"]
+    p["vehicle_width"] = gp["wheel_tread"] + gp["left_overhang"] + gp["right_overhang"]
+    p["min_longitudinal_offset"] = -gp["rear_overhang"]
+    p["max_longitudinal_offset"] = gp["front_overhang"] + gp["wheel_base"]
+    p["min_lateral_offset"] = -(gp["wheel_tread"] / 2.0 + gp["right_overhang"])
+    p["max_lateral_offset"] = gp["wheel_tread"] / 2.0 + gp["left_overhang"]
+    p["min_height_offset"] = -0.3  # margin to crop pointcloud under vehicle
+    p["max_height_offset"] = gp["vehicle_height"]
+    return p
+
 def launch_setup(context, *args, **kwargs):
     def create_parameter_dict(*args):
         result = {}
@@ -94,6 +111,29 @@ def launch_setup(context, *args, **kwargs):
         extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
     )
 
+    cropbox_parameters = create_parameter_dict("input_frame", "output_frame")
+    cropbox_parameters["negative"] = True
+
+    vehicle_info = get_vehicle_info(context)
+    cropbox_parameters["min_x"] = vehicle_info["min_longitudinal_offset"]
+    cropbox_parameters["max_x"] = vehicle_info["max_longitudinal_offset"]
+    cropbox_parameters["min_y"] = vehicle_info["min_lateral_offset"]
+    cropbox_parameters["max_y"] = vehicle_info["max_lateral_offset"]
+    cropbox_parameters["min_z"] = vehicle_info["min_height_offset"]
+    cropbox_parameters["max_z"] = vehicle_info["max_height_offset"]
+
+    self_crop_component = ComposableNode(
+        package="pointcloud_preprocessor",
+        plugin="pointcloud_preprocessor::CropBoxFilterComponent",
+        name="crop_box_filter_self",
+        remappings=[
+            ("input", "pointcloud_raw_ex"),
+            ("output", "self_cropped/pointcloud_ex"),
+        ],
+        parameters=[cropbox_parameters],
+        extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
+    )
+
     undistort_component = ComposableNode(
         package="pointcloud_preprocessor",
         plugin="pointcloud_preprocessor::DistortionCorrectorComponent",
@@ -102,7 +142,7 @@ def launch_setup(context, *args, **kwargs):
             ("~/input/twist", "/sensing/vehicle_velocity_converter/twist_with_covariance"),
             ("~/input/imu", "/sensing/imu/imu_data"),
             ("~/input/velocity_report", "/vehicle/status/velocity_status"),
-            ("~/input/pointcloud", "pointcloud_raw_ex"),
+            ("~/input/pointcloud", "self_cropped/pointcloud_ex"),
             ("~/output/pointcloud", "rectified/pointcloud_ex"),
         ],
         extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
@@ -114,7 +154,7 @@ def launch_setup(context, *args, **kwargs):
         name="ring_outlier_filter",
         remappings=[
             ("input", "rectified/pointcloud_ex"),
-            ("output", "outlier_filtered/pointcloud"),
+            ("output", "pointcloud"),
         ],
         extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
     )
@@ -126,6 +166,7 @@ def launch_setup(context, *args, **kwargs):
         executable=LaunchConfiguration("container_executable"),
         composable_node_descriptions=[
             pointcloud_component,
+            self_crop_component,
             undistort_component,
             ring_outlier_filter_component,
         ],
@@ -158,11 +199,14 @@ def generate_launch_description():
     add_launch_arg("angle_range", "[0.0, 360.0]")
     add_launch_arg("distance_range", "[0.05, 200.0]")
     add_launch_arg("return_mode", "Dual")
+    add_launch_arg("base_frame", "base_link")
     add_launch_arg("container_name", "pandar_composable_node_container")
     add_launch_arg("pcap", "")
     add_launch_arg("lidar_port", "2321")
     add_launch_arg("gps_port", "10121")
     add_launch_arg("frame_id", "pandar")
+    add_launch_arg("input_frame", LaunchConfiguration("base_frame"))
+    add_launch_arg("output_frame", LaunchConfiguration("base_frame"))
     add_launch_arg("use_multithread", "False")
     add_launch_arg("use_intra_process", "False")
 
