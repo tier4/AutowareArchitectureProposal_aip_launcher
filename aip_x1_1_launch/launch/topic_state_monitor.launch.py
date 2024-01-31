@@ -64,7 +64,7 @@ def generate_launch_description():
         name="topic_state_monitor_pandar_front_center_outlier_filtered",
         parameters=[
             {
-                "topic": "/sensing/lidar/front_center/outlier_filtered/pointcloud",
+                "topic": "/sensing/lidar/front_center/pointcloud",
                 "topic_type": "sensor_msgs/msg/PointCloud2",
                 "best_effort": True,
                 "diag_name": "sensing_topic_status",
@@ -84,7 +84,7 @@ def generate_launch_description():
         name="topic_state_monitor_rough_no_ground",
         parameters=[
             {
-                "topic": "/perception/obstacle_segmentation/single_frame/pointcloud_raw",
+                "topic": "/perception/obstacle_segmentation/single_frame/pointcloud",
                 "topic_type": "sensor_msgs/msg/PointCloud2",
                 "best_effort": True,
                 "diag_name": "sensing_topic_status",
@@ -96,24 +96,24 @@ def generate_launch_description():
         ],
         extra_arguments=[{"use_intra_process_comms": True}],
     )
-    topic_state_monitor_short_height_no_ground = ComposableNode(
-        package="topic_state_monitor",
-        plugin="topic_state_monitor::TopicStateMonitorNode",
-        name="topic_state_monitor_short_height_no_ground",
-        parameters=[
-            {
-                "topic": "/perception/obstacle_segmentation/plane_fitting/pointcloud",
-                "topic_type": "sensor_msgs/msg/PointCloud2",
-                "best_effort": True,
-                "diag_name": "sensing_topic_status",
-                "warn_rate": 5.0,
-                "error_rate": 1.0,
-                "timeout": 1.0,
-                "window_size": 10,
-            },
-        ],
-        extra_arguments=[{"use_intra_process_comms": True}],
-    )
+    # topic_state_monitor_short_height_no_ground = ComposableNode(
+    #     package="topic_state_monitor",
+    #     plugin="topic_state_monitor::TopicStateMonitorNode",
+    #     name="topic_state_monitor_short_height_no_ground",
+    #     parameters=[
+    #         {
+    #             "topic": "/perception/obstacle_segmentation/plane_fitting/pointcloud",
+    #             "topic_type": "sensor_msgs/msg/PointCloud2",
+    #             "best_effort": True,
+    #             "diag_name": "sensing_topic_status",
+    #             "warn_rate": 5.0,
+    #             "error_rate": 1.0,
+    #             "timeout": 1.0,
+    #             "window_size": 10,
+    #         },
+    #     ],
+    #     extra_arguments=[{"use_intra_process_comms": True}],
+    # )
 
     # topic monitor for tamagawa IMU
     topic_state_monitor_imu_data = ComposableNode(
@@ -146,7 +146,7 @@ def generate_launch_description():
             topic_state_monitor_top_outlier_filtered,
             topic_state_monitor_pandar_front_center_outlier_filtered,
             topic_state_monitor_rough_no_ground,
-            topic_state_monitor_short_height_no_ground,
+            # topic_state_monitor_short_height_no_ground,
             topic_state_monitor_imu_data,
         ],
         output="screen",
