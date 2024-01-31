@@ -38,7 +38,7 @@ def launch_setup(context, *args, **kwargs):
             {
                 "input_topics": [
                     "/sensing/lidar/top/pointcloud",
-                    "/sensing/lidar/front_center/pointcloud_raw",
+                    "/sensing/lidar/front_center/pointcloud",
                 ],
                 "output_frame": LaunchConfiguration("base_frame"),
                 "timeout_sec": 1.0,
@@ -69,6 +69,7 @@ def launch_setup(context, *args, **kwargs):
     concat_loader = LoadComposableNodes(
         composable_node_descriptions=[concat_component],
         target_container=target_container,
+        condition=IfCondition(LaunchConfiguration("use_concat_filter")),
     )
 
     return [container, concat_loader]
