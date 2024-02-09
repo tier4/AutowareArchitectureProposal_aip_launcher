@@ -149,7 +149,7 @@ def launch_setup(context, *args, **kwargs):
     # set container to run all required components in the same process
     container = ComposableNodeContainer(
         # need unique name, otherwise all processes in same container and the node names then clash
-        name="velodyne_node_container",
+        name=LaunchConfiguration("container_name"),
         namespace="pointcloud_preprocessor",
         package="rclcpp_components",
         executable=LaunchConfiguration("container_executable"),
