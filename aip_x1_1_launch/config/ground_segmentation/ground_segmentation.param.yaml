@@ -17,20 +17,30 @@
         negative: False
 
     common_ground_filter:
-      plugin: "ground_segmentation::RayGroundFilterComponent"
+      plugin: "ground_segmentation::ScanGroundFilterComponent"
       parameters:
-        initial_max_slope: 10.0
-        general_max_slope: 10.0
-        local_max_slope: 10.0
-        min_height_threshold: 0.3
-        radial_divider_angle: 1.0
-        concentric_divider_distance: 0.0
-        use_vehicle_footprint: True
+        global_slope_max_angle_deg: 10.0
+        local_slope_max_angle_deg: 13.0 # recommended 30.0 for non elevation_grid_mode
+        split_points_distance_tolerance: 0.2
+        use_virtual_ground_point: True
+        split_height_distance: 0.2
+        radial_divider_angle_deg: 1.0
+
+    # common_ground_filter:
+    #   plugin: "ground_segmentation::RayGroundFilterComponent"
+    #   parameters:
+    #     initial_max_slope: 10.0
+    #     general_max_slope: 10.0
+    #     local_max_slope: 10.0
+    #     min_height_threshold: 0.3
+    #     radial_divider_angle: 1.0
+    #     concentric_divider_distance: 0.0
+    #     use_vehicle_footprint: True
 
     short_height_obstacle_detection_area_filter:
       parameters:
         min_x: 0.0
-        max_x: 19.6  # max_x: 18.0m + base_link2livox_front_center distance 1.6m
+        max_x: 21.6  # max_x: 20.0m + base_link2xt32_front_center distance 1.6m
         min_y: -4.0
         max_y: 4.0
         min_z: -0.5

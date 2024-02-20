@@ -50,6 +50,8 @@ class GroundSegmentationPipeline:
     def get_vehicle_info(self):
         # TODO: need to rename key from "ros_params" to "global_params" after Humble
         gp = self.context.launch_configurations.get("ros_params", {})
+        if not gp:
+            gp = dict(self.context.launch_configurations.get("global_params", {}))
         p = {}
         p["vehicle_length"] = gp["front_overhang"] + gp["wheel_base"] + gp["rear_overhang"]
         p["vehicle_width"] = gp["wheel_tread"] + gp["left_overhang"] + gp["right_overhang"]
@@ -82,8 +84,8 @@ class GroundSegmentationPipeline:
                     {
                         "input_frame": LaunchConfiguration("base_frame"),
                         "output_frame": LaunchConfiguration("base_frame"),
-                        "min_z": self.vehicle_info["min_height_offset"],
-                        "max_z": self.vehicle_info["max_height_offset"],
+                        # "min_z": self.vehicle_info["min_height_offset"],
+                        # "max_z": self.vehicle_info["max_height_offset"],
                     },
                     self.ground_segmentation_param[f"{lidar_name}_crop_box_filter"]["parameters"],
                 ],
