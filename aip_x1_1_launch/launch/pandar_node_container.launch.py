@@ -39,6 +39,7 @@ def get_pandar_monitor_info():
         p = yaml.safe_load(f)["/**"]["ros__parameters"]
     return p
 
+
 def get_vehicle_info(context):
     # TODO(TIER IV): Use Parameter Substitution after we drop Galactic support
     # https://github.com/ros2/launch_ros/blob/master/launch_ros/launch_ros/substitutions/parameter.py
@@ -55,6 +56,7 @@ def get_vehicle_info(context):
     p["min_height_offset"] = -0.3  # margin to crop pointcloud under vehicle
     p["max_height_offset"] = gp["vehicle_height"]
     return p
+
 
 def launch_setup(context, *args, **kwargs):
     def create_parameter_dict(*args):

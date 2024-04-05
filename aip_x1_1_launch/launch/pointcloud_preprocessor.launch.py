@@ -31,7 +31,7 @@ def launch_setup(context, *args, **kwargs):
         name="concatenate_data",
         remappings=[
             ("~/input/twist", "/sensing/vehicle_velocity_converter/twist_with_covariance"),
-            ("output", "concatenated/pointcloud")
+            ("output", "concatenated/pointcloud"),
         ],
         parameters=[
             {
