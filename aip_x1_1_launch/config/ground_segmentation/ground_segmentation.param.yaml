@@ -9,12 +9,12 @@
 
     common_crop_box_filter:
       parameters:
-        min_x: -100.0
-        max_x: 150.0
-        min_y: -70.0
-        max_y: 70.0
-        margin_max_z: 0.0  # to extend the crop box max_z from vehicle_height
-        margin_min_z: -2.5 # to extend the crop box min_z from ground
+        min_x: -50.0
+        max_x: 100.0
+        min_y: -50.0
+        max_y: 50.0
+        margin_max_z: 0.63  # to extend the crop box max_z from vehicle_height
+        margin_min_z: -0.5 # to extend the crop box min_z from ground
         negative: False
 
     common_ground_filter:
@@ -31,17 +31,26 @@
         gnd_grid_buffer_size: 4
         detection_range_z_max: 2.5
         elevation_grid_mode: true
+        use_recheck_ground_cluster: true
+        low_priority_region_x: -20.0
+        center_pcl_shift: 0.0
+        radial_divider_angle_deg: 1.0
 
     # common_ground_filter:
     #   plugin: "ground_segmentation::RayGroundFilterComponent"
     #   parameters:
-    #     initial_max_slope: 10.0
+    #     min_x: -0.01
+    #     max_x: +0.01
+    #     min_y: -0.01
+    #     max_y: +0.01
+    #     use_vehicle_footprint: True
     #     general_max_slope: 10.0
     #     local_max_slope: 10.0
-    #     min_height_threshold: 0.3
+    #     initial_max_slope: 10.0
     #     radial_divider_angle: 1.0
+    #     min_height_threshold: 0.3
     #     concentric_divider_distance: 0.0
-    #     use_vehicle_footprint: True
+    #     reclass_distance_threshold: 0.1
 
     short_height_obstacle_detection_area_filter:
       parameters:
@@ -55,13 +64,15 @@
 
     ransac_ground_filter:
       parameters:
-        outlier_threshold: 0.1
-        min_points: 400
-        min_inliers: 200
+#        base_frame: base_link
+        unit_axis: "z"
         max_iterations: 50
-        height_threshold: 0.10
+        min_trial: 200
+        min_points: 400
+        outlier_threshold: 0.1
         plane_slope_threshold: 10.0
         voxel_size_x: 0.1
         voxel_size_y: 0.1
         voxel_size_z: 0.1
+        height_threshold: 0.10
         debug: False
