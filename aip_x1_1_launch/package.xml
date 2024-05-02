@@ -10,22 +10,18 @@
 
   <buildtool_depend>ament_cmake_auto</buildtool_depend>
 
+  <exec_depend>common_sensor_launch</exec_depend>
   <exec_depend>compare_map_segmentation</exec_depend>
   <exec_depend>elevation_map_loader</exec_depend>
   <exec_depend>ground_segmentation</exec_depend>
   <exec_depend>imu_corrector</exec_depend>
   <exec_depend>individual_params</exec_depend>
   <exec_depend>occupancy_grid_map_outlier_filter</exec_depend>
-  <exec_depend>pandar_driver</exec_depend>
-  <exec_depend>pandar_pointcloud</exec_depend>
   <exec_depend>pointcloud_preprocessor</exec_depend>
   <exec_depend>rclcpp_components</exec_depend>
   <exec_depend>ros2_socketcan</exec_depend>
   <exec_depend>tamagawa_imu_driver</exec_depend>
   <exec_depend>topic_state_monitor</exec_depend>
-  <exec_depend>velodyne_driver</exec_depend>
-  <exec_depend>velodyne_monitor</exec_depend>
-  <exec_depend>velodyne_pointcloud</exec_depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>autoware_lint_common</test_depend>
