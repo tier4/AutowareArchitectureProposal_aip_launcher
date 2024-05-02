@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <robot name="vehicle" xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <xacro:arg name="config_dir" default="$(find aip_x1_description)/config"/>
-  <xacro:include filename="$(find aip_x1_description)/urdf/sensor_kit.xacro"/>
-  <xacro:property name="calibration" value="${xacro.load_yaml('$(arg config_dir)/sensors_calibration.yaml')}"/>
+  <xacro:arg name="config_dir" default="$(find aip_x1_1_description)/config"/>
+  <xacro:include filename="$(find aip_x1_1_description)/urdf/sensor_kit.xacro"/>
+  <xacro:property name="calibration" value="${load_yaml('$(arg config_dir)/sensors_calibration.yaml')}"/>
 
   <!-- sensor kit -->
   <xacro:sensor_kit_macro

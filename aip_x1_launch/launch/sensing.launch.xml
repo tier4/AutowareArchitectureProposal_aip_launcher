@@ -8,7 +8,7 @@
 
   <group>
     <!-- LiDAR Driver -->
-    <include file="$(find-pkg-share aip_x1_launch)/launch/lidar.launch.xml">
+    <include file="$(find-pkg-share aip_x1_1_launch)/launch/lidar.launch.xml">
       <arg name="launch_driver" value="$(var launch_driver)" />
       <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)" />
       <arg name="pointcloud_container_name" value="$(var pointcloud_container_name)"/>
@@ -16,9 +16,8 @@
     </include>
 
     <!-- IMU Driver -->
-    <include file="$(find-pkg-share aip_x1_launch)/launch/imu.launch.xml">
+    <include file="$(find-pkg-share aip_x1_1_launch)/launch/imu.launch.xml">
       <arg name="launch_driver" value="$(var launch_driver)" />
-      <arg name="imu_raw_name" value="$(var imu_raw_name)" />
     </include>
 
     <!-- GNSS Driver -->
@@ -30,7 +29,7 @@
     <include file="$(find-pkg-share autoware_vehicle_velocity_converter)/launch/vehicle_velocity_converter.launch.xml">
       <arg name="input_vehicle_velocity_topic" value="/vehicle/status/velocity_status"/>
       <arg name="output_twist_with_covariance" value="/sensing/vehicle_velocity_converter/twist_with_covariance"/>
-      <arg name="config_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x1/vehicle_velocity_converter.param.yaml" />
+      <arg name="config_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x1_1/vehicle_velocity_converter.param.yaml" />
     </include>
   </group>
 

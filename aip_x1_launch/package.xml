@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>aip_x1_launch</name>
+  <name>aip_x1_1_launch</name>
   <version>0.1.0</version>
-  <description>The aip_x1_launch package</description>
+  <description>The aip_x1_1_launch package</description>
 
   <maintainer email="takeshi.miura@tier4.jp">Takeshi Miura</maintainer>
   <license>Apache License 2.0</license>

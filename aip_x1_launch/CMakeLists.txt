@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(aip_x1_launch)
+project(aip_x1_1_launch)
 
 find_package(ament_cmake_auto REQUIRED)
 ament_auto_find_build_dependencies()
