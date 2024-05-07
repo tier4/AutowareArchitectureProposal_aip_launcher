@@ -13,7 +13,13 @@
   ros__parameters:
     required_diags:
       # gnss
-      gnss: default
+      gnss_connection: default
+      gnss_data: default
+      gnss_antenna: default
+      gnss_tx_usage: default
+      gnss_spoofing: default
+      gnss_jamming: default
+      fix topic status: default
 
       # pandar
       pandar_connection: default
@@ -24,8 +30,6 @@
       velodyne_connection: default
       velodyne_temperature: default
       velodyne_rpm: default
-
-      concat_status: default
 
       sensing_topic_status: default
 
