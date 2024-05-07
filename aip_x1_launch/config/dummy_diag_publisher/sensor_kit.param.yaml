@@ -1,0 +1,33 @@
+# Description:
+#   name: diag name
+#   is_active: Force update or not
+#   status: diag status set by dummy diag publisher "OK, Warn, Error, Stale"
+#
+# Note:
+#
+# default values are:
+#   is_active: "true"
+#   status: "OK"
+---
+/**:
+  ros__parameters:
+    required_diags:
+      # gnss
+      gnss: default
+
+      # pandar
+      pandar_connection: default
+      pandar_temperature: default
+      pandar_ptp: default
+
+      # velodyne
+      velodyne_connection: default
+      velodyne_temperature: default
+      velodyne_rpm: default
+
+      concat_status: default
+
+      sensing_topic_status: default
+
+      # imu
+      gyro_bias_estimator: default
