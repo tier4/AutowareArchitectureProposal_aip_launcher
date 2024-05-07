@@ -34,7 +34,7 @@ class GroundSegmentationPipeline:
         self.context = context
         self.vehicle_info = self.get_vehicle_info()
         ground_segmentation_param_path = os.path.join(
-            get_package_share_directory("aip_x1_1_launch"),
+            get_package_share_directory("aip_x1_launch"),
             "config/ground_segmentation/ground_segmentation.param.yaml",
         )
         with open(ground_segmentation_param_path, "r") as f:
@@ -369,7 +369,7 @@ class GroundSegmentationPipeline:
                         "inpaint_radius": 1.0,
                         "param_file_path": PathJoinSubstitution(
                             [
-                                FindPackageShare("aip_x1_1_launch"),
+                                FindPackageShare("aip_x1_launch"),
                                 "config",
                                 "ground_segmentation",
                                 "elevation_map_parameters.yaml",

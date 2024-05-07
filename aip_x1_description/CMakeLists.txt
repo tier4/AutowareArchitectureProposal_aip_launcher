@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(aip_x1_1_description)
+project(aip_x1_description)
 
 find_package(ament_cmake_auto REQUIRED)
 
