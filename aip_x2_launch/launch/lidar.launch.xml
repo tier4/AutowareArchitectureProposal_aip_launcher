@@ -37,7 +37,7 @@
         <!--arg name="is_channel_order_top2down" value="true"/-->
         <!--arg name="horizontal_resolution" value="0.4"/-->
         <!--arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/-->
-        <!--arg name="calibration" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2/pandar/front_lower.csv" /-->
+        <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2/pandar/front_lower.csv" />
         <arg name="launch_driver" value="$(var launch_driver)" />
         <!--arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" /-->
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)" />
@@ -70,7 +70,7 @@
         <!--arg name="is_channel_order_top2down" value="true"/-->
         <!--arg name="horizontal_resolution" value="0.4"/-->
         <!--arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/-->
-        <!--arg name="calibration" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2/pandar/front_lower.csv" /-->
+        <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2/pandar/front_upper.csv" />
         <arg name="launch_driver" value="$(var launch_driver)" />
         <!--arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" /-->
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)" />
@@ -103,7 +103,7 @@
         <!--arg name="is_channel_order_top2down" value="true"/-->
         <!--arg name="horizontal_resolution" value="0.4"/-->
         <!--arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/-->
-        <!--arg name="calibration" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2/pandar/front_lower.csv" /-->
+        <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2/pandar/left_upper.csv" />
         <arg name="launch_driver" value="$(var launch_driver)" />
         <!--arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" /-->
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)" />
@@ -136,7 +136,7 @@
         <!--arg name="is_channel_order_top2down" value="true"/-->
         <!--arg name="horizontal_resolution" value="0.4"/-->
         <!--arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/-->
-        <!--arg name="calibration" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2/pandar/front_lower.csv" /-->
+        <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2/pandar/left_lower.csv" />
         <arg name="launch_driver" value="$(var launch_driver)" />
         <!--arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" /-->
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)" />
@@ -169,7 +169,7 @@
         <!--arg name="is_channel_order_top2down" value="true"/-->
         <!--arg name="horizontal_resolution" value="0.4"/-->
         <!--arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/-->
-        <!--arg name="calibration" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2/pandar/front_lower.csv" /-->
+        <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2/pandar/right_upper.csv" />
         <arg name="launch_driver" value="$(var launch_driver)" />
         <!--arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" /-->
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)" />
@@ -202,7 +202,7 @@
         <!--arg name="is_channel_order_top2down" value="true"/-->
         <!--arg name="horizontal_resolution" value="0.4"/-->
         <!--arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/-->
-        <!--arg name="calibration" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2/pandar/front_lower.csv" /-->
+        <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2/pandar/right_lower.csv" />
         <arg name="launch_driver" value="$(var launch_driver)" />
         <!--arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" /-->
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)" />
@@ -235,7 +235,7 @@
         <!--arg name="is_channel_order_top2down" value="true"/-->
         <!--arg name="horizontal_resolution" value="0.4"/-->
         <!--arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/-->
-        <!--arg name="calibration" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2/pandar/front_lower.csv" /-->
+        <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2/pandar/rear_lower.csv" />
         <arg name="launch_driver" value="$(var launch_driver)" />
         <!--arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" /-->
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)" />
@@ -268,7 +268,7 @@
         <!--arg name="is_channel_order_top2down" value="true"/-->
         <!--arg name="horizontal_resolution" value="0.4"/-->
         <!--arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/-->
-        <!--arg name="calibration" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2/pandar/front_lower.csv" /-->
+        <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2/pandar/rear_upper.csv" />
         <arg name="launch_driver" value="$(var launch_driver)" />
         <!--arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" /-->
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)" />

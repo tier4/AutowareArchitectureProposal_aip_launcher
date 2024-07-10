@@ -75,18 +75,6 @@ def launch_setup(context, *args, **kwargs):
     # Model and make
     sensor_model = LaunchConfiguration("sensor_model").perform(context)
     sensor_make, sensor_extension = get_lidar_make(sensor_model)
-    nebula_decoders_share_dir = get_package_share_directory("nebula_decoders")
-
-    # Calibration file
-    sensor_calib_fp = os.path.join(
-        nebula_decoders_share_dir,
-        "calibration",
-        sensor_make.lower(),
-        sensor_model + sensor_extension,
-    )
-    assert os.path.exists(
-        sensor_calib_fp
-    ), "Sensor calib file under calibration/ was not found: {}".format(sensor_calib_fp)
 
     nodes = []
 
@@ -136,7 +124,6 @@ def launch_setup(context, *args, **kwargs):
             name=sensor_make.lower() + "_driver_ros_wrapper_node",
             parameters=[
                 {
-                    "calibration_file": sensor_calib_fp,
                     "sensor_model": sensor_model,
                     **create_parameter_dict(
                         "host_ip",
@@ -157,6 +144,7 @@ def launch_setup(context, *args, **kwargs):
                         "ptp_transport_type",
                         "ptp_switch_type",
                         "ptp_domain",
+                        "calibration_file",
                     ),
                     "launch_hw": True,
                 },
@@ -290,7 +278,6 @@ def launch_setup(context, *args, **kwargs):
         parameters=[
             {
                 "sensor_model": sensor_model,
-                "calibration_file": sensor_calib_fp,
                 **create_parameter_dict(
                     "sensor_ip",
                     "host_ip",
@@ -309,6 +296,7 @@ def launch_setup(context, *args, **kwargs):
                     "ptp_transport_type",
                     "ptp_switch_type",
                     "ptp_domain",
+                    "calibration_file",
                 ),
             }
         ],
@@ -360,6 +348,7 @@ def generate_launch_description():
     add_launch_arg("use_multithread", "False", "use multithread")
     add_launch_arg("use_intra_process", "False", "use ROS 2 component container communication")
     add_launch_arg("container_name", "nebula_node_container")
+    add_launch_arg("calibration_file", "")
 
     set_container_executable = SetLaunchConfiguration(
         "container_executable",
