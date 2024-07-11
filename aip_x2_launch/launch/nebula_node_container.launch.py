@@ -345,8 +345,8 @@ def generate_launch_description():
     )
     add_launch_arg("diag_span", "1000")
     add_launch_arg("delay_monitor_ms", "2000")
-    add_launch_arg("use_multithread", "False", "use multithread")
-    add_launch_arg("use_intra_process", "False", "use ROS 2 component container communication")
+    add_launch_arg("use_multithread", "True", "use multithread")
+    add_launch_arg("use_intra_process", "True", "use ROS 2 component container communication")
     add_launch_arg("container_name", "nebula_node_container")
     add_launch_arg("calibration_file", "")
 
