@@ -21,7 +21,7 @@
       pandar_ptp: default
       "left_upper: visibility_validation": default
       blockage_validation: default
-      concat_status: default
+      "concatenate_data: concat_status": default
 
       sensing_topic_status: default
 
