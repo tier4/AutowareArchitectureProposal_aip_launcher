@@ -150,6 +150,7 @@ def launch_setup(context, *args, **kwargs):
                 ("pandar_points", "pointcloud_raw_ex"),
                 ("velodyne_points", "pointcloud_raw_ex"),
             ],
+            condition=IfCondition(LaunchConfiguration("launch_driver")),
             extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
         )
     )
