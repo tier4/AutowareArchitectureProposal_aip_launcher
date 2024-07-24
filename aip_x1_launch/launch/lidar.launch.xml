@@ -28,6 +28,7 @@
         <arg name="launch_driver" value="$(var launch_driver)" />
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)" />
         <arg name="container_name" value="pointcloud_container"/>
+        <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
       </include>
     </group>
     <group>
