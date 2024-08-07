@@ -38,7 +38,7 @@
     <arg name="cloud_max_angle" value="$(var cloud_max_angle)"/>
     <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
     <arg name="use_intra_process" value="true"/>
-    <arg name="use_multithread" value="true"/>
+    <arg name="use_multithread" value="false"/>
     <arg name="container_name" value="$(var container_name)"/>
     <arg name="vertical_bins" value="$(var vertical_bins)"/>
     <arg name="horizontal_ring_id" value="$(var horizontal_ring_id)"/>
