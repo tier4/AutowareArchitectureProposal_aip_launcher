@@ -1,0 +1,8 @@
+/**:
+  ros__parameters:
+    base_frame: base_link
+    gnss_base_frame: gnss_link
+    map_frame: map
+    buff_epoch: 1
+    use_gnss_ins_orientation: false
+    gnss_pose_pub_method: 0         # 0: Median, 1: Average

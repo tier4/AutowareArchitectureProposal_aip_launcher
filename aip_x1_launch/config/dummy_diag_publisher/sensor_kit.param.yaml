@@ -12,19 +12,26 @@
 /**:
   ros__parameters:
     required_diags:
+      # gnss
+      gnss_connection: default
+      gnss_data: default
+      gnss_antenna: default
+      gnss_tx_usage: default
+      gnss_spoofing: default
+      gnss_jamming: default
+      fix topic status: default
+
+      # pandar
+      pandar_connection: default
+      pandar_temperature: default
+      pandar_ptp: default
+
       # velodyne
       velodyne_connection: default
       velodyne_temperature: default
       velodyne_rpm: default
 
-      # livox
-      livox_connection: default
-      livox_fan_status: default
-      livox_firmware_status: default
-      livox_internal_voltage: default
-      livox_motor_status: default
-      livox_service_life: default
-      livox_temperature: default
+      sensing_topic_status: default
 
       # imu
       gyro_bias_estimator: default

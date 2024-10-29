@@ -1,16 +1,30 @@
 <launch>
-
-  <arg name="launch_driver" default="true" />
-  <arg name ="vehicle_id" default="$(env VEHICLE_ID default)" />
-
   <group>
     <push-ros-namespace namespace="imu"/>
 
-    <arg name="imu_raw_name" default="/sensing/lidar/front_center/livox/imu"/>
+    <arg name="launch_driver" default="true" />
+    <arg name="interface" default="canIMU"/>
+    <arg name="receiver_interval_sec" default="0.01"/>
+    <arg name ="vehicle_id" default="$(env VEHICLE_ID default)" />
+
+    <group if="$(var launch_driver)">
+      <push-ros-namespace namespace="tamagawa"/>
+      <include file="$(find-pkg-share ros2_socketcan)/launch/socket_can_receiver.launch.py">
+        <arg name="interface" value="$(var interface)"/>
+        <arg name="interval_sec" value="$(var receiver_interval_sec)"/>
+      </include>
+      <node pkg="tamagawa_imu_driver" name="tag_can_driver" exec="tag_can_driver">
+        <remap from="/can/imu" to="from_can_bus"/>
+        <remap from="imu/data_raw" to="imu_raw"/>
+        <param name="imu_frame_id" value="tamagawa/imu_link"/>
+      </node>
+    </group>
+
+    <arg name="imu_raw_name" default="tamagawa/imu_raw"/>
     <arg name="imu_corrector_param_file" default="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x1/imu_corrector.param.yaml"/>
     <include file="$(find-pkg-share autoware_imu_corrector)/launch/imu_corrector.launch.xml">
       <arg name="input_topic" value="$(var imu_raw_name)"/>
-      <arg name="output_topic" value="imu_data"/>
+      <arg name="output_topic" value="imu_data" />
       <arg name="param_file" value="$(var imu_corrector_param_file)"/>
     </include>
 
@@ -19,7 +33,6 @@
       <arg name="input_imu_raw" value="$(var imu_raw_name)"/>
       <arg name="input_odom" value="/localization/kinematic_state"/>
       <arg name="imu_corrector_param_file" value="$(var imu_corrector_param_file)"/>
-      <arg name="gyro_bias_estimator_param_file" value="$(var gyro_bias_estimator_param_file)"/>
     </include>
   </group>
 
