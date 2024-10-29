@@ -129,7 +129,6 @@ def launch_setup(context, *args, **kwargs):
         )
     )
 
-
     # There is an issue where hw_monitor crashes due to data race,
     # so the monitor will now only be launched when explicitly specified with a launch command.
     launch_hw_monitor: bool = IfCondition(LaunchConfiguration("launch_hw_monitor")).evaluate(
