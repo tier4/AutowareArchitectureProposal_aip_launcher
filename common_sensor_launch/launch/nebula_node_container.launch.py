@@ -126,36 +126,36 @@ def launch_setup(context, *args, **kwargs):
         )
     )
 
-    nodes.append(
-        ComposableNode(
-            package="nebula_ros",
-            plugin=sensor_make + "HwMonitorRosWrapper",
-            name=sensor_make.lower() + "_hw_monitor_ros_wrapper_node",
-            parameters=[
-                {
-                    "sensor_model": sensor_model,
-                    **create_parameter_dict(
-                        "return_mode",
-                        "frame_id",
-                        "scan_phase",
-                        "sensor_ip",
-                        "host_ip",
-                        "data_port",
-                        "gnss_port",
-                        "packet_mtu_size",
-                        "rotation_speed",
-                        "cloud_min_angle",
-                        "cloud_max_angle",
-                        "diag_span",
-                        "dual_return_distance_threshold",
-                        "delay_monitor_ms",
-                    ),
-                },
-            ],
-            condition=IfCondition(LaunchConfiguration("launch_driver")),
-            extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
-        )
-    )
+    # nodes.append(
+    #     ComposableNode(
+    #         package="nebula_ros",
+    #         plugin=sensor_make + "HwMonitorRosWrapper",
+    #         name=sensor_make.lower() + "_hw_monitor_ros_wrapper_node",
+    #         parameters=[
+    #             {
+    #                 "sensor_model": sensor_model,
+    #                 **create_parameter_dict(
+    #                     "return_mode",
+    #                     "frame_id",
+    #                     "scan_phase",
+    #                     "sensor_ip",
+    #                     "host_ip",
+    #                     "data_port",
+    #                     "gnss_port",
+    #                     "packet_mtu_size",
+    #                     "rotation_speed",
+    #                     "cloud_min_angle",
+    #                     "cloud_max_angle",
+    #                     "diag_span",
+    #                     "dual_return_distance_threshold",
+    #                     "delay_monitor_ms",
+    #                 ),
+    #             },
+    #         ],
+    #         condition=IfCondition(LaunchConfiguration("launch_driver")),
+    #         extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
+    #     )
+    # )
 
     cropbox_parameters = create_parameter_dict("input_frame", "output_frame")
     cropbox_parameters["negative"] = True
