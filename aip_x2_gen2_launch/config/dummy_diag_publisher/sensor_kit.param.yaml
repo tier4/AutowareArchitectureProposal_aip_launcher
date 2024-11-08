@@ -22,32 +22,32 @@
       "gyro_bias_validator: gyro_bias_validator": default
 
       # lidar
-      "pandar_monitor: /sensing/lidar/front_lower: pandar_connection": default
-      "pandar_monitor: /sensing/lidar/front_upper: pandar_connection": default
-      "pandar_monitor: /sensing/lidar/left_lower: pandar_connection": default
-      "pandar_monitor: /sensing/lidar/left_upper: pandar_connection": default
-      "pandar_monitor: /sensing/lidar/right_lower: pandar_connection": default
-      "pandar_monitor: /sensing/lidar/right_upper: pandar_connection": default
-      "pandar_monitor: /sensing/lidar/rear_lower: pandar_connection": default
-      "pandar_monitor: /sensing/lidar/rear_upper: pandar_connection": default
+      "/sensing/lidar/front_lower/hesai_ros_wrapper_node: hesai_status": default
+      "/sensing/lidar/front_upper/hesai_ros_wrapper_node: hesai_status": default
+      "/sensing/lidar/left_lower/hesai_ros_wrapper_node: hesai_status": default
+      "/sensing/lidar/left_upper/hesai_ros_wrapper_node: hesai_status": default
+      "/sensing/lidar/right_lower/hesai_ros_wrapper_node: hesai_status": default
+      "/sensing/lidar/right_upper/hesai_ros_wrapper_node: hesai_status": default
+      "/sensing/lidar/rear_lower/hesai_ros_wrapper_node: hesai_status": default
+      "/sensing/lidar/rear_upper/hesai_ros_wrapper_node: hesai_status": default
 
-      "pandar_monitor: /sensing/lidar/front_lower: pandar_ptp": default
-      "pandar_monitor: /sensing/lidar/front_upper: pandar_ptp": default
-      "pandar_monitor: /sensing/lidar/left_lower: pandar_ptp": default
-      "pandar_monitor: /sensing/lidar/left_upper: pandar_ptp": default
-      "pandar_monitor: /sensing/lidar/right_lower: pandar_ptp": default
-      "pandar_monitor: /sensing/lidar/right_upper: pandar_ptp": default
-      "pandar_monitor: /sensing/lidar/rear_lower: pandar_ptp": default
-      "pandar_monitor: /sensing/lidar/rear_upper: pandar_ptp": default
+      "/sensing/lidar/front_lower/hesai_ros_wrapper_node: hesai_ptp": default
+      "/sensing/lidar/front_upper/hesai_ros_wrapper_node: hesai_ptp": default
+      "/sensing/lidar/left_lower/hesai_ros_wrapper_node: hesai_ptp": default
+      "/sensing/lidar/left_upper/hesai_ros_wrapper_node: hesai_ptp": default
+      "/sensing/lidar/right_lower/hesai_ros_wrapper_node: hesai_ptp": default
+      "/sensing/lidar/right_upper/hesai_ros_wrapper_node: hesai_ptp": default
+      "/sensing/lidar/rear_lower/hesai_ros_wrapper_node: hesai_ptp": default
+      "/sensing/lidar/rear_upper/hesai_ros_wrapper_node: hesai_ptp": default
 
-      "pandar_monitor: /sensing/lidar/front_lower: pandar_temperature": default
-      "pandar_monitor: /sensing/lidar/front_upper: pandar_temperature": default
-      "pandar_monitor: /sensing/lidar/left_lower: pandar_temperature": default
-      "pandar_monitor: /sensing/lidar/left_upper: pandar_temperature": default
-      "pandar_monitor: /sensing/lidar/right_lower: pandar_temperature": default
-      "pandar_monitor: /sensing/lidar/right_upper: pandar_temperature": default
-      "pandar_monitor: /sensing/lidar/rear_lower: pandar_temperature": default
-      "pandar_monitor: /sensing/lidar/rear_upper: pandar_temperature": default
+      "/sensing/lidar/front_lower/hesai_ros_wrapper_node: hesai_temperature": default
+      "/sensing/lidar/front_upper/hesai_ros_wrapper_node: hesai_temperature": default
+      "/sensing/lidar/left_lower/hesai_ros_wrapper_node: hesai_temperature": default
+      "/sensing/lidar/left_upper/hesai_ros_wrapper_node: hesai_temperature": default
+      "/sensing/lidar/right_lower/hesai_ros_wrapper_node: hesai_temperature": default
+      "/sensing/lidar/right_upper/hesai_ros_wrapper_node: hesai_temperature": default
+      "/sensing/lidar/rear_lower/hesai_ros_wrapper_node: hesai_temperature": default
+      "/sensing/lidar/rear_upper/hesai_ros_wrapper_node: hesai_temperature": default
       "concatenate_data: concat_status": default
 
       # camera
