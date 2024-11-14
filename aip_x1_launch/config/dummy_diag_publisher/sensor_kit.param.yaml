@@ -26,11 +26,6 @@
       pandar_temperature: default
       pandar_ptp: default
 
-      # velodyne
-      velodyne_connection: default
-      velodyne_temperature: default
-      velodyne_rpm: default
-
       sensing_topic_status: default
 
       # imu
