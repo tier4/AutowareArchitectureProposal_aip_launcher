@@ -22,7 +22,12 @@
 
     <!-- Septentrio GNSS Driver -->
     <group if="$(eval &quot;'$(var launch_driver)' and '$(var gnss_receiver)'=='septentrio'&quot;)">
-      <include file="$(find-pkg-share septentrio_gnss_driver)/launch/mosaic_x5_rover.launch.xml" />
+      <node pkg="septentrio_gnss_driver" name="septentrio" exec="septentrio_gnss_driver_node" if="$(var launch_driver)">
+        <param from="$(find-pkg-share aip_xx1_gen2_launch)/config/mosaic_x5_rover.param.yaml"/>
+        <remap from="navsatfix" to="~/nav_sat_fix"/>
+        <remap from="poscovgeodetic" to="~/poscovgeodetic"/>
+        <remap from="pvtgeodetic" to="~/pvtgeodetic"/>
+      </node>
     </group>
 
     <!-- NavSatFix to MGRS Pose -->

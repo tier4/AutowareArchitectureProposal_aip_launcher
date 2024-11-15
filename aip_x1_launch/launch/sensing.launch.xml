@@ -4,19 +4,14 @@
   <arg name="vehicle_mirror_param_file" description="path to the file of vehicle mirror position yaml"/>
   <arg name="pointcloud_container_name" default="pointcloud_container"/>
   <arg name ="vehicle_id" default="$(env VEHICLE_ID default)" />
+  <arg name="use_gnss" default="false"/>
 
   <group>
-
     <!-- LiDAR Driver -->
     <include file="$(find-pkg-share aip_x1_launch)/launch/lidar.launch.xml">
       <arg name="launch_driver" value="$(var launch_driver)" />
       <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)" />
       <arg name="pointcloud_container_name" value="$(var pointcloud_container_name)"/>
-    </include>
-
-    <!-- Camera Driver -->
-    <include file="$(find-pkg-share aip_x1_launch)/launch/camera.launch.xml">
-      <arg name="launch_driver" value="$(var launch_driver)" />
     </include>
 
     <!-- IMU Driver -->
@@ -25,7 +20,7 @@
     </include>
 
     <!-- GNSS Driver -->
-    <include file="$(find-pkg-share aip_x1_launch)/launch/gnss.launch.xml">
+    <include file="$(find-pkg-share aip_x1_launch)/launch/gnss.launch.xml" if="$(var use_gnss)" >
       <arg name="launch_driver" value="$(var launch_driver)" />
     </include>
 

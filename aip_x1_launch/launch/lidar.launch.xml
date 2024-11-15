@@ -1,55 +1,50 @@
 <launch>
 
   <arg name="launch_driver" default="true" />
+  <arg name="host_ip" default="127.0.0.1"/>
   <arg name="use_concat_filter" default="true" />
   <arg name="use_radius_search" default="false" />
+  <arg name="vehicle_id" default="$(env VEHICLE_ID default)" />
   <arg name="vehicle_mirror_param_file" />
   <arg name="pointcloud_container_name" default="pointcloud_container"/>
-
-  <!-- x1 additional setting -->
-  <arg name="livox_min_range" default="1.5" />
+  <arg name="enable_blockage_diag" default="false"/>
 
   <group>
     <push-ros-namespace namespace="lidar"/>
 
     <group>
       <push-ros-namespace namespace="top"/>
-      <include file="$(find-pkg-share aip_x1_launch)/launch/velodyne_VLP16.launch.xml">
+      <include file="$(find-pkg-share common_sensor_launch)/launch/velodyne_VLP16.launch.xml">
         <arg name="sensor_frame" value="velodyne_top" />
         <arg name="device_ip" value="192.168.1.20"/>
+        <arg name="host_ip" value="$(var host_ip)"/>
         <arg name="data_port" value="2368"/>
         <arg name="scan_phase" value="180.0" />
         <arg name="launch_driver" value="$(var launch_driver)" />
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)" />
         <arg name="container_name" value="pointcloud_container"/>
+        <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
       </include>
     </group>
 
     <group>
-      <group>
-	      <push-ros-namespace namespace="front_right"/>
-        <include file="$(find-pkg-share aip_x1_launch)/launch/new_livox_horizon.launch.py">
-          <arg name="launch_driver" value="$(var launch_driver)" />
-          <arg name="lidar_config_file" value="$(find-pkg-share individual_params)/config/default/new_driver_livox_front_right_config.yaml" />
-          <arg name="min_range" value="$(var livox_min_range)" />
-        </include>
-      </group>
-      <group>
-        <push-ros-namespace namespace="front_center"/>
-        <include file="$(find-pkg-share aip_x1_launch)/launch/new_livox_horizon.launch.py">
-          <arg name="launch_driver" value="$(var launch_driver)" />
-          <arg name="lidar_config_file" value="$(find-pkg-share individual_params)/config/default/new_driver_livox_front_center_config.yaml" />
-          <arg name="min_range" value="$(var livox_min_range)" />
-	      </include>
-      </group>
-      <group>
-        <push-ros-namespace namespace="front_left"/>
-        <include file="$(find-pkg-share aip_x1_launch)/launch/new_livox_horizon.launch.py">
-          <arg name="launch_driver" value="$(var launch_driver)" />
-          <arg name="lidar_config_file" value="$(find-pkg-share individual_params)/config/default/new_driver_livox_front_left_config.yaml" />
-          <arg name="min_range" value="$(var livox_min_range)" />
-	      </include>
-      </group>
+      <push-ros-namespace namespace="front_center" />
+      <include file="$(find-pkg-share common_sensor_launch)/launch/hesai_XT32.launch.xml">
+        <arg name="sensor_frame" value="pandar_xt32_front_center" />
+        <arg name="sensor_ip" value="192.168.3.201" />
+        <arg name="data_port" value="2321" />
+        <arg name="gnss_port" value="10121" />
+        <arg name="scan_phase" value="0.0" />
+        <arg name="cloud_min_angle" value="0"/>
+        <arg name="cloud_max_angle" value="360"/>
+        <arg name="min_range" value="0.05"/>
+        <arg name="max_range" value="200.0"/>
+        <arg name="return_mode" value="Strongest" />
+        <arg name="config_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x1/xt32.csv" />
+        <arg name="launch_driver" value="$(var launch_driver)" />
+        <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)" />
+        <arg name="container_name" value="pointcloud_container"/>
+      </include>
     </group>
 
     <include file="$(find-pkg-share aip_x1_launch)/launch/pointcloud_preprocessor.launch.py">
@@ -59,6 +54,5 @@
       <arg name="container_name" value="$(var pointcloud_container_name)"/>
     </include>
 
-    <include file="$(find-pkg-share aip_x1_launch)/launch/topic_state_monitor.launch.py" />
   </group>
 </launch>

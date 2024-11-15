@@ -1,4 +1,4 @@
-# Copyright 2024 Tier IV, Inc. All rights reserved.
+# Copyright 2024 TIER IV, Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -92,11 +92,12 @@ def load_sub_launches_from_yaml(context, *args, **kwargs):
     path_dictionary = generate_launch_dictionary()
 
     base_parameters = {}
-    base_parameters["host_ip"] = LaunchConfiguration("host_ip")
+    base_parameters["host_ip"] = LaunchConfiguration("host_ip").perform(context)
     base_parameters["vehicle_mirror_param_file"] = LaunchConfiguration(
         "vehicle_mirror_param_file"
     ).perform(context)
     base_parameters["launch_driver"] = LaunchConfiguration("launch_driver").perform(context)
+    base_parameters["launch_hw_monitor"] = LaunchConfiguration("launch_hw_monitor").perform(context)
     base_parameters["vehicle_id"] = LaunchConfiguration("vehicle_id").perform(context)
     base_parameters["pointcloud_container_name"] = LaunchConfiguration(
         "pointcloud_container_name"
@@ -159,7 +160,7 @@ def generate_launch_description():
     config_file_arg = DeclareLaunchArgument(
         "config_file",
         default_value=os.path.join(
-            get_package_share_directory("aip_xx1_gen2_launch"), "config", "lidar_launch.yaml"
+            get_package_share_directory("aip_xx1_gen2_launch"), "config", "lidar_gen2.yaml"
         ),
         description="Path to the configuration file",
     )
@@ -169,6 +170,7 @@ def generate_launch_description():
         launch_arguments.append(DeclareLaunchArgument(name, default_value=default_value, **kwargs))
 
     add_launch_arg("launch_driver", "true")
+    add_launch_arg("launch_hw_monitor", "true", description="launch hardware monitor")
     add_launch_arg("host_ip", "192.168.1.10")
     add_launch_arg("use_concat_filter", "true")
     add_launch_arg(

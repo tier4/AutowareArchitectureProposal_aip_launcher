@@ -209,11 +209,9 @@ def launch_setup(context, *args, **kwargs):
 
     # Ring Outlier Filter is the last component in the pipeline, so control the output frame here
     if LaunchConfiguration("output_as_sensor_frame").perform(context):
-        ring_outlier_filter_parameters = {"output_frame": LaunchConfiguration("frame_id")}
+        ring_outlier_output_frame = {"output_frame": LaunchConfiguration("frame_id")}
     else:
-        ring_outlier_filter_parameters = {
-            "output_frame": ""
-        }  # keep the output frame as the input frame
+        ring_outlier_output_frame = {"output_frame": ""}  # keep the output frame as the input frame
     ring_outlier_filter_component = ComposableNode(
         package="autoware_pointcloud_preprocessor",
         plugin="autoware::pointcloud_preprocessor::RingOutlierFilterComponent",
@@ -222,7 +220,10 @@ def launch_setup(context, *args, **kwargs):
             ("input", "rectified/pointcloud_ex"),
             ("output", "pointcloud_before_sync"),
         ],
-        parameters=[ring_outlier_filter_parameters],
+        parameters=[
+            load_composable_node_param("ring_outlier_filter_node_param_file"),
+            ring_outlier_output_frame,
+        ],
         extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
     )
 
@@ -342,7 +343,11 @@ def generate_launch_description():
     add_launch_arg("horizontal_resolution", "0.4")
     add_launch_arg(
         "blockage_diagnostics_param_file",
-        [FindPackageShare("aip_x2_launch"), "/config/blockage_diagnostics_param_file.yaml"],
+        [FindPackageShare("aip_x2_launch"), "/config/blockage_diagnostics.param.yaml"],
+    )
+    add_launch_arg(
+        "ring_outlier_filter_node_param_file",
+        [FindPackageShare("aip_x2_launch"), "/config/ring_outlier_filter_node.param.yaml"],
     )
     add_launch_arg(
         "distortion_corrector_node_param_file",

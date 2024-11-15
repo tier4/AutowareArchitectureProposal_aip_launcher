@@ -23,23 +23,26 @@
     <!-- IMU Driver -->
     <include file="$(find-pkg-share aip_xx1_gen2_launch)/launch/imu.launch.xml">
       <arg name="launch_driver" value="$(var launch_driver)" />
+      <arg name="imu_connection" value="can" />
     </include>
 
     <!-- GNSS Driver -->
     <include file="$(find-pkg-share aip_xx1_gen2_launch)/launch/gnss.launch.xml">
       <arg name="launch_driver" value="$(var launch_driver)" />
+      <arg name="gnss_receiver" value="septentrio"/>
     </include>
 
     <!-- Radar Driver -->
     <include file="$(find-pkg-share aip_xx1_gen2_launch)/launch/radar.launch.xml">
       <arg name="launch_driver" value="$(var launch_driver)" />
+      <arg name="ars_version" value="ars548" />
     </include>
 
     <!-- Vehicle twist -->
     <include file="$(find-pkg-share autoware_vehicle_velocity_converter)/launch/vehicle_velocity_converter.launch.xml">
       <arg name="input_vehicle_velocity_topic" value="/vehicle/status/velocity_status"/>
       <arg name="output_twist_with_covariance" value="/sensing/vehicle_velocity_converter/twist_with_covariance"/>
-      <arg name="config_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_xx1/vehicle_velocity_converter.param.yaml" />
+      <arg name="config_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_xx1_gen2/vehicle_velocity_converter.param.yaml" />
     </include>
 
   </group>

@@ -1,10 +1,9 @@
 <launch>
 
-  <arg name="use_gnss" default="false" />
   <arg name="launch_driver" default="true" />
 
-  <group if="$(var use_gnss)">
-    <push-ros-namespace namespace="gnss"/>
+  <group>
+    <push-ros-namespace namespace="gnss" />
 
     <!-- Ublox Driver -->
     <node pkg="ublox_gps" name="ublox" exec="ublox_gps_node" if="$(var launch_driver)" respawn="true" respawn_delay="1.0">
@@ -14,14 +13,13 @@
 
     <!-- NavSatFix to MGRS Pose -->
     <include file="$(find-pkg-share autoware_gnss_poser)/launch/gnss_poser.launch.xml">
+      <arg name="param_file" value="$(find-pkg-share aip_x1_launch)/config/gnss_poser.param.yaml" />
       <arg name="input_topic_fix" value="ublox/nav_sat_fix" />
-      <arg name="input_topic_navpvt" value="ublox/navpvt" />
-
+      <!-- Required if use_gnss_ins_orientation in gnss_poser.param.yaml is true -->
+      <!-- <arg name="input_topic_orientation" value="" /> -->
       <arg name="output_topic_gnss_pose" value="pose" />
       <arg name="output_topic_gnss_pose_cov" value="pose_with_covariance" />
       <arg name="output_topic_gnss_fixed" value="fixed" />
-
-      <arg name="use_ublox_receiver" value="true" />
     </include>
 
   </group>

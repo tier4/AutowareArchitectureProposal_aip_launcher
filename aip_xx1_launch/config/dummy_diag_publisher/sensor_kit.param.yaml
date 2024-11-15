@@ -12,19 +12,34 @@
 /**:
   ros__parameters:
     required_diags:
-      # gnss
-      gnss_connection: default
-      gnss_data: default
-      gnss_antenna: default
-      gnss_tx_usage: default
-      gnss_spoofing: default
-      gnss_jamming: default
-      fix topic status: default
+      # performance monitoring  ----> To be confirmed in v0.47.0
+      # "blockage: blockage_validation": default
 
       # velodyne
-      velodyne_connection: default
-      velodyne_temperature: default
-      velodyne_rpm: default
+      "velodyne_monitor: velodyne_connection": default
+      "velodyne_monitor: velodyne_temperature": default
+      "velodyne_monitor: velodyne_rpm": default
+
+      # gnss
+      # "connection: gnss_connection": default
+      # "data: gnss_data": default
+      # "antenna: gnss_antenna": default
+      # "tx_usage: gnss_tx_usage": default
+      # "spoofing: gnss_spoofing": default
+      # "jamming: gnss_jamming": default
+      # "fix_topic_status: fix topic status": default
+      "ublox: fix topic status": default
+      "ublox: fix": default
+
+      # camera
+      "topic_state_monitor_camera0: sensing_topic_status": default
+      "topic_state_monitor_camera1: sensing_topic_status": default
+      "topic_state_monitor_camera2: sensing_topic_status": default
+      "topic_state_monitor_camera3: sensing_topic_status": default
+      "topic_state_monitor_camera4: sensing_topic_status": default
+      "topic_state_monitor_camera5: sensing_topic_status": default
+      "topic_state_monitor_camera6: sensing_topic_status": default
 
       # imu
-      gyro_bias_estimator: default
+      "topic_state_monitor_imu: sensing_topic_status": default
+      "gyro_bias_validator: gyro_bias_validator": default

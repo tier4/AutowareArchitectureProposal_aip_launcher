@@ -5,15 +5,23 @@
   <version>0.1.0</version>
   <description>The aip_x1_launch package</description>
 
-  <maintainer email="hiroki.ota@tier4.jp">Hiroki OTA</maintainer>
+  <maintainer email="takeshi.miura@tier4.jp">Takeshi Miura</maintainer>
   <license>Apache License 2.0</license>
 
   <buildtool_depend>ament_cmake_auto</buildtool_depend>
 
+  <exec_depend>autoware_compare_map_segmentation</exec_depend>
+  <exec_depend>autoware_elevation_map_loader</exec_depend>
   <exec_depend>autoware_gnss_poser</exec_depend>
+  <exec_depend>autoware_ground_segmentation</exec_depend>
   <exec_depend>autoware_imu_corrector</exec_depend>
+  <exec_depend>autoware_occupancy_grid_map_outlier_filter</exec_depend>
   <exec_depend>autoware_pointcloud_preprocessor</exec_depend>
   <exec_depend>autoware_vehicle_velocity_converter</exec_depend>
+  <exec_depend>common_sensor_launch</exec_depend>
+  <exec_depend>glog_component</exec_depend>
+  <exec_depend>pacmod3</exec_depend>
+  <exec_depend>ros2_socketcan</exec_depend>
   <exec_depend>tamagawa_imu_driver</exec_depend>
   <exec_depend>topic_tools</exec_depend>
   <exec_depend>ublox_gps</exec_depend>

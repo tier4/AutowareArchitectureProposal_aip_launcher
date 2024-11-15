@@ -37,12 +37,14 @@ def launch_setup(context, *args, **kwargs):
             {
                 "input_topics": [
                     "/sensing/lidar/top/pointcloud_before_sync",
-                    "/sensing/lidar/front_left/min_range_cropped/pointcloud_before_sync",
-                    "/sensing/lidar/front_right/min_range_cropped/pointcloud_before_sync",
-                    "/sensing/lidar/front_center/min_range_cropped/pointcloud_before_sync",
+                    "/sensing/lidar/front_center/pointcloud_before_sync",
                 ],
                 "output_frame": LaunchConfiguration("base_frame"),
-                "timeout_sec": 1.0,
+                "input_offset": [
+                    0.055,
+                    0.025,
+                ],
+                "timeout_sec": 0.095,
                 "input_twist_topic_type": "twist",
                 "publish_synchronized_pointcloud": True,
             }
@@ -54,6 +56,7 @@ def launch_setup(context, *args, **kwargs):
     concat_loader = LoadComposableNodes(
         composable_node_descriptions=[concat_component],
         target_container=LaunchConfiguration("pointcloud_container_name"),
+        condition=IfCondition(LaunchConfiguration("use_concat_filter")),
     )
 
     return [concat_loader]

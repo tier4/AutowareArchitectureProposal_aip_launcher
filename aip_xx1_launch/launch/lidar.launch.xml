@@ -6,7 +6,7 @@
   <arg name ="vehicle_id" default="$(env VEHICLE_ID default)"/>
   <arg name="vehicle_mirror_param_file"/>
   <arg name="pointcloud_container_name" default="pointcloud_container"/>
-  <arg name="enable_blockage_diag" default="false"/>
+  <arg name="enable_blockage_diag" default="true"/>
 
   <group>
     <push-ros-namespace namespace="lidar"/>
@@ -49,7 +49,7 @@
         <arg name="horizontal_ring_id" value="0"/>
         <arg name="is_channel_order_top2down" value="false"/>
         <arg name="horizontal_resolution" value="0.4"/>
-        <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
+        <arg name="enable_blockage_diag" value="false"/>
       </include>
     </group>
 
@@ -71,7 +71,7 @@
         <arg name="horizontal_ring_id" value="0"/>
         <arg name="is_channel_order_top2down" value="false"/>
         <arg name="horizontal_resolution" value="0.4"/>
-        <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
+        <arg name="enable_blockage_diag" value="false"/>
       </include>
     </group>
 
@@ -93,7 +93,7 @@
         <arg name="horizontal_ring_id" value="0"/>
         <arg name="is_channel_order_top2down" value="false"/>
         <arg name="horizontal_resolution" value="0.4"/>
-        <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
+        <arg name="enable_blockage_diag" value="false"/>
       </include>
     </group>
 
