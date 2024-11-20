@@ -206,7 +206,7 @@ def launch_setup(context, *args, **kwargs):
         remappings=[
             ("~/input/twist", "/sensing/vehicle_velocity_converter/twist_with_covariance"),
             ("~/input/imu", "/sensing/imu/imu_data"),
-            ("~/input/pointcloud", "mirror_cropped/pointcloud_ex"),
+            ("~/input/pointcloud", "pointcloud_raw_ex"),
             ("~/output/pointcloud", "rectified/pointcloud_ex"),
         ],
         parameters=[load_composable_node_param("distortion_corrector_node_param_file")],
@@ -274,9 +274,9 @@ def launch_setup(context, *args, **kwargs):
         composable_node_descriptions=[
             glog_component,
             nebula_component,
-            self_crop_component,
-            right_mirror_crop_component,
-            left_mirror_crop_component,
+            # self_crop_component,
+            # right_mirror_crop_component,
+            # left_mirror_crop_component,
             undistort_component,
         ],
     )
