@@ -274,9 +274,9 @@ def launch_setup(context, *args, **kwargs):
         composable_node_descriptions=[
             glog_component,
             nebula_component,
-            #self_crop_component,
-            #right_mirror_crop_component,
-            #left_mirror_crop_component,
+            # self_crop_component,
+            # right_mirror_crop_component,
+            # left_mirror_crop_component,
             undistort_component,
         ],
     )
