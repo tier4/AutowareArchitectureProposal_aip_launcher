@@ -167,7 +167,7 @@
       height="400"
       fov="1.3"
     />
-    <xacro:monocular_camera_macro
+    <!-- <xacro:monocular_camera_macro
       name="camera6/camera"
       parent="sensor_kit_base_link"
       namespace=""
@@ -196,7 +196,7 @@
       width="800"
       height="400"
       fov="1.3"
-    />
+    /> -->
     <!-- gnss -->
     <xacro:imu_macro
       name="gnss"

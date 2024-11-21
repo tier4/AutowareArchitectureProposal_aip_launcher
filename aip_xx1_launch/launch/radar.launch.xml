@@ -6,7 +6,7 @@
   <group>
     <push-ros-namespace namespace="radar"/>
 
-    <group>
+    <!-- <group>
       <push-ros-namespace namespace="front_center"/>
 
       <include file="$(find-pkg-share common_sensor_launch)/launch/ars408.launch.xml">
@@ -15,7 +15,7 @@
         <arg name="input/frame" value="$(var input/frame)" />
         <arg name="output_frame" value="ars408_front_center" />
       </include>
-    </group>
+    </group> -->
 
     <node pkg="topic_tools" exec="relay" name="radar_relay" output="log" args="front_center/detected_objects detected_objects"/>
 

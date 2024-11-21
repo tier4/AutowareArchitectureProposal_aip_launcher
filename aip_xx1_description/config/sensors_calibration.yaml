@@ -1,11 +1,11 @@
 base_link:
-  ars408_front_center:
-    x: 3.8
-    y: 0.0
-    z: 0.5
-    roll: 0.0
-    pitch: 0.0
-    yaw: 0.0
+  # ars408_front_center:
+  #   x: 3.8
+  #   y: 0.0
+  #   z: 0.5
+  #   roll: 0.0
+  #   pitch: 0.0
+  #   yaw: 0.0
   sensor_kit_base_link:
     x: 0.9
     y: 0.0
