@@ -20,11 +20,11 @@
       <arg name="launch_driver" value="$(var launch_driver)" />
     </include> -->
 
-    <!-- IMU Driver -->
+    <!-- IMU Driver
     <include file="$(find-pkg-share aip_xx1_gen2_launch)/launch/imu.launch.xml">
       <arg name="launch_driver" value="$(var launch_driver)" />
       <arg name="imu_connection" value="can" />
-    </include>
+    </include> -->
 
     <!-- GNSS Driver -->
     <include file="$(find-pkg-share aip_xx1_gen2_launch)/launch/gnss.launch.xml">
