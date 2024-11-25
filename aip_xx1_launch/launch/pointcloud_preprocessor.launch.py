@@ -44,9 +44,11 @@ def launch_setup(context, *args, **kwargs):
         remappings=[
             ("~/input/twist", "/sensing/vehicle_velocity_converter/twist_with_covariance"),
             ("output", "concatenated/pointcloud"),
+            ("output/cuda", "concatenated/pointcloud/cuda"),
         ],
         parameters=[concatenate_and_time_sync_node_param],
-        extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
+        # NOTE(knzo25): when using  the cuda blackboard, this setting can not be made global
+        # extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
     )
 
     # load concat or passthrough filter
