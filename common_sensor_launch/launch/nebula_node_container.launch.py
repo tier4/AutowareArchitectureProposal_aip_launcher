@@ -265,6 +265,10 @@ def launch_setup(context, *args, **kwargs):
         executable=LaunchConfiguration("container_executable"),
         composable_node_descriptions=nodes,
         output="both",
+        additional_env={
+            'LD_PRELOAD': 'libagnocast_heaphook.so',
+            'MEMPOOL_SIZE': '1073741824',  # 1GB
+        },
     )
 
     driver_component = ComposableNode(
