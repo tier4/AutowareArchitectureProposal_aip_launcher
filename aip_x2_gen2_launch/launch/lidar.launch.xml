@@ -48,7 +48,7 @@
 
         <arg name="distance_range" value="[0.5, 200.0]"/>
         <arg name="blockage_range" value="[90.0, 270.0]"/>
-        <arg name="vertical_bins" value ="40" />
+        <arg name="vertical_bins" value ="128" />
         <arg name="horizontal_ring_id" value="12" />
         <arg name="is_channel_order_top2down" value="true"/>
         <arg name="horizontal_resolution" value="0.4"/>
@@ -82,7 +82,7 @@
 
         <arg name="distance_range" value="[0.5, 200.0]"/>
         <arg name="blockage_range" value="[90.0, 270.0]"/>
-        <arg name="vertical_bins" value ="40" />
+        <arg name="vertical_bins" value ="128" />
         <arg name="horizontal_ring_id" value="12" />
         <arg name="is_channel_order_top2down" value="true"/>
         <arg name="horizontal_resolution" value="0.4"/>
@@ -116,7 +116,7 @@
 
         <arg name="distance_range" value="[0.5, 200.0]"/>
         <arg name="blockage_range" value="[90.0, 270.0]"/>
-        <arg name="vertical_bins" value ="40" />
+        <arg name="vertical_bins" value ="128" />
         <arg name="horizontal_ring_id" value="12" />
         <arg name="is_channel_order_top2down" value="true"/>
         <arg name="horizontal_resolution" value="0.4"/>
@@ -150,7 +150,7 @@
 
         <arg name="distance_range" value="[0.5, 200.0]"/>
         <arg name="blockage_range" value="[90.0, 270.0]"/>
-        <arg name="vertical_bins" value ="40" />
+        <arg name="vertical_bins" value ="128" />
         <arg name="horizontal_ring_id" value="12" />
         <arg name="is_channel_order_top2down" value="true"/>
         <arg name="horizontal_resolution" value="0.4"/>
@@ -185,7 +185,7 @@
 
         <arg name="distance_range" value="[0.5, 200.0]"/>
         <arg name="blockage_range" value="[90.0, 270.0]"/>
-        <arg name="vertical_bins" value ="40" />
+        <arg name="vertical_bins" value ="128" />
         <arg name="horizontal_ring_id" value="12" />
         <arg name="is_channel_order_top2down" value="true"/>
         <arg name="horizontal_resolution" value="0.4"/>
@@ -219,7 +219,7 @@
 
         <arg name="distance_range" value="[0.5, 200.0]"/>
         <arg name="blockage_range" value="[90.0, 270.0]"/>
-        <arg name="vertical_bins" value ="40" />
+        <arg name="vertical_bins" value ="128" />
         <arg name="horizontal_ring_id" value="12" />
         <arg name="is_channel_order_top2down" value="true"/>
         <arg name="horizontal_resolution" value="0.4"/>
@@ -253,7 +253,7 @@
 
         <arg name="distance_range" value="[0.5, 200.0]"/>
         <arg name="blockage_range" value="[90.0, 270.0]"/>
-        <arg name="vertical_bins" value ="40" />
+        <arg name="vertical_bins" value ="128" />
         <arg name="horizontal_ring_id" value="12" />
         <arg name="is_channel_order_top2down" value="true"/>
         <arg name="horizontal_resolution" value="0.4"/>
@@ -287,7 +287,7 @@
 
         <arg name="distance_range" value="[0.5, 200.0]"/>
         <arg name="blockage_range" value="[90.0, 270.0]"/>
-        <arg name="vertical_bins" value ="40" />
+        <arg name="vertical_bins" value ="128" />
         <arg name="horizontal_ring_id" value="12" />
         <arg name="is_channel_order_top2down" value="true"/>
         <arg name="horizontal_resolution" value="0.4"/>
