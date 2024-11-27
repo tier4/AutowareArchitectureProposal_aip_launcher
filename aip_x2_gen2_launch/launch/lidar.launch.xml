@@ -11,7 +11,7 @@
   <arg name="pointcloud_container_name" default="pointcloud_container"/>
 
   <arg name="dual_return_filter_param_file" default="$(find-pkg-share aip_x2_gen2_launch)/config/dual_return_filter.param.yaml"/>
-  <arg name="enable_blockage_diag" default="false"/>
+  <arg name="enable_blockage_diag" default="true"/>
 
   <group>
     <push-ros-namespace namespace="lidar" />
