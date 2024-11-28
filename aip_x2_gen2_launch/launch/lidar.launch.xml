@@ -11,7 +11,7 @@
   <arg name="pointcloud_container_name" default="pointcloud_container"/>
 
   <arg name="dual_return_filter_param_file" default="$(find-pkg-share aip_x2_gen2_launch)/config/dual_return_filter.param.yaml"/>
-  <arg name="enable_blockage_diag" default="false"/>
+  <arg name="enable_blockage_diag" default="true"/>
 
   <group>
     <push-ros-namespace namespace="lidar" />
@@ -48,8 +48,8 @@
 
         <arg name="distance_range" value="[0.5, 200.0]"/>
         <arg name="blockage_range" value="[90.0, 270.0]"/>
-        <arg name="vertical_bins" value ="40" />
-        <arg name="horizontal_ring_id" value="12" />
+        <arg name="vertical_bins" value ="128" />
+        <arg name="horizontal_ring_id" value="40" />
         <arg name="is_channel_order_top2down" value="true"/>
         <arg name="horizontal_resolution" value="0.4"/>
         <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
@@ -82,8 +82,8 @@
 
         <arg name="distance_range" value="[0.5, 200.0]"/>
         <arg name="blockage_range" value="[90.0, 270.0]"/>
-        <arg name="vertical_bins" value ="40" />
-        <arg name="horizontal_ring_id" value="12" />
+        <arg name="vertical_bins" value ="128" />
+        <arg name="horizontal_ring_id" value="40" />
         <arg name="is_channel_order_top2down" value="true"/>
         <arg name="horizontal_resolution" value="0.4"/>
         <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
@@ -116,9 +116,9 @@
 
         <arg name="distance_range" value="[0.5, 200.0]"/>
         <arg name="blockage_range" value="[90.0, 270.0]"/>
-        <arg name="vertical_bins" value ="40" />
-        <arg name="horizontal_ring_id" value="12" />
-        <arg name="is_channel_order_top2down" value="true"/>
+        <arg name="vertical_bins" value ="128" />
+        <arg name="horizontal_ring_id" value="118" />
+        <arg name="is_channel_order_top2down" value="false"/>
         <arg name="horizontal_resolution" value="0.4"/>
         <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
         <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2_gen2/pandar/rear_lower.csv" />
@@ -150,9 +150,9 @@
 
         <arg name="distance_range" value="[0.5, 200.0]"/>
         <arg name="blockage_range" value="[90.0, 270.0]"/>
-        <arg name="vertical_bins" value ="40" />
-        <arg name="horizontal_ring_id" value="12" />
-        <arg name="is_channel_order_top2down" value="true"/>
+        <arg name="vertical_bins" value ="128" />
+        <arg name="horizontal_ring_id" value="118" />
+        <arg name="is_channel_order_top2down" value="false"/>
         <arg name="horizontal_resolution" value="0.4"/>
         <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
         <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2_gen2/pandar/left_lower.csv" />
@@ -185,8 +185,8 @@
 
         <arg name="distance_range" value="[0.5, 200.0]"/>
         <arg name="blockage_range" value="[90.0, 270.0]"/>
-        <arg name="vertical_bins" value ="40" />
-        <arg name="horizontal_ring_id" value="12" />
+        <arg name="vertical_bins" value ="128" />
+        <arg name="horizontal_ring_id" value="40" />
         <arg name="is_channel_order_top2down" value="true"/>
         <arg name="horizontal_resolution" value="0.4"/>
         <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
@@ -219,8 +219,8 @@
 
         <arg name="distance_range" value="[0.5, 200.0]"/>
         <arg name="blockage_range" value="[90.0, 270.0]"/>
-        <arg name="vertical_bins" value ="40" />
-        <arg name="horizontal_ring_id" value="12" />
+        <arg name="vertical_bins" value ="128" />
+        <arg name="horizontal_ring_id" value="40" />
         <arg name="is_channel_order_top2down" value="true"/>
         <arg name="horizontal_resolution" value="0.4"/>
         <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
@@ -253,9 +253,9 @@
 
         <arg name="distance_range" value="[0.5, 200.0]"/>
         <arg name="blockage_range" value="[90.0, 270.0]"/>
-        <arg name="vertical_bins" value ="40" />
-        <arg name="horizontal_ring_id" value="12" />
-        <arg name="is_channel_order_top2down" value="true"/>
+        <arg name="vertical_bins" value ="128" />
+        <arg name="horizontal_ring_id" value="118" />
+        <arg name="is_channel_order_top2down" value="false"/>
         <arg name="horizontal_resolution" value="0.4"/>
         <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
         <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2_gen2/pandar/front_lower.csv" />
@@ -287,9 +287,9 @@
 
         <arg name="distance_range" value="[0.5, 200.0]"/>
         <arg name="blockage_range" value="[90.0, 270.0]"/>
-        <arg name="vertical_bins" value ="40" />
-        <arg name="horizontal_ring_id" value="12" />
-        <arg name="is_channel_order_top2down" value="true"/>
+        <arg name="vertical_bins" value ="128" />
+        <arg name="horizontal_ring_id" value="118" />
+        <arg name="is_channel_order_top2down" value="false"/>
         <arg name="horizontal_resolution" value="0.4"/>
         <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
         <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2_gen2/pandar/right_lower.csv" />
