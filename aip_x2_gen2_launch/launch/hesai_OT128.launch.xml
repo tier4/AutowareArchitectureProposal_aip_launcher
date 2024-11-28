@@ -22,7 +22,7 @@
 
   <arg name="distance_range" default="[0.5, 200.0]"/>
   <arg name="blockage_range" default="[90.0, 270.0]"/>
-  <arg name="vertical_bins" default ="40" />
+  <arg name="vertical_bins" default ="128" />
   <arg name="horizontal_ring_id" default="12" />
   <arg name="is_channel_order_top2down" default="true"/>
   <arg name="horizontal_resolution" default="0.4"/>
