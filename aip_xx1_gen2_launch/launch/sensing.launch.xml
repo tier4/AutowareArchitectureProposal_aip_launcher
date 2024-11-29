@@ -29,7 +29,6 @@
     <!-- GNSS Driver -->
     <include file="$(find-pkg-share aip_xx1_gen2_launch)/launch/gnss.launch.xml">
       <arg name="launch_driver" value="$(var launch_driver)" />
-      <arg name="gnss_receiver" value="septentrio"/>
     </include>
 
     <!-- Radar Driver -->
