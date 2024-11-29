@@ -83,7 +83,7 @@
       poscovcartesian: false
       poscovgeodetic: true
       velcovgeodetic: false
-      atteuler: false
+      atteuler: true
       attcoveuler: false
       pose: false
       twist: false
