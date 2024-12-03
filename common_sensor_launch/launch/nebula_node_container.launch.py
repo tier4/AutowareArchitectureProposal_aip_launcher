@@ -125,7 +125,8 @@ def launch_setup(context, *args, **kwargs):
                 ("pandar_points", "pointcloud_raw_ex"),
                 ("velodyne_points", "pointcloud_raw_ex"),
             ],
-            extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
+            extra_arguments=[
+                {"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
         )
     )
 
@@ -266,7 +267,7 @@ def launch_setup(context, *args, **kwargs):
         composable_node_descriptions=nodes,
         output="both",
         additional_env={
-            'LD_PRELOAD': 'libagnocast_heaphook.so',
+            'LD_PRELOAD': f"libagnocast_heaphook.so:{os.getenv('LD_PRELOAD', '')}",
             'MEMPOOL_SIZE': '1073741824',  # 1GB
         },
     )
