@@ -25,7 +25,7 @@
   </group>
 
   <group if="$(eval &quot;'$(var ars_version)'=='ars548'&quot;)">
-    <let name="odometry_topic" value="/sensing/vehicle_velocity_converter/twist_with_covariance"/>
+    <let name="odometry_topic" value="/localization/kinematic_state"/>
     <let name="acceleration_topic" value="/localization/acceleration"/>
     <let name="steering_angle_topic" value="/vehicle/status/steering_status_scalar"/>
     <arg name="radar_tracks_msgs_converter_param_path" default="$(find-pkg-share common_sensor_launch)/config/radar_tracks_msgs_converter.param.yaml"/>
