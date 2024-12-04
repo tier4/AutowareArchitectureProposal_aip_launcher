@@ -29,7 +29,7 @@
       <push-ros-namespace namespace="rear_upper" />
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_OT128.launch.xml">
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
-        <arg name="sensor_frame" value="rear_upper/lidar"/>
+        <arg name="sensor_frame" value="rear_upper/lidar_base_link"/>
         <arg name="sensor_ip" value="192.168.1.202"/>
         <arg name="host_ip" value="$(var host_ip)"/>
         <arg name="data_port" value="2321"/>
@@ -63,7 +63,7 @@
       <push-ros-namespace namespace="left_upper" />
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_OT128.launch.xml">
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
-        <arg name="sensor_frame" value="left_upper/lidar"/>
+        <arg name="sensor_frame" value="left_upper/lidar_base_link"/>
         <arg name="sensor_ip" value="192.168.1.203"/>
         <arg name="host_ip" value="$(var host_ip)"/>
         <arg name="data_port" value="2322"/>
@@ -97,7 +97,7 @@
       <push-ros-namespace namespace="rear_lower" />
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_QT128.launch.xml">
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
-        <arg name="sensor_frame" value="rear_lower/lidar"/>
+        <arg name="sensor_frame" value="rear_lower/lidar_base_link"/>
         <arg name="sensor_ip" value="192.168.1.212"/>
         <arg name="host_ip" value="$(var host_ip)"/>
         <arg name="data_port" value="2376"/>
@@ -131,7 +131,7 @@
       <push-ros-namespace namespace="left_lower" />
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_QT128.launch.xml">
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
-        <arg name="sensor_frame" value="left_lower/lidar"/>
+        <arg name="sensor_frame" value="left_lower/lidar_base_link"/>
         <arg name="sensor_ip" value="192.168.1.213"/>
         <arg name="host_ip" value="$(var host_ip)"/>
         <arg name="data_port" value="2377"/>
@@ -166,7 +166,7 @@
       <push-ros-namespace namespace="front_upper" />
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_OT128.launch.xml">
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
-        <arg name="sensor_frame" value="front_upper/lidar"/>
+        <arg name="sensor_frame" value="front_upper/lidar_base_link"/>
         <arg name="sensor_ip" value="192.168.1.204"/>
         <arg name="host_ip" value="$(var host_ip)"/>
         <arg name="data_port" value="2323"/>
@@ -200,7 +200,7 @@
       <push-ros-namespace namespace="right_upper" />
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_OT128.launch.xml">
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
-        <arg name="sensor_frame" value="right_upper/lidar"/>
+        <arg name="sensor_frame" value="right_upper/lidar_base_link"/>
         <arg name="sensor_ip" value="192.168.1.205"/>
         <arg name="host_ip" value="$(var host_ip)"/>
         <arg name="data_port" value="2324"/>
@@ -234,7 +234,7 @@
       <push-ros-namespace namespace="front_lower" />
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_QT128.launch.xml">
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
-        <arg name="sensor_frame" value="front_lower/lidar"/>
+        <arg name="sensor_frame" value="front_lower/lidar_base_link"/>
         <arg name="sensor_ip" value="192.168.1.214"/>
         <arg name="host_ip" value="$(var host_ip)"/>
         <arg name="data_port" value="2378"/>
@@ -268,7 +268,7 @@
       <push-ros-namespace namespace="right_lower" />
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_QT128.launch.xml">
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
-        <arg name="sensor_frame" value="right_lower/lidar"/>
+        <arg name="sensor_frame" value="right_lower/lidar_base_link"/>
         <arg name="sensor_ip" value="192.168.1.215"/>
         <arg name="host_ip" value="$(var host_ip)"/>
         <arg name="data_port" value="2379"/>
