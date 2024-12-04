@@ -87,7 +87,7 @@ def launch_setup(context, *args, **kwargs):
 
     nodes.append(
         ComposableNode(
-            package="glog_component",
+            package="autoware_glog_component",
             plugin="GlogComponent",
             name="glog_component",
         )
