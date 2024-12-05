@@ -26,6 +26,7 @@
 
   <group if="$(eval &quot;'$(var ars_version)'=='ars548'&quot;)">
     <let name="odometry_topic" value="/localization/kinematic_state"/>
+    <let name="twist_topic" value="/sensing/vehicle_velocity_converter/twist_with_covariance"/>
     <let name="acceleration_topic" value="/localization/acceleration"/>
     <let name="steering_angle_topic" value="/vehicle/status/steering_status_scalar"/>
     <arg name="radar_tracks_msgs_converter_param_path" default="$(find-pkg-share common_sensor_launch)/config/radar_tracks_msgs_converter.param.yaml"/>
@@ -36,9 +37,10 @@
 
     <group>
       <push-ros-namespace namespace="front_center"/>
+      <group>
         <include file="$(find-pkg-share nebula_ros)/launch/continental_launch_all_hw.xml" if="$(var launch_driver)">
 
-          <arg name="odometry_topic" value="$(var odometry_topic)"/>
+          <arg name="odometry_topic" value="$(var twist_topic)"/>
           <arg name="acceleration_topic" value="$(var acceleration_topic)"/>
           <arg name="steering_angle_topic" value="$(var steering_angle_topic)"/>
 
@@ -54,23 +56,27 @@
           <arg name="configuration_sensor_port" value="42101"/>
 
           <arg name="new_plug_orientation" value="0"/>
-      </include>
+        </include>
+      </group>
 
-      <include file="$(find-pkg-share autoware_radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
-        <arg name="input/radar_objects" value="objects_raw"/>
-        <arg name="input/odometry" value="$(var odometry_topic)"/>
-        <arg name="output/radar_detected_objects" value="detected_objects"/>
-        <arg name="output/radar_tracked_objects" value="tracked_objects"/>
-        <arg name="use_twist_compensation" value="false"/>
-        <arg name="param_path" value="$(var radar_tracks_msgs_converter_param_path)"/>
-      </include>
+      <group>
+        <include file="$(find-pkg-share autoware_radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
+          <arg name="input/radar_objects" value="objects_raw"/>
+          <arg name="input/odometry" value="$(var odometry_topic)"/>
+          <arg name="output/radar_detected_objects" value="detected_objects"/>
+          <arg name="output/radar_tracked_objects" value="tracked_objects"/>
+          <arg name="use_twist_compensation" value="false"/>
+          <arg name="param_path" value="$(var radar_tracks_msgs_converter_param_path)"/>
+        </include>
+      </group>
     </group>
 
     <group>
       <push-ros-namespace namespace="front_left"/>
+      <group>
         <include file="$(find-pkg-share nebula_ros)/launch/continental_launch_all_hw.xml" if="$(var launch_driver)">
 
-          <arg name="odometry_topic" value="$(var odometry_topic)"/>
+          <arg name="odometry_topic" value="$(var twist_topic)"/>
           <arg name="acceleration_topic" value="$(var acceleration_topic)"/>
           <arg name="steering_angle_topic" value="$(var steering_angle_topic)"/>
 
@@ -86,23 +92,27 @@
           <arg name="configuration_sensor_port" value="42101"/>
 
           <arg name="new_plug_orientation" value="0"/>
-      </include>
+        </include>
+      </group>
 
-      <include file="$(find-pkg-share autoware_radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
-        <arg name="input/radar_objects" value="objects_raw"/>
-        <arg name="input/odometry" value="$(var odometry_topic)"/>
-        <arg name="output/radar_detected_objects" value="detected_objects"/>
-        <arg name="output/radar_tracked_objects" value="tracked_objects"/>
-        <arg name="use_twist_compensation" value="false"/>
-        <arg name="param_path" value="$(var radar_tracks_msgs_converter_param_path)"/>
-      </include>
+      <group>
+        <include file="$(find-pkg-share autoware_radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
+          <arg name="input/radar_objects" value="objects_raw"/>
+          <arg name="input/odometry" value="$(var odometry_topic)"/>
+          <arg name="output/radar_detected_objects" value="detected_objects"/>
+          <arg name="output/radar_tracked_objects" value="tracked_objects"/>
+          <arg name="use_twist_compensation" value="false"/>
+          <arg name="param_path" value="$(var radar_tracks_msgs_converter_param_path)"/>
+        </include>
+      </group>
     </group>
 
     <group>
       <push-ros-namespace namespace="front_right"/>
+      <group>
         <include file="$(find-pkg-share nebula_ros)/launch/continental_launch_all_hw.xml" if="$(var launch_driver)">
 
-          <arg name="odometry_topic" value="$(var odometry_topic)"/>
+          <arg name="odometry_topic" value="$(var twist_topic)"/>
           <arg name="acceleration_topic" value="$(var acceleration_topic)"/>
           <arg name="steering_angle_topic" value="$(var steering_angle_topic)"/>
 
@@ -118,23 +128,27 @@
           <arg name="configuration_sensor_port" value="42101"/>
 
           <arg name="new_plug_orientation" value="0"/>
-      </include>
+        </include>
+      </group>
 
-      <include file="$(find-pkg-share autoware_radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
-        <arg name="input/radar_objects" value="objects_raw"/>
-        <arg name="input/odometry" value="$(var odometry_topic)"/>
-        <arg name="output/radar_detected_objects" value="detected_objects"/>
-        <arg name="output/radar_tracked_objects" value="tracked_objects"/>
-        <arg name="use_twist_compensation" value="false"/>
-        <arg name="param_path" value="$(var radar_tracks_msgs_converter_param_path)"/>
-      </include>
+      <group>
+        <include file="$(find-pkg-share autoware_radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
+          <arg name="input/radar_objects" value="objects_raw"/>
+          <arg name="input/odometry" value="$(var odometry_topic)"/>
+          <arg name="output/radar_detected_objects" value="detected_objects"/>
+          <arg name="output/radar_tracked_objects" value="tracked_objects"/>
+          <arg name="use_twist_compensation" value="false"/>
+          <arg name="param_path" value="$(var radar_tracks_msgs_converter_param_path)"/>
+        </include>
+      </group>
     </group>
 
     <group>
       <push-ros-namespace namespace="rear_center"/>
+      <group>
         <include file="$(find-pkg-share nebula_ros)/launch/continental_launch_all_hw.xml" if="$(var launch_driver)">
 
-          <arg name="odometry_topic" value="$(var odometry_topic)"/>
+          <arg name="odometry_topic" value="$(var twist_topic)"/>
           <arg name="acceleration_topic" value="$(var acceleration_topic)"/>
           <arg name="steering_angle_topic" value="$(var steering_angle_topic)"/>
 
@@ -150,23 +164,27 @@
           <arg name="configuration_sensor_port" value="42101"/>
 
           <arg name="new_plug_orientation" value="0"/>
-      </include>
+        </include>
+      </group>
 
-      <include file="$(find-pkg-share autoware_radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
-        <arg name="input/radar_objects" value="objects_raw"/>
-        <arg name="input/odometry" value="$(var odometry_topic)"/>
-        <arg name="output/radar_detected_objects" value="detected_objects"/>
-        <arg name="output/radar_tracked_objects" value="tracked_objects"/>
-        <arg name="use_twist_compensation" value="false"/>
-        <arg name="param_path" value="$(var radar_tracks_msgs_converter_param_path)"/>
-      </include>
+      <group>
+        <include file="$(find-pkg-share autoware_radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
+          <arg name="input/radar_objects" value="objects_raw"/>
+          <arg name="input/odometry" value="$(var odometry_topic)"/>
+          <arg name="output/radar_detected_objects" value="detected_objects"/>
+          <arg name="output/radar_tracked_objects" value="tracked_objects"/>
+          <arg name="use_twist_compensation" value="false"/>
+          <arg name="param_path" value="$(var radar_tracks_msgs_converter_param_path)"/>
+        </include>
+      </group>
     </group>
 
     <group>
       <push-ros-namespace namespace="rear_left"/>
+      <group>
         <include file="$(find-pkg-share nebula_ros)/launch/continental_launch_all_hw.xml" if="$(var launch_driver)">
 
-          <arg name="odometry_topic" value="$(var odometry_topic)"/>
+          <arg name="odometry_topic" value="$(var twist_topic)"/>
           <arg name="acceleration_topic" value="$(var acceleration_topic)"/>
           <arg name="steering_angle_topic" value="$(var steering_angle_topic)"/>
 
@@ -182,23 +200,27 @@
           <arg name="configuration_sensor_port" value="42101"/>
 
           <arg name="new_plug_orientation" value="0"/>
-      </include>
+        </include>
+      </group>
 
-      <include file="$(find-pkg-share autoware_radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
-        <arg name="input/radar_objects" value="objects_raw"/>
-        <arg name="input/odometry" value="$(var odometry_topic)"/>
-        <arg name="output/radar_detected_objects" value="detected_objects"/>
-        <arg name="output/radar_tracked_objects" value="tracked_objects"/>
-        <arg name="use_twist_compensation" value="false"/>
-        <arg name="param_path" value="$(var radar_tracks_msgs_converter_param_path)"/>
-      </include>
+      <group>
+        <include file="$(find-pkg-share autoware_radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
+          <arg name="input/radar_objects" value="objects_raw"/>
+          <arg name="input/odometry" value="$(var odometry_topic)"/>
+          <arg name="output/radar_detected_objects" value="detected_objects"/>
+          <arg name="output/radar_tracked_objects" value="tracked_objects"/>
+          <arg name="use_twist_compensation" value="false"/>
+          <arg name="param_path" value="$(var radar_tracks_msgs_converter_param_path)"/>
+        </include>
+      </group>
     </group>
 
     <group>
       <push-ros-namespace namespace="rear_right"/>
+      <group>
         <include file="$(find-pkg-share nebula_ros)/launch/continental_launch_all_hw.xml" if="$(var launch_driver)">
 
-          <arg name="odometry_topic" value="$(var odometry_topic)"/>
+          <arg name="odometry_topic" value="$(var twist_topic)"/>
           <arg name="acceleration_topic" value="$(var acceleration_topic)"/>
           <arg name="steering_angle_topic" value="$(var steering_angle_topic)"/>
 
@@ -214,15 +236,18 @@
           <arg name="configuration_sensor_port" value="42101"/>
 
           <arg name="new_plug_orientation" value="0"/>
-      </include>
+        </include>
+      </group>
 
-      <include file="$(find-pkg-share autoware_radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
-        <arg name="input/radar_objects" value="objects_raw"/>
-        <arg name="input/odometry" value="$(var odometry_topic)"/>
-        <arg name="output/radar_detected_objects" value="detected_objects"/>
-        <arg name="output/radar_tracked_objects" value="tracked_objects"/>
-        <arg name="param_path" value="$(var radar_tracks_msgs_converter_param_path)"/>
-      </include>
+      <group>
+        <include file="$(find-pkg-share autoware_radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
+          <arg name="input/radar_objects" value="objects_raw"/>
+          <arg name="input/odometry" value="$(var odometry_topic)"/>
+          <arg name="output/radar_detected_objects" value="detected_objects"/>
+          <arg name="output/radar_tracked_objects" value="tracked_objects"/>
+          <arg name="param_path" value="$(var radar_tracks_msgs_converter_param_path)"/>
+        </include>
+      </group>
     </group>
 
     <!-- merge radar objects -->
