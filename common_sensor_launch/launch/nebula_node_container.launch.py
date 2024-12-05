@@ -92,78 +92,78 @@ def launch_setup(context, *args, **kwargs):
         )
     )
 
-    nodes.append(
-        ComposableNode(
-            package="nebula_ros",
-            plugin=sensor_make + "DriverRosWrapper",
-            name=sensor_make.lower() + "_driver_ros_wrapper_node",
-            parameters=[
-                {
-                    "calibration_file": sensor_calib_fp,
-                    "sensor_model": sensor_model,
-                    **create_parameter_dict(
-                        "host_ip",
-                        "sensor_ip",
-                        "data_port",
-                        "return_mode",
-                        "min_range",
-                        "max_range",
-                        "frame_id",
-                        "scan_phase",
-                        "cloud_min_angle",
-                        "cloud_max_angle",
-                        "dual_return_distance_threshold",
-                        "setup_sensor",
-                        "retry_hw",
-                    ),
-                },
-            ],
-            remappings=[
-                ("aw_points", "pointcloud_raw"),
-                ("aw_points_ex", "pointcloud_raw_ex"),
-            ],
-            extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
-        )
-    )
+    # nodes.append(
+    #     ComposableNode(
+    #         package="nebula_ros",
+    #         plugin=sensor_make + "DriverRosWrapper",
+    #         name=sensor_make.lower() + "_driver_ros_wrapper_node",
+    #         parameters=[
+    #             {
+    #                 "calibration_file": sensor_calib_fp,
+    #                 "sensor_model": sensor_model,
+    #                 **create_parameter_dict(
+    #                     "host_ip",
+    #                     "sensor_ip",
+    #                     "data_port",
+    #                     "return_mode",
+    #                     "min_range",
+    #                     "max_range",
+    #                     "frame_id",
+    #                     "scan_phase",
+    #                     "cloud_min_angle",
+    #                     "cloud_max_angle",
+    #                     "dual_return_distance_threshold",
+    #                     "setup_sensor",
+    #                     "retry_hw",
+    #                 ),
+    #             },
+    #         ],
+    #         remappings=[
+    #             ("aw_points", "pointcloud_raw"),
+    #             ("aw_points_ex", "pointcloud_raw_ex"),
+    #         ],
+    #         extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
+    #     )
+    # )
 
-    # There is an issue where hw_monitor crashes due to data race,
-    # so the monitor will now only be launched when explicitly specified with a launch command.
-    launch_hw_monitor: bool = IfCondition(LaunchConfiguration("launch_hw_monitor")).evaluate(
-        context
-    )
-    launch_driver: bool = IfCondition(LaunchConfiguration("launch_driver")).evaluate(context)
-    if launch_hw_monitor and launch_driver:
-        nodes.append(
-            ComposableNode(
-                package="nebula_ros",
-                plugin=sensor_make + "HwMonitorRosWrapper",
-                name=sensor_make.lower() + "_hw_monitor_ros_wrapper_node",
-                parameters=[
-                    {
-                        "sensor_model": sensor_model,
-                        **create_parameter_dict(
-                            "return_mode",
-                            "frame_id",
-                            "scan_phase",
-                            "sensor_ip",
-                            "host_ip",
-                            "data_port",
-                            "gnss_port",
-                            "packet_mtu_size",
-                            "rotation_speed",
-                            "cloud_min_angle",
-                            "cloud_max_angle",
-                            "diag_span",
-                            "dual_return_distance_threshold",
-                            "delay_monitor_ms",
-                        ),
-                    },
-                ],
-                extra_arguments=[
-                    {"use_intra_process_comms": LaunchConfiguration("use_intra_process")}
-                ],
-            )
-        )
+    # # There is an issue where hw_monitor crashes due to data race,
+    # # so the monitor will now only be launched when explicitly specified with a launch command.
+    # launch_hw_monitor: bool = IfCondition(LaunchConfiguration("launch_hw_monitor")).evaluate(
+    #     context
+    # )
+    # launch_driver: bool = IfCondition(LaunchConfiguration("launch_driver")).evaluate(context)
+    # if launch_hw_monitor and launch_driver:
+    #     nodes.append(
+    #         ComposableNode(
+    #             package="nebula_ros",
+    #             plugin=sensor_make + "HwMonitorRosWrapper",
+    #             name=sensor_make.lower() + "_hw_monitor_ros_wrapper_node",
+    #             parameters=[
+    #                 {
+    #                     "sensor_model": sensor_model,
+    #                     **create_parameter_dict(
+    #                         "return_mode",
+    #                         "frame_id",
+    #                         "scan_phase",
+    #                         "sensor_ip",
+    #                         "host_ip",
+    #                         "data_port",
+    #                         "gnss_port",
+    #                         "packet_mtu_size",
+    #                         "rotation_speed",
+    #                         "cloud_min_angle",
+    #                         "cloud_max_angle",
+    #                         "diag_span",
+    #                         "dual_return_distance_threshold",
+    #                         "delay_monitor_ms",
+    #                     ),
+    #                 },
+    #             ],
+    #             extra_arguments=[
+    #                 {"use_intra_process_comms": LaunchConfiguration("use_intra_process")}
+    #             ],
+    #         )
+    #     )
 
     cropbox_parameters = create_parameter_dict("input_frame", "output_frame")
     cropbox_parameters["negative"] = True
@@ -258,15 +258,17 @@ def launch_setup(context, *args, **kwargs):
         output="both",
     )
 
+    launch_hw: bool = IfCondition(LaunchConfiguration("launch_driver")).evaluate(context)
     driver_component = ComposableNode(
         package="nebula_ros",
-        plugin=sensor_make + "HwInterfaceRosWrapper",
+        plugin=sensor_make + "RosWrapper",
         # node is created in a global context, need to avoid name clash
-        name=sensor_make.lower() + "_hw_interface_ros_wrapper_node",
+        name=sensor_make.lower() + "_ros_wrapper_node",
         parameters=[
             {
                 "sensor_model": sensor_model,
                 "calibration_file": sensor_calib_fp,
+                "launch_hw": launch_hw,
                 **create_parameter_dict(
                     "sensor_ip",
                     "host_ip",
@@ -286,10 +288,50 @@ def launch_setup(context, *args, **kwargs):
                     "ptp_switch_type",
                     "ptp_domain",
                     "retry_hw",
+                    "diag_span",
+                    "delay_monitor_ms",
                 ),
             }
         ],
+        remappings=[
+            ("aw_points", "pointcloud_raw"),
+            ("aw_points_ex", "pointcloud_raw_ex"),
+        ],
+        extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
     )
+
+    # driver_component = ComposableNode(
+    #     package="nebula_ros",
+    #     plugin=sensor_make + "HwInterfaceRosWrapper",
+    #     # node is created in a global context, need to avoid name clash
+    #     name=sensor_make.lower() + "_hw_interface_ros_wrapper_node",
+    #     parameters=[
+    #         {
+    #             "sensor_model": sensor_model,
+    #             "calibration_file": sensor_calib_fp,
+    #             **create_parameter_dict(
+    #                 "sensor_ip",
+    #                 "host_ip",
+    #                 "scan_phase",
+    #                 "return_mode",
+    #                 "frame_id",
+    #                 "rotation_speed",
+    #                 "data_port",
+    #                 "gnss_port",
+    #                 "cloud_min_angle",
+    #                 "cloud_max_angle",
+    #                 "packet_mtu_size",
+    #                 "dual_return_distance_threshold",
+    #                 "setup_sensor",
+    #                 "ptp_profile",
+    #                 "ptp_transport_type",
+    #                 "ptp_switch_type",
+    #                 "ptp_domain",
+    #                 "retry_hw",
+    #             ),
+    #         }
+    #     ],
+    # )
 
     blockage_diag_component = ComposableNode(
         package="pointcloud_preprocessor",
