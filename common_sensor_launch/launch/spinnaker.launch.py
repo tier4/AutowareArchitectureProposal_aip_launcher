@@ -39,7 +39,11 @@ def launch_setup(context, *args, **kwargs):
             namespace=LaunchConfiguration("spinnaker_namespace"),
             remappings=[
                 (
-                    "camera0/image_raw",
+                    [
+                        "camera",
+                        LaunchConfiguration("camera_id"),
+                        "/image_raw",
+                    ],
                     [
                         "camera",
                         LaunchConfiguration("camera_id"),
@@ -48,7 +52,11 @@ def launch_setup(context, *args, **kwargs):
                     ],
                 ),
                 (
-                    "camera0/camera_info",
+                    [
+                        "camera",
+                        LaunchConfiguration("camera_id"),
+                        "/camera_info",
+                    ],
                     ["camera", LaunchConfiguration("camera_id"), "/camera_info"],
                 ),
             ],
