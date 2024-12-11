@@ -67,6 +67,9 @@ def launch_setup(context, *args, **kwargs):
                         "camera_info_url"
                     ),
                 },
+                {
+                    "use_image_tranport": LaunchConfiguration("use_image_tranport")
+                }
             ],
             extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
         ),
@@ -106,6 +109,7 @@ def generate_launch_description():
     add_launch_arg("spinnaker_namespace", "/sensing/camera")
     add_launch_arg("spinnaker_param_path")
     add_launch_arg("camera_info_url")
+    add_launch_arg("use_image_tranport", "True")
     add_launch_arg("use_intra_process", "True")
     set_camera_info_url_key = SetLaunchConfiguration(
         "camera_info_url_key",
