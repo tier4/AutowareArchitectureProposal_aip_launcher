@@ -67,13 +67,9 @@ def launch_setup(context, *args, **kwargs):
                         "camera_info_url"
                     ),
                 },
-<<<<<<< HEAD
                 {
                     "use_image_transport": LaunchConfiguration("use_image_transport")
                 }
-=======
-                {"use_image_tranport": LaunchConfiguration("use_image_tranport")},
->>>>>>> 38605787025d7a216b4e669674a0b8e21d58623b
             ],
             extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
         ),
