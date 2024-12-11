@@ -55,6 +55,20 @@ def launch_setup(context, *args, **kwargs):
                     [
                         "camera",
                         LaunchConfiguration("camera_id"),
+                        "/image_raw/compressed",
+                    ],
+                    [
+                        "camera",
+                        LaunchConfiguration("camera_id"),
+                        "/",
+                        LaunchConfiguration("image_topic"),
+                        "/compressed"
+                    ],
+                ),
+                (
+                    [
+                        "camera",
+                        LaunchConfiguration("camera_id"),
                         "/camera_info",
                     ],
                     ["camera", LaunchConfiguration("camera_id"), "/camera_info"],
