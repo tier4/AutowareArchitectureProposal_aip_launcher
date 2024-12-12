@@ -3,4 +3,4 @@
     update_rate_hz: 20.0
     new_frame_id: "base_link"
     timeout_threshold: 1.0
-    input_topics: ["/sensing/radar/front_center/detected_objects", "/sensing/radar/front_left/detected_objects", "/sensing/radar/rear_left/detected_objects", "/sensing/radar/rear_center/detected_objects", "/sensing/radar/rear_right/detected_objects", "/sensing/radar/front_right/detected_objects"]
+    input_topics: ["/sensing/radar/front_center/detected_objects", "/sensing/radar/rear_center/detected_objects"]
