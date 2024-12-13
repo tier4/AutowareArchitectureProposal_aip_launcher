@@ -21,7 +21,7 @@
     </link>
 
     <!-- sensor -->
-    <xacro:property name="calibration" value="${xacro.load_yaml('$(arg config_dir)/sensor_kit_calibration.yaml')}"/>
+    <xacro:property name="calibration" value="${xacro.load_yaml('$(arg config_dir)/{{ joint_unit_name }}_calibration.yaml')}"/>
 
     {% for item in isolated_sensors %}
     {{ item }}

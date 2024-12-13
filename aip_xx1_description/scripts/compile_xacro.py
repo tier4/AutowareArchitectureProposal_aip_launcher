@@ -27,6 +27,7 @@ class Transformation:
             self.yaw = transformation["yaw"]
             self.base_frame = base_frame
             self.child_frame = child_frame
+            self.type: str = transformation.get("type", "")
 
             self.name = self.child_frame.replace("_base_link", "").replace("_link", "")
 
@@ -91,6 +92,19 @@ class LinkType(enum.Enum):
     VLS128 = "VLS-128.urdf"
     RADAR = "radar"
     JOINT_UNITS = "units"
+
+
+def obtain_link_type(link: Transformation) -> LinkType:
+    if len(link.type) > 0:
+        # use explicit type string to obtain link
+        link_type_lower = link.type.lower()
+
+        # Check each enum value for a match
+        for type_enum in LinkType:
+            if link_type_lower == type_enum.value.lower():
+                return type_enum
+    # if there is no match, or the type is not defined:
+    return determine_link_type(link.child_frame)
 
 
 def determine_link_type(link_name: str) -> LinkType:
@@ -276,9 +290,7 @@ def main(
 
     render_meta_data = {}
     render_meta_data["default_config_path"] = f"$(find {project_name})/config"
-    render_meta_data[
-        "sensor_calibration_yaml_path"
-    ] = f"$(find {project_name})/config/sensors_calibration.yaml"
+    render_meta_data["sensor_calibration_yaml_path"] = "$(arg config_dir)/sensors_calibration.yaml"
     render_meta_data["sensor_units_includes"] = []
     render_meta_data["sensor_units"] = []
     render_meta_data["isolated_sensors_includes"] = []
@@ -287,7 +299,7 @@ def main(
     include_text = set()
     sensor_items = []
     for _, transform in calib.transforms.items():
-        link_type: LinkType = determine_link_type(transform.child_frame)
+        link_type: LinkType = obtain_link_type(transform)
         if link_type == LinkType.JOINT_UNITS:
             render_meta_data["sensor_units_includes"].append(
                 link_dicts[link_type]["including_file"].format(filename=transform.name)
@@ -330,12 +342,13 @@ def main(
         sensor_unit_render_meta_data["default_config_path"] = render_meta_data[
             "default_config_path"
         ]
-
+        sensor_unit_render_meta_data["joint_unit_name"] = sensor_unit["name"]
         sensor_unit_render_meta_data["current_base_link"] = sensor_unit_calib.base_frame
         sensor_unit_isolated_sensors = []
         for _, transform in sensor_unit_calib.transforms.items():
-            link_type: LinkType = determine_link_type(transform.child_frame)
+            link_type: LinkType = obtain_link_type(transform)
             include_text.add(link_dicts[link_type]["including_file"])
+            print(transform.child_frame)
             sensor_unit_isolated_sensors.append(link_dicts[link_type]["string_api"](transform))
         sensor_unit_render_meta_data["isolated_sensors_includes"] = list(include_text)
         sensor_unit_render_meta_data["isolated_sensors"] = sensor_unit_isolated_sensors
