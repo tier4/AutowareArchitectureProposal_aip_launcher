@@ -113,6 +113,8 @@ def launch_setup(context, *args, **kwargs):
                         "cloud_min_angle",
                         "cloud_max_angle",
                         "dual_return_distance_threshold",
+                        "setup_sensor",
+                        "retry_hw",
                     ),
                 },
             ],
@@ -123,6 +125,45 @@ def launch_setup(context, *args, **kwargs):
             extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
         )
     )
+
+    # There is an issue where hw_monitor crashes due to data race,
+    # so the monitor will now only be launched when explicitly specified with a launch command.
+    launch_hw_monitor: bool = IfCondition(LaunchConfiguration("launch_hw_monitor")).evaluate(
+        context
+    )
+    launch_driver: bool = IfCondition(LaunchConfiguration("launch_driver")).evaluate(context)
+    if launch_hw_monitor and launch_driver:
+        nodes.append(
+            ComposableNode(
+                package="nebula_ros",
+                plugin=sensor_make + "HwMonitorRosWrapper",
+                name=sensor_make.lower() + "_hw_monitor_ros_wrapper_node",
+                parameters=[
+                    {
+                        "sensor_model": sensor_model,
+                        **create_parameter_dict(
+                            "return_mode",
+                            "frame_id",
+                            "scan_phase",
+                            "sensor_ip",
+                            "host_ip",
+                            "data_port",
+                            "gnss_port",
+                            "packet_mtu_size",
+                            "rotation_speed",
+                            "cloud_min_angle",
+                            "cloud_max_angle",
+                            "diag_span",
+                            "dual_return_distance_threshold",
+                            "delay_monitor_ms",
+                        ),
+                    },
+                ],
+                extra_arguments=[
+                    {"use_intra_process_comms": LaunchConfiguration("use_intra_process")}
+                ],
+            )
+        )
 
     cropbox_parameters = create_parameter_dict("input_frame", "output_frame")
     cropbox_parameters["negative"] = True
@@ -240,6 +281,11 @@ def launch_setup(context, *args, **kwargs):
                     "packet_mtu_size",
                     "dual_return_distance_threshold",
                     "setup_sensor",
+                    "ptp_profile",
+                    "ptp_transport_type",
+                    "ptp_switch_type",
+                    "ptp_domain",
+                    "retry_hw",
                 ),
             }
         ],
@@ -296,7 +342,13 @@ def generate_launch_description():
     add_launch_arg("sensor_model", description="sensor model name")
     add_launch_arg("config_file", "", description="sensor configuration file")
     add_launch_arg("launch_driver", "True", "do launch driver")
+    add_launch_arg(
+        "launch_hw_monitor",
+        "False",
+        "do launch hardware monitor. Due to an issue where hw_monitor crashes due to data conflicts, the monitor in launched only when explicitly specified",
+    )
     add_launch_arg("setup_sensor", "True", "configure sensor")
+    add_launch_arg("retry_hw", "false", "retry hw")
     add_launch_arg("sensor_ip", "192.168.1.201", "device ip address")
     add_launch_arg("host_ip", "255.255.255.255", "host ip address")
     add_launch_arg("scan_phase", "0.0")
@@ -319,6 +371,13 @@ def generate_launch_description():
     add_launch_arg("use_multithread", "False", "use multithread")
     add_launch_arg("use_intra_process", "False", "use ROS 2 component container communication")
     add_launch_arg("container_name", "nebula_node_container")
+    add_launch_arg("ptp_profile", "1588v2")
+    add_launch_arg("ptp_transport_type", "L2")
+    add_launch_arg("ptp_switch_type", "TSN")
+    add_launch_arg("ptp_domain", "0")
+    add_launch_arg("output_as_sensor_frame", "True", "output final pointcloud in sensor frame")
+    add_launch_arg("diag_span", "1000", "")
+    add_launch_arg("delay_monitor_ms", "2000", "")
     add_launch_arg("output_as_sensor_frame", "True", "output final pointcloud in sensor frame")
 
     add_launch_arg("enable_blockage_diag", "true")

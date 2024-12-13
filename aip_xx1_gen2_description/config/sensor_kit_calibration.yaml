@@ -1,0 +1,113 @@
+sensor_kit_base_link:
+  camera0/camera_link:
+    x: 0.372 # Design Value
+    y: 0.0 # Design Value
+    z: -0.207 # Design Value
+    roll: 0.0 # Design Value
+    pitch: 0.0 # Design Value
+    yaw: 0.0 # Design Value
+  camera1/camera_link:
+    x: 0.372 # Design Value
+    y: 0.045 # Design Value
+    z: -0.207 # Design Value
+    roll: 0.0 # Design Value
+    pitch: 0.0 # Design Value
+    yaw: 0.0 # Design Value
+  camera2/camera_link:
+    x: 0.372 # Design Value
+    y: -0.045 # Design Value
+    z: -0.207 # Design Value
+    roll: 0.0 # Design Value
+    pitch: 0.0 # Design Value
+    yaw: 0.0 # Design Value
+  camera3/camera_link:
+    x: 0.133 # Design Value
+    y: 0.498 # Design Value
+    z: -0.246 # Design Value
+    roll: 0.0 # Design Value
+    pitch: 0.0 # Design Value
+    yaw: 0.872665 # Design Value
+  camera4/camera_link:
+    x: 0.133 # Design Value
+    y: -0.498 # Design Value
+    z: -0.246 # Design Value
+    roll: 0.0 # Design Value
+    pitch: 0.0 # Design Value
+    yaw: -0.872665 # Design Value
+  camera5/camera_link:
+    x: 0.095 # Design Value
+    y: 0.524 # Design Value
+    z: -0.246 # Design Value
+    roll: 0.0 # Design Value
+    pitch: 0.0 # Design Value
+    yaw: 1.0472 # Design Value
+  camera6/camera_link:
+    x: 0.095 # Design Value
+    y: -0.524 # Design Value
+    z: -0.246 # Design Value
+    roll: 0.0 # Design Value
+    pitch: 0.0 # Design Value
+    yaw: -1.0472 # Design Value
+  camera7/camera_link:
+    x: -0.345 # Design Value
+    y: 0.244 # Design Value
+    z: -0.174 # Design Value
+    roll: 0.0 # Design Value
+    pitch: 0.0 # Design Value
+    yaw: 2.70526 # Design Value
+  camera8/camera_link:
+    x: -0.345 # Design Value
+    y: -0.244 # Design Value
+    z: -0.174 # Design Value
+    roll: 0.0 # Design Value
+    pitch: 0.0 # Design Value
+    yaw: -2.70526 # Design Value
+  camera9/camera_link:
+    x: -0.362 # Design Value
+    y: 0.202 # Design Value
+    z: -0.174 # Design Value
+    roll: 0.0 # Design Value
+    pitch: 0.0 # Design Value
+    yaw: 2.79253 # Design Value
+  camera10/camera_link:
+    x: -0.362 # Design Value
+    y: -0.202 # Design Value
+    z: -0.174 # Design Value
+    roll: 0.0 # Design Value
+    pitch: 0.0 # Design Value
+    yaw: -2.79253 # Design Value
+  hesai_top_base_link:
+    x: 0.0 # Design Value
+    y: 0.0 # Design Value
+    z: 0.0 # Design Value
+    roll: 0.0 # Design Value
+    pitch: 0.0 # Design Value
+    yaw: 4.36332298038 # Design Value
+  hesai_left_base_link:
+    x: 0.0 # Design Value
+    y: 0.564 # Design Value
+    z: -0.300 # Design Value
+    roll: 0.872665 # Design Value
+    pitch: 0.0 # Design Value
+    yaw: 3.14159265359 # Design Value
+  hesai_right_base_link:
+    x: 0.0 # Design Value
+    y: -0.564 # Design Value
+    z: -0.300 # Design Value
+    roll: 0.69813132679 # Design Value
+    pitch: 0.0 # Design Value
+    yaw: 0.0 # Design Value
+  gnss_link:
+    x: -0.279 # Design Value
+    y: 0.0 # Design Value
+    z: -0.160 # Design Value
+    roll: 0.0 # Design Value
+    pitch: 0.0 # Design Value
+    yaw: 0.0 # Design Value
+  tamagawa/imu_link:
+    x: -0.129 # Design Value
+    y: 0.0 # Design Value
+    z: -0.160 # Design Value
+    roll: 3.14159265359
+    pitch: 0.0 # Design Value
+    yaw: 3.14159265359 # Design Value

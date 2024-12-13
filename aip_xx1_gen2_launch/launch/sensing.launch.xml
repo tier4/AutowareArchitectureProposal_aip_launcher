@@ -2,42 +2,48 @@
 
   <arg name="launch_driver" default="true" description="do launch driver"/>
   <arg name="vehicle_mirror_param_file" description="path to the file of vehicle mirror position yaml"/>
+  <arg name="perception_mode" default="camera_lidar_fusion" description="select perception mode. camera_lidar_fusion, lidar, camera"/>
   <arg name="pointcloud_container_name" default="pointcloud_container"/>
   <arg name ="vehicle_id" default="$(env VEHICLE_ID default)" />
 
   <group>
 
     <!-- LiDAR Driver -->
-    <include file="$(find-pkg-share aip_x2_launch)/launch/lidar.launch.xml">
+    <include file="$(find-pkg-share aip_xx1_gen2_launch)/launch/lidar.launch.py">
       <arg name="launch_driver" value="$(var launch_driver)" />
       <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)" />
       <arg name="pointcloud_container_name" value="$(var pointcloud_container_name)"/>
     </include>
 
-    <!-- IMU Driver -->
-    <include file="$(find-pkg-share aip_x2_launch)/launch/imu.launch.xml">
+    <!-- Camera Driver -->
+    <!-- <include file="$(find-pkg-share aip_xx1_gen2_launch)/launch/camera.launch.xml">
       <arg name="launch_driver" value="$(var launch_driver)" />
+    </include> -->
+
+    <!-- IMU Driver -->
+    <include file="$(find-pkg-share aip_xx1_gen2_launch)/launch/imu.launch.xml">
+      <arg name="launch_driver" value="$(var launch_driver)" />
+      <arg name="imu_connection" value="can" />
     </include>
 
     <!-- GNSS Driver -->
-    <include file="$(find-pkg-share aip_x2_launch)/launch/gnss.launch.xml">
+    <include file="$(find-pkg-share aip_xx1_gen2_launch)/launch/gnss.launch.xml">
       <arg name="launch_driver" value="$(var launch_driver)" />
+      <arg name="gnss_receiver" value="septentrio"/>
     </include>
 
     <!-- Radar Driver -->
-    <!--include file="$(find-pkg-share aip_x2_launch)/launch/radar.launch.xml">
+    <include file="$(find-pkg-share aip_xx1_gen2_launch)/launch/radar.launch.xml">
       <arg name="launch_driver" value="$(var launch_driver)" />
-    </include-->
+      <arg name="ars_version" value="ars548" />
+    </include>
 
     <!-- Vehicle twist -->
     <include file="$(find-pkg-share vehicle_velocity_converter)/launch/vehicle_velocity_converter.launch.xml">
       <arg name="input_vehicle_velocity_topic" value="/vehicle/status/velocity_status"/>
       <arg name="output_twist_with_covariance" value="/sensing/vehicle_velocity_converter/twist_with_covariance"/>
-      <arg name="config_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2/vehicle_velocity_converter.param.yaml" />
+      <arg name="config_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_xx1_gen2/vehicle_velocity_converter.param.yaml" />
     </include>
-
-    <!-- Topic state monitor for each sensor -->
-    <include file="$(find-pkg-share aip_x2_launch)/launch/topic_state_monitor.launch.py"/>
 
   </group>
 
