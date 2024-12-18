@@ -46,7 +46,7 @@ def launch_setup(context, *args, **kwargs):
                     "/sensing/lidar/rear_upper/pointcloud",
                     "/sensing/lidar/rear_lower/pointcloud",
                 ],
-                "input_offset": [0.005, 0.025, 0.050, 0.005, 0.050, 0.005, 0.005, 0.025],
+                "input_offset": [0.025, 0.025, 0.025, 0.0, 0.050, 0.050, 0.050, 0.050],
                 "timeout_sec": 0.075,
                 "output_frame": LaunchConfiguration("base_frame"),
                 "input_twist_topic_type": "twist",
