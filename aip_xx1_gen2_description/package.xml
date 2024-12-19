@@ -11,6 +11,7 @@
 
   <depend>aip_urdf_compiler</depend>
   <depend>velodyne_description</depend>
+  <depend>aip_urdf_compiler</depend>
 
   <export>
     <build_type>ament_cmake</build_type>

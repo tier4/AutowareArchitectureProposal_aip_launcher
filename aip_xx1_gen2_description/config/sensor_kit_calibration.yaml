@@ -6,6 +6,7 @@ sensor_kit_base_link:
     roll: 0.0 # Design Value
     pitch: 0.0 # Design Value
     yaw: 0.0 # Design Value
+    type: monocular_camera
   camera1/camera_link:
     x: 0.372 # Design Value
     y: 0.045 # Design Value
@@ -13,6 +14,7 @@ sensor_kit_base_link:
     roll: 0.0 # Design Value
     pitch: 0.0 # Design Value
     yaw: 0.0 # Design Value
+    type: monocular_camera
   camera2/camera_link:
     x: 0.372 # Design Value
     y: -0.045 # Design Value
@@ -20,6 +22,7 @@ sensor_kit_base_link:
     roll: 0.0 # Design Value
     pitch: 0.0 # Design Value
     yaw: 0.0 # Design Value
+    type: monocular_camera
   camera3/camera_link:
     x: 0.133 # Design Value
     y: 0.498 # Design Value
@@ -27,6 +30,7 @@ sensor_kit_base_link:
     roll: 0.0 # Design Value
     pitch: 0.0 # Design Value
     yaw: 0.872665 # Design Value
+    type: monocular_camera
   camera4/camera_link:
     x: 0.133 # Design Value
     y: -0.498 # Design Value
@@ -34,6 +38,7 @@ sensor_kit_base_link:
     roll: 0.0 # Design Value
     pitch: 0.0 # Design Value
     yaw: -0.872665 # Design Value
+    type: monocular_camera
   camera5/camera_link:
     x: 0.095 # Design Value
     y: 0.524 # Design Value
@@ -41,6 +46,7 @@ sensor_kit_base_link:
     roll: 0.0 # Design Value
     pitch: 0.0 # Design Value
     yaw: 1.0472 # Design Value
+    type: monocular_camera
   camera6/camera_link:
     x: 0.095 # Design Value
     y: -0.524 # Design Value
@@ -48,6 +54,7 @@ sensor_kit_base_link:
     roll: 0.0 # Design Value
     pitch: 0.0 # Design Value
     yaw: -1.0472 # Design Value
+    type: monocular_camera
   camera7/camera_link:
     x: -0.345 # Design Value
     y: 0.244 # Design Value
@@ -55,6 +62,7 @@ sensor_kit_base_link:
     roll: 0.0 # Design Value
     pitch: 0.0 # Design Value
     yaw: 2.70526 # Design Value
+    type: monocular_camera
   camera8/camera_link:
     x: -0.345 # Design Value
     y: -0.244 # Design Value
@@ -62,6 +70,7 @@ sensor_kit_base_link:
     roll: 0.0 # Design Value
     pitch: 0.0 # Design Value
     yaw: -2.70526 # Design Value
+    type: monocular_camera
   camera9/camera_link:
     x: -0.362 # Design Value
     y: 0.202 # Design Value
@@ -69,6 +78,7 @@ sensor_kit_base_link:
     roll: 0.0 # Design Value
     pitch: 0.0 # Design Value
     yaw: 2.79253 # Design Value
+    type: monocular_camera
   camera10/camera_link:
     x: -0.362 # Design Value
     y: -0.202 # Design Value
@@ -76,6 +86,7 @@ sensor_kit_base_link:
     roll: 0.0 # Design Value
     pitch: 0.0 # Design Value
     yaw: -2.79253 # Design Value
+    type: monocular_camera
   hesai_top_base_link:
     x: 0.0 # Design Value
     y: 0.0 # Design Value
@@ -83,6 +94,7 @@ sensor_kit_base_link:
     roll: 0.0 # Design Value
     pitch: 0.0 # Design Value
     yaw: 4.36332298038 # Design Value
+    type: pandar_ot128
   hesai_left_base_link:
     x: 0.0 # Design Value
     y: 0.564 # Design Value
@@ -90,6 +102,7 @@ sensor_kit_base_link:
     roll: 0.872665 # Design Value
     pitch: 0.0 # Design Value
     yaw: 3.14159265359 # Design Value
+    type: pandar_xt32
   hesai_right_base_link:
     x: 0.0 # Design Value
     y: -0.564 # Design Value
@@ -97,6 +110,7 @@ sensor_kit_base_link:
     roll: 0.69813132679 # Design Value
     pitch: 0.0 # Design Value
     yaw: 0.0 # Design Value
+    type: pandar_xt32
   gnss_link:
     x: -0.279 # Design Value
     y: 0.0 # Design Value
@@ -104,6 +118,7 @@ sensor_kit_base_link:
     roll: 0.0 # Design Value
     pitch: 0.0 # Design Value
     yaw: 0.0 # Design Value
+    type: imu
   tamagawa/imu_link:
     x: -0.129 # Design Value
     y: 0.0 # Design Value
@@ -111,3 +126,4 @@ sensor_kit_base_link:
     roll: 3.14159265359
     pitch: 0.0 # Design Value
     yaw: 3.14159265359 # Design Value
+    type: imu
