@@ -2,28 +2,38 @@ cmake_minimum_required(VERSION 3.5)
 project(aip_xx1_description)
 
 find_package(ament_cmake_auto REQUIRED)
+find_package(aip_urdf_compiler REQUIRED)
 
 ament_auto_find_build_dependencies()
 
 find_package(PythonInterp REQUIRED) # cspell: ignore Interp
-# Specify the path to your Python script
-set(PYTHON_SCRIPT "${CMAKE_CURRENT_SOURCE_DIR}/scripts/compile_xacro.py")
-set(PYTHON_TEMPLATE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/templates")
+
+# Get the package share directory
+set(aip_urdf_compiler_BASE_DIR "${aip_urdf_compiler_DIR}/../")
+# Set the correct paths
+set(PYTHON_SCRIPT "${aip_urdf_compiler_BASE_DIR}/scripts/compile_xacro.py")
+set(PYTHON_TEMPLATE_DIRECTORY "${aip_urdf_compiler_BASE_DIR}/templates")
 set(PYTHON_CALIBRATION_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/config")
 set(PYTHON_XACRO_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/urdf")
 
-# Create a custom command to run the Python script
+message(STATUS "PYTHON_SCRIPT path: ${PYTHON_SCRIPT}")
+message(STATUS "PYTHON_TEMPLATE_DIRECTORY path: ${PYTHON_TEMPLATE_DIRECTORY}")
 
+# Verify that the required files exist
+if(NOT EXISTS "${PYTHON_SCRIPT}")
+    message(FATAL_ERROR "Could not find compile_xacro.py at ${PYTHON_SCRIPT}")
+endif()
+
+# Create a custom command to run the Python script
 add_custom_target(xacro_compilation ALL
-    DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/python_script_run_flag # this target will ask for `python_script_run_flag`
+    DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/python_script_run_flag
 )
 
 add_custom_command(
-    # this command will claim to create `python_script_run_flag`, but will not actually do so; only running the script
     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/python_script_run_flag
     COMMAND ${PYTHON_EXECUTABLE} ${PYTHON_SCRIPT} ${PYTHON_TEMPLATE_DIRECTORY} ${PYTHON_CALIBRATION_DIRECTORY} ${PYTHON_XACRO_DIRECTORY} ${PROJECT_NAME}
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    DEPENDS ${PYTHON_SCRIPT} # Add dependencies here
+    DEPENDS ${PYTHON_SCRIPT}
     COMMENT "Running Python script for URDF creation"
 )
 
