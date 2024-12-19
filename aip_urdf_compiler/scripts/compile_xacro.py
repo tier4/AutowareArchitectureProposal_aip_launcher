@@ -182,10 +182,16 @@ def base_string_func(macro_type: str, transform: Transformation) -> str:
         namespace=\"\""""
     else:
         extra = ""
+    if "pandar" in transform.type or "livox" in transform.type or "camera" in transform.type:
+        # In commen sensor description, LiDAR and camera macros will automatically be attached with a "base_link" name.
+        # So we need to strip away
+        child_frame = transform.name.replace("_base_link", "").replace("_link", "")
+    else:
+        child_frame = transform.child_frame
     return BASE_STRING.format(
         type=macro_type,
         base_frame=transform.base_frame,
-        child_frame=transform.child_frame,
+        child_frame=child_frame,  # pandar
         x=transform.serialize_single("x"),
         y=transform.serialize_single("y"),
         z=transform.serialize_single("z"),
@@ -200,7 +206,7 @@ def VLP16_func(transform: Transformation) -> str:
     return VLD_STRING.format(
         type="VLP-16",
         base_frame=transform.base_frame,
-        child_frame=transform.child_frame,
+        child_frame=transform.name,
         x=transform.serialize_single("x"),
         y=transform.serialize_single("y"),
         z=transform.serialize_single("z"),
@@ -214,7 +220,7 @@ def VLS128_func(transform: Transformation) -> str:
     return VLD_STRING.format(
         type="VLS-128",
         base_frame=transform.base_frame,
-        child_frame=transform.child_frame,
+        child_frame=transform.name,
         x=transform.serialize_single("x"),
         y=transform.serialize_single("y"),
         z=transform.serialize_single("z"),
@@ -276,7 +282,10 @@ link_dicts = {
 
 
 def main(
-    template_directory: str, calibration_directory: str, output_directory: str, project_name: str
+    template_directory: str,
+    calibration_directory: str,
+    output_directory: str,
+    project_name: str,
 ):
     os.makedirs(output_directory, exist_ok=True)
     # Load the template
@@ -348,7 +357,7 @@ def main(
         for _, transform in sensor_unit_calib.transforms.items():
             link_type: LinkType = obtain_link_type(transform)
             include_text.add(link_dicts[link_type]["including_file"])
-            print(transform.child_frame)
+            print(transform.name)
             sensor_unit_isolated_sensors.append(link_dicts[link_type]["string_api"](transform))
         sensor_unit_render_meta_data["isolated_sensors_includes"] = list(include_text)
         sensor_unit_render_meta_data["isolated_sensors"] = sensor_unit_isolated_sensors
