@@ -103,6 +103,7 @@ sensor_kit_base_link:
     pitch: 0.0 # Design Value
     yaw: 3.14159265359 # Design Value
     type: pandar_xt32
+    frame_id: hesai_side_left
   hesai_right_base_link:
     x: 0.0 # Design Value
     y: -0.564 # Design Value
@@ -111,6 +112,7 @@ sensor_kit_base_link:
     pitch: 0.0 # Design Value
     yaw: 0.0 # Design Value
     type: pandar_xt32
+    frame_id: hesai_side_right
   gnss_link:
     x: -0.279 # Design Value
     y: 0.0 # Design Value
@@ -119,6 +121,7 @@ sensor_kit_base_link:
     pitch: 0.0 # Design Value
     yaw: 0.0 # Design Value
     type: imu
+    frame_id: gnss
   tamagawa/imu_link:
     x: -0.129 # Design Value
     y: 0.0 # Design Value
@@ -127,3 +130,4 @@ sensor_kit_base_link:
     pitch: 0.0 # Design Value
     yaw: 3.14159265359 # Design Value
     type: imu
+    frame_id: tamagawa/imu
