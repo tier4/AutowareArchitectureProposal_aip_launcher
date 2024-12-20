@@ -202,10 +202,7 @@ def launch_setup(context, *args, **kwargs):
             plugin="autoware::pointcloud_preprocessor::DistortionCorrectorComponent",
             name="distortion_corrector_node",
             remappings=[
-                (
-                    "~/input/twist",
-                    "/sensing/vehicle_velocity_converter/twist_with_covariance",
-                ),
+                ("~/input/twist", "/sensing/vehicle_velocity_converter/twist_with_covariance"),
                 ("~/input/imu", "/sensing/imu/imu_data"),
                 ("~/input/pointcloud", "mirror_cropped/pointcloud_ex"),
                 ("~/output/pointcloud", "rectified/pointcloud_ex"),
@@ -219,7 +216,8 @@ def launch_setup(context, *args, **kwargs):
     if LaunchConfiguration("output_as_sensor_frame").perform(context).lower() == "true":
         ring_outlier_output_frame = {"output_frame": LaunchConfiguration("frame_id")}
     else:
-        ring_outlier_output_frame = {"output_frame": ""}  # keep the output frame as the input frame
+        # keep the output frame as the input frame
+        ring_outlier_output_frame = {"output_frame": ""}
     nodes.append(
         ComposableNode(
             package="autoware_pointcloud_preprocessor",
