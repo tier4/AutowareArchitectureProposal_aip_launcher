@@ -1,13 +1,36 @@
+#!/usr/bin/python3
+"""
+XACRO Compiler Script.
+
+This script compiles XACRO files for robot sensor configurations. It processes calibration data
+from YAML files and generates XACRO files that define the sensor transforms and configurations
+for a robot's URDF description.
+
+The script handles various types of sensors including cameras, IMUs, LiDARs (Velodyne, Pandar, Livox),
+and radar units, generating appropriate XACRO macros for each sensor type.
+"""
+
 import enum
 import functools
 import os
+from typing import Callable
 from typing import Dict
+from typing import Union
 
 from jinja2 import Template
 import yaml
 
 
 def load_yaml(file_path: str) -> Dict:
+    """
+    Load and parse a YAML file.
+
+    Args:
+        file_path (str): Path to the YAML file
+
+    Returns:
+        Dict: Parsed YAML content or None if parsing fails
+    """
     with open(file_path, "r") as stream:
         try:
             return yaml.safe_load(stream)
@@ -17,7 +40,25 @@ def load_yaml(file_path: str) -> Dict:
 
 
 class Transformation:
+    """
+    Represents a coordinate transformation between two frames.
+
+    Stores translation (x,y,z) and rotation (roll,pitch,yaw) parameters
+    along with frame information and sensor type.
+    """
+
     def __init__(self, transformation: Dict, base_frame: str, child_frame: str):
+        """
+        Initialize a transformation from a dictionary of parameters.
+
+        Args:
+            transformation (Dict): Dictionary containing transformation parameters
+            base_frame (str): Name of the parent/base frame
+            child_frame (str): Name of the child frame
+
+        Raises:
+            KeyError: If required transformation parameters are missing
+        """
         try:
             self.x = transformation["x"]
             self.y = transformation["y"]
@@ -31,14 +72,47 @@ class Transformation:
 
             self.name = self.child_frame.replace("_base_link", "").replace("_link", "")
 
+            if len(self.type) == 0:
+                self.type = determine_link_type(self.name)
+
+            self.frame_id: str = transformation.get("frame_id", "")
+            if len(self.frame_id) == 0:
+                if (
+                    "pandar" in self.type
+                    or "livox" in self.type
+                    or "camera" in self.type
+                    or "vls" in self.type.lower()
+                    or "vlp" in self.type.lower()
+                ):
+                    # For common sensor descriptions, LiDAR and camera macros will automatically
+                    # be attached with a "base_link" name
+                    self.frame_id = self.name
+                else:
+                    self.frame_id = self.child_frame
+
         except KeyError as e:
             print(f"Error: Key {e} not in transformation dictionary")
             raise e
 
     def serialize_single(self, key: str) -> str:
+        """
+        Generate a serialized string for a single transformation parameter.
+
+        Args:
+            key (str): Parameter key (x, y, z, roll, pitch, or yaw)
+
+        Returns:
+            str: Serialized parameter string for use in XACRO template
+        """
         return f"${{calibration['{self.base_frame}']['{self.child_frame}']['{key}']}}"
 
     def serialize(self) -> str:
+        """
+        Generate a complete serialized string for all transformation parameters.
+
+        Returns:
+            str: Complete serialized transformation string for XACRO template
+        """
         return f"""
         name=\"{self.name}\"
         parent=\"{self.base_frame}\"
@@ -52,7 +126,22 @@ class Transformation:
 
 
 class Calibration:
+    """
+    Represents a complete set of calibration data for all sensors.
+
+    Contains transformations for all sensors relative to a single base frame.
+    """
+
     def __init__(self, calibration: Dict):
+        """
+        Initialize calibration data from a dictionary.
+
+        Args:
+            calibration (Dict): Dictionary containing calibration data
+
+        Raises:
+            AssertionError: If calibration format is invalid
+        """
         self.base_dict: Dict = calibration
         assert len(calibration.keys()) == 1, "Calibration file should have only one base frame"
         assert isinstance(
@@ -95,6 +184,7 @@ class LinkType(enum.Enum):
 
 
 def obtain_link_type(link: Transformation) -> LinkType:
+    """Output the LinkType of the target link."""
     if len(link.type) > 0:
         # use explicit type string to obtain link
         link_type_lower = link.type.lower()
@@ -108,6 +198,7 @@ def obtain_link_type(link: Transformation) -> LinkType:
 
 
 def determine_link_type(link_name: str) -> LinkType:
+    """Produce a guess of the type of the link based on its name."""
     if "cam" in link_name:
         return LinkType.CAMERA
 
@@ -182,16 +273,10 @@ def base_string_func(macro_type: str, transform: Transformation) -> str:
         namespace=\"\""""
     else:
         extra = ""
-    if "pandar" in transform.type or "livox" in transform.type or "camera" in transform.type:
-        # In commen sensor description, LiDAR and camera macros will automatically be attached with a "base_link" name.
-        # So we need to strip away
-        child_frame = transform.name.replace("_base_link", "").replace("_link", "")
-    else:
-        child_frame = transform.child_frame
     return BASE_STRING.format(
         type=macro_type,
         base_frame=transform.base_frame,
-        child_frame=child_frame,  # pandar
+        child_frame=transform.frame_id,  # pandar
         x=transform.serialize_single("x"),
         y=transform.serialize_single("y"),
         z=transform.serialize_single("z"),
@@ -206,7 +291,7 @@ def VLP16_func(transform: Transformation) -> str:
     return VLD_STRING.format(
         type="VLP-16",
         base_frame=transform.base_frame,
-        child_frame=transform.name,
+        child_frame=transform.frame_id,
         x=transform.serialize_single("x"),
         y=transform.serialize_single("y"),
         z=transform.serialize_single("z"),
@@ -220,7 +305,7 @@ def VLS128_func(transform: Transformation) -> str:
     return VLD_STRING.format(
         type="VLS-128",
         base_frame=transform.base_frame,
-        child_frame=transform.name,
+        child_frame=transform.frame_id,
         x=transform.serialize_single("x"),
         y=transform.serialize_single("y"),
         z=transform.serialize_single("z"),
@@ -230,7 +315,13 @@ def VLS128_func(transform: Transformation) -> str:
     )
 
 
-link_dicts = {
+"""
+link_dicts maps the LinkType to its required include files and the template strings.
+including_file is the path to the required sub module xacro
+string_api is a function that outputs a template string from a transform
+"""
+
+link_dicts: Dict[LinkType, Dict[str, Union[str, Callable[[Transformation], str]]]] = {
     LinkType.CAMERA: {
         "including_file": "$(find camera_description)/urdf/monocular_camera.xacro",
         "string_api": functools.partial(base_string_func, "monocular_camera_macro"),
