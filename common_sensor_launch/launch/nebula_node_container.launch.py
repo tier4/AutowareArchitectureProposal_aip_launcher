@@ -292,30 +292,18 @@ def launch_setup(context, *args, **kwargs):
         parameters=[
             {
                 "angle_range": [
-                    float(
-                        context.perform_substitution(
-                            LaunchConfiguration("cloud_min_angle")
-                        )
-                    ),
-                    float(
-                        context.perform_substitution(
-                            LaunchConfiguration("cloud_max_angle")
-                        )
-                    ),
+                    float(context.perform_substitution(LaunchConfiguration("cloud_min_angle"))),
+                    float(context.perform_substitution(LaunchConfiguration("cloud_max_angle"))),
                 ],
                 "horizontal_ring_id": LaunchConfiguration("horizontal_ring_id"),
                 "vertical_bins": LaunchConfiguration("vertical_bins"),
-                "is_channel_order_top2down": LaunchConfiguration(
-                    "is_channel_order_top2down"
-                ),
+                "is_channel_order_top2down": LaunchConfiguration("is_channel_order_top2down"),
                 "max_distance_range": LaunchConfiguration("max_range"),
                 "horizontal_resolution": LaunchConfiguration("horizontal_resolution"),
             }
         ]
         + [load_composable_node_param("blockage_diagnostics_param_file")],
-        extra_arguments=[
-            {"use_intra_process_comms": LaunchConfiguration("use_intra_process")}
-        ],
+        extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
     )
 
     driver_component_loader = LoadComposableNodes(
