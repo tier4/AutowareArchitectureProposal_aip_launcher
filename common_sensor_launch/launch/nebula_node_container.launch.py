@@ -23,6 +23,7 @@ from launch.conditions import IfCondition
 from launch.conditions import UnlessCondition
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import ComposableNodeContainer
+from launch_ros.actions import LoadComposableNodes
 from launch_ros.descriptions import ComposableNode
 from launch_ros.parameter_descriptions import ParameterFile
 import yaml
@@ -64,6 +65,10 @@ def get_vehicle_mirror_info(context):
 
 
 def launch_setup(context, *args, **kwargs):
+    def load_composable_node_param(param_path):
+        with open(LaunchConfiguration(param_path).perform(context), "r") as f:
+            return yaml.safe_load(f)["/**"]["ros__parameters"]
+
     def create_parameter_dict(*args):
         result = {}
         for x in args:
@@ -218,6 +223,7 @@ def launch_setup(context, *args, **kwargs):
     else:
         # keep the output frame as the input frame
         ring_outlier_output_frame = {"output_frame": ""}
+
     nodes.append(
         ComposableNode(
             package="autoware_pointcloud_preprocessor",
@@ -242,7 +248,88 @@ def launch_setup(context, *args, **kwargs):
         output="both",
     )
 
-    return [container]
+    driver_component = ComposableNode(
+        package="nebula_ros",
+        plugin=sensor_make + "HwInterfaceRosWrapper",
+        # node is created in a global context, need to avoid name clash
+        name=sensor_make.lower() + "_hw_interface_ros_wrapper_node",
+        parameters=[
+            {
+                "sensor_model": sensor_model,
+                "calibration_file": sensor_calib_fp,
+                **create_parameter_dict(
+                    "sensor_ip",
+                    "host_ip",
+                    "scan_phase",
+                    "return_mode",
+                    "frame_id",
+                    "rotation_speed",
+                    "data_port",
+                    "gnss_port",
+                    "cloud_min_angle",
+                    "cloud_max_angle",
+                    "packet_mtu_size",
+                    "dual_return_distance_threshold",
+                    "setup_sensor",
+                    "ptp_profile",
+                    "ptp_transport_type",
+                    "ptp_switch_type",
+                    "ptp_domain",
+                    "retry_hw",
+                ),
+            }
+        ],
+    )
+
+    blockage_diag_component = ComposableNode(
+        package="autoware_pointcloud_preprocessor",
+        plugin="autoware::pointcloud_preprocessor::BlockageDiagComponent",
+        name="blockage_diag",
+        remappings=[
+            ("input", "pointcloud_raw_ex"),
+            ("output", "blockage_diag/pointcloud"),
+        ],
+        parameters=[
+            {
+                "angle_range": [
+                    float(
+                        context.perform_substitution(
+                            LaunchConfiguration("cloud_min_angle")
+                        )
+                    ),
+                    float(
+                        context.perform_substitution(
+                            LaunchConfiguration("cloud_max_angle")
+                        )
+                    ),
+                ],
+                "horizontal_ring_id": LaunchConfiguration("horizontal_ring_id"),
+                "vertical_bins": LaunchConfiguration("vertical_bins"),
+                "is_channel_order_top2down": LaunchConfiguration(
+                    "is_channel_order_top2down"
+                ),
+                "max_distance_range": LaunchConfiguration("max_range"),
+                "horizontal_resolution": LaunchConfiguration("horizontal_resolution"),
+            }
+        ]
+        + [load_composable_node_param("blockage_diagnostics_param_file")],
+        extra_arguments=[
+            {"use_intra_process_comms": LaunchConfiguration("use_intra_process")}
+        ],
+    )
+
+    driver_component_loader = LoadComposableNodes(
+        composable_node_descriptions=[driver_component],
+        target_container=container,
+        condition=IfCondition(LaunchConfiguration("launch_driver")),
+    )
+    blockage_diag_loader = LoadComposableNodes(
+        composable_node_descriptions=[blockage_diag_component],
+        target_container=container,
+        condition=IfCondition(LaunchConfiguration("enable_blockage_diag")),
+    )
+
+    return [container, driver_component_loader, blockage_diag_loader]
 
 
 def generate_launch_description():
