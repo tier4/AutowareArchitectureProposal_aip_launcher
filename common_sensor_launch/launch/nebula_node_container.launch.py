@@ -88,8 +88,8 @@ def launch_setup(context, *args, **kwargs):
     if UnlessCondition(LaunchConfiguration("use_pointcloud_container")).evaluate(context):
         nodes.append(
             ComposableNode(
-                package="glog_component",
-                plugin="GlogComponent",
+                package="autoware_glog_component",
+                plugin="autoware::glog_component::GlogComponent",
                 name="glog_component",
             )
         )

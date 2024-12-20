@@ -39,7 +39,11 @@ def launch_setup(context, *args, **kwargs):
             namespace=LaunchConfiguration("spinnaker_namespace"),
             remappings=[
                 (
-                    "camera0/image_raw",
+                    [
+                        "camera",
+                        LaunchConfiguration("camera_id"),
+                        "/image_raw",
+                    ],
                     [
                         "camera",
                         LaunchConfiguration("camera_id"),
@@ -48,7 +52,25 @@ def launch_setup(context, *args, **kwargs):
                     ],
                 ),
                 (
-                    "camera0/camera_info",
+                    [
+                        "camera",
+                        LaunchConfiguration("camera_id"),
+                        "/image_raw/compressed",
+                    ],
+                    [
+                        "camera",
+                        LaunchConfiguration("camera_id"),
+                        "/",
+                        LaunchConfiguration("image_topic"),
+                        "/compressed",
+                    ],
+                ),
+                (
+                    [
+                        "camera",
+                        LaunchConfiguration("camera_id"),
+                        "/camera_info",
+                    ],
                     ["camera", LaunchConfiguration("camera_id"), "/camera_info"],
                 ),
             ],
@@ -59,6 +81,7 @@ def launch_setup(context, *args, **kwargs):
                         "camera_info_url"
                     ),
                 },
+                {"use_image_transport": LaunchConfiguration("use_image_transport")},
             ],
             extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
         ),
@@ -98,6 +121,7 @@ def generate_launch_description():
     add_launch_arg("spinnaker_namespace", "/sensing/camera")
     add_launch_arg("spinnaker_param_path")
     add_launch_arg("camera_info_url")
+    add_launch_arg("use_image_transport", "True")
     add_launch_arg("use_intra_process", "True")
     set_camera_info_url_key = SetLaunchConfiguration(
         "camera_info_url_key",
