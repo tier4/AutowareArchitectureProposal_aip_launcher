@@ -6,6 +6,7 @@ base_link:
     roll: 0.0
     pitch: 0.0
     yaw: 0.0
+    type: units
   hesai_front_left_base_link:
     x: 3.373 # Design Value
     y: 0.740 # Design Value
@@ -13,6 +14,7 @@ base_link:
     roll: 0.0 # Design Value
     pitch: 0.0 # Design Value
     yaw: 2.44346132679 # Design Value
+    type: pandar_xt32
   hesai_front_right_base_link:
     x: 3.373 # Design Value
     y: -0.740 # Design Value
@@ -20,6 +22,7 @@ base_link:
     roll: 0.0 # Design Value
     pitch: 0.0 # Design Value
     yaw: 0.69813132679 # Design Value
+    type: pandar_xt32
   # velodyne_rear_base_link: #unused
   #   x: -0.358
   #   y: 0.0
@@ -34,6 +37,7 @@ base_link:
     roll: 0.0 # Design Value
     pitch: 0.0 # Design Value
     yaw: 0.0 # Design Value
+    type: radar
   front_right/radar_link:
     x: 3.384 # Design Value
     y: -0.7775 # Design Value
@@ -41,6 +45,7 @@ base_link:
     roll: 0.0 # Design Value
     pitch: 0.0 # Design Value
     yaw: -1.22173 # Design Value
+    type: radar
   front_left/radar_link:
     x: 3.384 # Design Value
     y: 0.7775 # Design Value
@@ -48,6 +53,7 @@ base_link:
     roll: 0.0 # Design Value
     pitch: 0.0 # Design Value
     yaw: 1.22173 # Design Value
+    type: radar
   rear_center/radar_link:
     x: -0.858 # Design Value
     y: 0.0 # Design Value
@@ -55,6 +61,7 @@ base_link:
     roll: 0.0 # Design Value
     pitch: 0.0 # Design Value
     yaw: 3.141592 # Design Value
+    type: radar
   rear_right/radar_link:
     x: -0.782 # Design Value
     y: -0.761 # Design Value
@@ -62,6 +69,7 @@ base_link:
     roll: 0.0 # Design Value
     pitch: 0.0 # Design Value
     yaw: -2.0944 # Design Value
+    type: radar
   rear_left/radar_link:
     x: -0.782 # Design Value
     y: 0.761 # Design Value
@@ -69,3 +77,4 @@ base_link:
     roll: 0.0 # Design Value
     pitch: 0.0 # Design Value
     yaw: 2.0944 # Design Value
+    type: radar
