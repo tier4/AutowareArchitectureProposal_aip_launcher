@@ -95,6 +95,7 @@ sensor_kit_base_link:
     pitch: 0.0
     yaw: 0.0
     type: imu
+    frame_id: gnss
   tamagawa/imu_link:
     x: 0.0
     y: 0.0
@@ -103,3 +104,4 @@ sensor_kit_base_link:
     pitch: 0.0
     yaw: 3.14159265359
     type: imu
+    frame_id: tamagawa/imu
