@@ -356,6 +356,15 @@ def generate_launch_description():
     add_launch_arg("lidar_container_name", "nebula_node_container")
     add_launch_arg("output_as_sensor_frame", "True", "output final pointcloud in sensor frame")
     add_launch_arg(
+        "blockage_diagnostics_param_file",
+        os.path.join(
+            common_sensor_share_dir,
+            "config",
+            "blockage_diagnostics.param.yaml",
+        ),
+        description="path to parameter file of blockage diagnostics node",
+    )
+    add_launch_arg(
         "vehicle_mirror_param_file",
         description="path to the file of vehicle mirror position yaml",
     )
