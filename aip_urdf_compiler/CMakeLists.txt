@@ -5,8 +5,15 @@ find_package(ament_cmake_auto REQUIRED)
 
 ament_auto_find_build_dependencies()
 
+# Install cmake directory
+install(
+  DIRECTORY cmake templates scripts
+  DESTINATION share/${PROJECT_NAME}
+)
+
 # Export the package's share directory path
-ament_auto_package(INSTALL_TO_SHARE
-    templates
-    scripts
+
+# Add the config extras
+ament_package(
+  CONFIG_EXTRAS "cmake/aip_cmake_urdf_compile.cmake"
 )
