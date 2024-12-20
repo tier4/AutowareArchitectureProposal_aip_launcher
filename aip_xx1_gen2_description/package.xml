@@ -9,7 +9,6 @@
 
   <buildtool_depend>ament_cmake_auto</buildtool_depend>
 
-  <depend>aip_urdf_compiler</depend>
   <depend>velodyne_description</depend>
   <depend>aip_urdf_compiler</depend>
 
