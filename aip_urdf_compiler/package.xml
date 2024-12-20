@@ -9,6 +9,7 @@
   <license>Apache 2</license>
 
   <buildtool_depend>ament_cmake_auto</buildtool_depend>
+  <depend>python3-jinja2</depend>
 
 
   <export>
