@@ -29,10 +29,10 @@ To use aip_urdf_compiler in your description package:
   aip_cmake_urdf_compile()
   ```
 
-- Configure your sensors in `config/sensors.yaml` with required meta values:
+- Configure your sensors in `config/sensors.yaml` with metadata values (Note: this does not need to be added in `individual_params`):
 
-  - `type`: Sensor type identifier
-  - `frame_id`: TF frame identifier
+  - `type`: Required string, corresponding to the string value from [existing sensors](#existing-sensors)
+  - `frame_id`: Optional string, overwrites the TF frame ID.
 
 - Clean up existing `.xacro` files and add to `.gitignore`:
 
@@ -40,6 +40,27 @@ To use aip_urdf_compiler in your description package:
   # In your URDF folder
   *.xacro
   ```
+
+### Existing Sensors
+
+```python
+class LinkType(enum.Enum):
+    """Enum class for the type of the link."""
+
+    CAMERA = "monocular_camera"
+    IMU = "imu"
+    LIVOX = "livox_horizon"
+    PANDAR_40P = "pandar_40p"
+    PANDAR_OT128 = "pandar_ot128"
+    PANDAR_XT32 = "pandar_xt32"
+    PANDAR_QT = "pandar_qt"
+    PANDAR_QT128 = "pandar_qt128"
+    VELODYNE16 = "velodyne_16"
+    VLS128 = "velodyne_128"
+    RADAR = "radar"
+    GNSS = "gnss"
+    JOINT_UNITS = "units"
+```
 
 ## Architecture
 
