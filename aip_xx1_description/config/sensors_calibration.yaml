@@ -38,4 +38,4 @@ base_link:
     roll: -0.02
     pitch: 0.7281317
     yaw: 3.141592
-    type: VLP-16.urdf
+    type: velodyne_16

@@ -31,12 +31,21 @@ def load_yaml(file_path: str) -> Dict:
     Returns:
         Dict: Parsed YAML content or None if parsing fails
     """
-    with open(file_path, "r") as stream:
-        try:
-            return yaml.safe_load(stream)
-        except yaml.YAMLError as exc:
-            print(exc)
-            return None
+    try:
+        with open(file_path, "r") as stream:
+            content = yaml.safe_load(stream)
+            if content is None:
+                raise ValueError(f"YAML file is empty or invalid: {file_path}")
+            if not isinstance(content, dict):
+                raise ValueError(f"YAML file must contain a dictionary: {file_path}")
+            return content
+
+    except FileNotFoundError:
+        raise FileNotFoundError(f"YAML file not found: {file_path}")
+    except yaml.YAMLError as exc:
+        raise yaml.YAMLError(f"Failed to parse YAML file {file_path}: {str(exc)}")
+    except Exception as e:  # Add general exception handling
+        raise RuntimeError(f"Unexpected error reading YAML file {file_path}: {str(e)}")
 
 
 class Transformation:
@@ -177,9 +186,10 @@ class LinkType(enum.Enum):
     PANDAR_XT32 = "pandar_xt32"
     PANDAR_QT = "pandar_qt"
     PANDAR_QT128 = "pandar_qt128"
-    VELODYNE16 = "VLP-16.urdf"
-    VLS128 = "VLS-128.urdf"
+    VELODYNE16 = "velodyne_16"
+    VLS128 = "velodyne_128"
     RADAR = "radar"
+    GNSS = "gnss"
     JOINT_UNITS = "units"
 
 
@@ -202,8 +212,11 @@ def determine_link_type(link_name: str) -> LinkType:
     if "cam" in link_name:
         return LinkType.CAMERA
 
-    if "imu" in link_name or "gnss" in link_name:
+    if "imu" in link_name:
         return LinkType.IMU
+
+    if "gnss" in link_name:
+        return LinkType.GNSS
 
     if "livox" in link_name:
         return LinkType.LIVOX
@@ -327,6 +340,10 @@ link_dicts: Dict[LinkType, Dict[str, Union[str, Callable[[Transformation], str]]
         "string_api": functools.partial(base_string_func, "monocular_camera_macro"),
     },
     LinkType.IMU: {
+        "including_file": "$(find imu_description)/urdf/imu.xacro",
+        "string_api": functools.partial(base_string_func, "imu_macro"),
+    },
+    LinkType.GNSS: {  # for now, GNSS will also use the imu xacro files.
         "including_file": "$(find imu_description)/urdf/imu.xacro",
         "string_api": functools.partial(base_string_func, "imu_macro"),
     },
