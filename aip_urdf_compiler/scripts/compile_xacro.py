@@ -16,6 +16,7 @@ import os
 from typing import Callable
 from typing import Dict
 from typing import Union
+import warnings
 
 from jinja2 import Template
 import yaml
@@ -82,7 +83,10 @@ class Transformation:
             self.name = self.child_frame.replace("_base_link", "").replace("_link", "")
 
             if len(self.type) == 0:
-                self.type = determine_link_type(self.name)
+                self.type = determine_link_type(self.name).value
+                warnings.warn(
+                    f"Warning: Link type not explicitly defined for '{self.name}'. Determining type from link name and obtained {self.type}"
+                )
 
             self.frame_id: str = transformation.get("frame_id", "")
             if len(self.frame_id) == 0:
@@ -401,6 +405,7 @@ def main(
         base_template = Template(file.read())
 
     # Render the template
+    print("Processing the main sensors_calibration.yaml")
     calibration_path = os.path.join(calibration_directory, "sensors_calibration.yaml")
     calib_yaml = load_yaml(calibration_path)
     calib = Calibration(calib_yaml)
@@ -418,6 +423,7 @@ def main(
     for _, transform in calib.transforms.items():
         link_type: LinkType = obtain_link_type(transform)
         if link_type == LinkType.JOINT_UNITS:
+            print(f"Collected joint sensor unit {transform.name}, which will be further rendered.")
             render_meta_data["sensor_units_includes"].append(
                 link_dicts[link_type]["including_file"].format(filename=transform.name)
             )
@@ -430,6 +436,7 @@ def main(
                 }
             )
         else:
+            print(f"Collected {transform.name}.")
             include_text.add(link_dicts[link_type]["including_file"])
             sensor_items.append(link_dicts[link_type]["string_api"](transform))
 
@@ -437,7 +444,6 @@ def main(
     render_meta_data["isolated_sensors"] = sensor_items
 
     rendered = base_template.render(render_meta_data)
-    print(rendered)
 
     print("=====================================")
     # Save the rendered template
@@ -449,6 +455,7 @@ def main(
         sensor_units_template = Template(file.read())
 
     for i, sensor_unit in enumerate(render_meta_data["sensor_units"]):
+        print(f"Processing {sensor_unit['name']}")
         sensor_unit_calib_path = os.path.join(
             calibration_directory, f"{sensor_unit['name']}_calibration.yaml"
         )
@@ -465,13 +472,12 @@ def main(
         for _, transform in sensor_unit_calib.transforms.items():
             link_type: LinkType = obtain_link_type(transform)
             include_text.add(link_dicts[link_type]["including_file"])
-            print(transform.name)
+            print(f"collected {transform.name}")
             sensor_unit_isolated_sensors.append(link_dicts[link_type]["string_api"](transform))
         sensor_unit_render_meta_data["isolated_sensors_includes"] = list(include_text)
         sensor_unit_render_meta_data["isolated_sensors"] = sensor_unit_isolated_sensors
 
         rendered = sensor_units_template.render(sensor_unit_render_meta_data)
-        print(rendered)
         with open(os.path.join(output_directory, f'{sensor_unit["name"]}.xacro'), "w") as file:
             file.write(rendered)
         print("=====================================")
