@@ -29,7 +29,7 @@ To use aip_urdf_compiler in your description package:
   aip_cmake_urdf_compile()
   ```
 
-- Configure your sensors in `config/sensors.yaml` with metadata values (Note: do not need to add metavalues in `individual_params`):
+- Configure your sensors in `config/sensors.yaml` with metadata values (Note: do not need to add meta values in `individual_params`):
 
   - `type`: Required string, corresponding to the string value from [existing sensors](#existing-sensors)
   - `frame_id`: Optional string, overwrites the TF frame ID.
