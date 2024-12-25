@@ -105,9 +105,7 @@ def load_sub_launches_from_yaml(context, *args, **kwargs):
     base_parameters["enable_blockage_diag"] = LaunchConfiguration("enable_blockage_diag").perform(
         context
     )
-    base_parameters["return_mode"] = LaunchConfiguration("return_mode").perform(
-        context
-    )
+    base_parameters["return_mode"] = LaunchConfiguration("return_mode").perform(context)
 
     sub_launch_actions = []
     for launch in config["launches"]:

@@ -13,16 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import rclpy
-from rclpy.node import Node
-from septentrio_gnss_driver.msg import AttEuler
 from autoware_sensing_msgs.msg import GnssInsOrientationStamped
 from geometry_msgs.msg import Quaternion
 import numpy as np
+import rclpy
+from rclpy.node import Node
+from septentrio_gnss_driver.msg import AttEuler
 
 
 class OrientationConverter(Node):
-
     def __init__(self):
         super().__init__("septentrio_orientation_converter")
         self.publisher = self.create_publisher(
