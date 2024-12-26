@@ -78,7 +78,7 @@ class LinkType(enum.Enum):
    - Creates build targets
    - Ensures URDF regeneration on each build
 
-3. **compile_xacro.py**
+3. **compile_urdf.py**
    - Configuration parser
    - Transform processor
    - URDF generator
@@ -105,7 +105,7 @@ class LinkType(enum.Enum):
 
 ## Adding New Sensors
 
-1. Add sensor descriptions (xacro files) in either:
+1. Add sensor descriptions (xacro module files) in either:
 
    - Your target package
    - `common_sensor_description` package

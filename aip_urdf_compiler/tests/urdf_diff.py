@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-XML/Xacro Difference Analyzer.
+URDF Model Difference Analyzer.
 
 This script analyzes and compares two XML/Xacro files, specifically designed for ROS URDF/Xacro files
 containing sensor configurations. It identifies and reports differences in included files, sensor configurations,

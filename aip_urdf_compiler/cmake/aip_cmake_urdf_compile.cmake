@@ -5,7 +5,7 @@ macro(aip_cmake_urdf_compile)
     # Set the correct paths
     find_package(PythonInterp REQUIRED) # cspell: ignore Interp
     set(aip_urdf_compiler_BASE_DIR "${aip_urdf_compiler_DIR}/../")
-    set(PYTHON_SCRIPT "${aip_urdf_compiler_BASE_DIR}/scripts/compile_xacro.py")
+    set(PYTHON_SCRIPT "${aip_urdf_compiler_BASE_DIR}/scripts/compile_urdf.py")
     set(PYTHON_TEMPLATE_DIRECTORY "${aip_urdf_compiler_BASE_DIR}/templates")
     set(PYTHON_CALIBRATION_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/config")
     set(PYTHON_XACRO_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/urdf")
