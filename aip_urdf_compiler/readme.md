@@ -110,7 +110,7 @@ class LinkType(enum.Enum):
    - Your target package
    - `common_sensor_description` package
 
-2. Update the following in `compile_xacro.py`:
+2. Update the following in `compile_urdf.py`:
    - `LinkType` enumeration
    - `link_dict` mapping
 

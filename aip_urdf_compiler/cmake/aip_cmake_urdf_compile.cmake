@@ -15,7 +15,7 @@ macro(aip_cmake_urdf_compile)
 
     # Verify that the required files exist
     if(NOT EXISTS "${PYTHON_SCRIPT}")
-        message(FATAL_ERROR "Could not find compile_xacro.py at ${PYTHON_SCRIPT}")
+        message(FATAL_ERROR "Could not find compile_urdf.py at ${PYTHON_SCRIPT}")
     endif()
 
     # Create a custom command to run the Python script
