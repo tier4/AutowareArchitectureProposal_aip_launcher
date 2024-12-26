@@ -40,14 +40,17 @@
   </include>
 
   <!-- Noise filter -->
+  <!--
   <include file="$(find-pkg-share radar_tracks_noise_filter)/launch/radar_tracks_noise_filter.launch.xml">
     <arg name="input/tracks" value="objects_raw"/>
     <arg name="output/noise_tracks" value="noise_objects" />
     <arg name="output/filtered_tracks" value="filtered_objects" />
     <arg name="param_path" value="$(var radar_tracks_noise_filter_param_path)"/>
-  </include>
+  </include> 
+  -->
 
   <!-- Message converter -->
+  <!--
   <include file="$(find-pkg-share radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
     <arg name="input/radar_objects" value="filtered_objects"/>
     <arg name="input/odometry" value="$(var input/odometry)"/>
@@ -55,4 +58,5 @@
     <arg name="output/radar_tracked_objects" value="tracked_objects"/>
     <arg name="param_path" value="$(var radar_tracks_msgs_converter_param_path)"/>
   </include>
+  -->
 </launch>

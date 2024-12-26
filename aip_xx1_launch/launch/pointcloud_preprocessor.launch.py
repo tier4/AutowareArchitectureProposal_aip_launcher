@@ -57,15 +57,15 @@ def launch_setup(context, *args, **kwargs):
         extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
     )
 
-    # load concat or passthrough filter
-    concat_loader = LoadComposableNodes(
-        composable_node_descriptions=[concat_component],
-        target_container=LaunchConfiguration("pointcloud_container_name"),
-        condition=IfCondition(LaunchConfiguration("use_concat_filter")),
-    )
-
-    return [concat_loader]
-
+#   # load concat or passthrough filter
+#   concat_loader = LoadComposableNodes(
+#       composable_node_descriptions=[concat_component],
+#       target_container=LaunchConfiguration("pointcloud_container_name"),
+#       condition=IfCondition(LaunchConfiguration("use_concat_filter")),
+#   )
+#
+#   return [concat_loader]
+    return []
 
 def generate_launch_description():
     launch_arguments = []

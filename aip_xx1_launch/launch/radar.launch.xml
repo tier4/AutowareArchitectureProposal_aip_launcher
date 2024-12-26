@@ -16,8 +16,8 @@
         <arg name="output_frame" value="ars408_front_center" />
       </include>
     </group>
-
+<!-->
     <node pkg="topic_tools" exec="relay" name="radar_relay" output="log" args="front_center/detected_objects detected_objects"/>
-
+-->
   </group>
 </launch>

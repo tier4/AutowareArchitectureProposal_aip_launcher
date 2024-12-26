@@ -26,6 +26,7 @@
     </group>
 
     <!-- NavSatFix to MGRS Pose -->
+    <!--
     <include file="$(find-pkg-share gnss_poser)/launch/gnss_poser.launch.xml">
       <arg name="input_topic_fix" value="$(var navsatfix_topic_name)" />
       <arg name="input_topic_navpvt" value="$(var navpvt_topic_name)" />
@@ -36,6 +37,6 @@
 
       <arg name="use_ublox_receiver" value="true" />
     </include>
-
+    -->
   </group>
 </launch>
