@@ -110,7 +110,7 @@
         <arg name="launch_driver" value="$(var launch_driver)"/>
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
         <arg name="container_name" value="$(var pointcloud_container_name)"/>
-        <arg name="blockage_range" value="[90.0, 270.0]"/>
+        <arg name="blockage_range" value="[130.0, 230.0]"/>
         <arg name="vertical_bins" value ="128" />
         <arg name="horizontal_ring_id" value="118" />
         <arg name="is_channel_order_top2down" value="false"/>
@@ -142,7 +142,7 @@
         <arg name="launch_driver" value="$(var launch_driver)"/>
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
         <arg name="container_name" value="$(var pointcloud_container_name)"/>
-        <arg name="blockage_range" value="[90.0, 270.0]"/>
+        <arg name="blockage_range" value="[140.0, 230.0]"/>
         <arg name="vertical_bins" value ="128" />
         <arg name="horizontal_ring_id" value="118" />
         <arg name="is_channel_order_top2down" value="false"/>
@@ -239,7 +239,7 @@
         <arg name="launch_driver" value="$(var launch_driver)"/>
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
         <arg name="container_name" value="$(var pointcloud_container_name)"/>
-        <arg name="blockage_range" value="[90.0, 270.0]"/>
+        <arg name="blockage_range" value="[130.0, 230.0]"/>
         <arg name="vertical_bins" value ="128" />
         <arg name="horizontal_ring_id" value="118" />
         <arg name="is_channel_order_top2down" value="false"/>
@@ -271,7 +271,7 @@
         <arg name="launch_driver" value="$(var launch_driver)"/>
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
         <arg name="container_name" value="$(var pointcloud_container_name)"/>
-        <arg name="blockage_range" value="[90.0, 270.0]"/>
+        <arg name="blockage_range" value="[145.0, 225.0]"/>
         <arg name="vertical_bins" value ="128" />
         <arg name="horizontal_ring_id" value="118" />
         <arg name="is_channel_order_top2down" value="false"/>

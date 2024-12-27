@@ -1,6 +1,6 @@
 /**:
   ros__parameters:
-    blockage_ratio_threshold: 0.1
+    blockage_ratio_threshold: 0.2
     blockage_count_threshold: 50
     blockage_buffering_frames: 2
     blockage_buffering_interval: 1
