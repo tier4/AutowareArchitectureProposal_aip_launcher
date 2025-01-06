@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# cspell: ignore atteuler
+
 from autoware_sensing_msgs.msg import GnssInsOrientationStamped
 from geometry_msgs.msg import Quaternion
 import numpy as np
