@@ -34,7 +34,7 @@ class OrientationConverter(Node):
         )
         self.subscription  # prevent unused variable warning
 
-    def heading_to_quaternion(self, heading):
+    def heading_to_quaternion(self, heading: float) -> Quaternion:
         # The input heading is in a North-East coordinate system and measured in degrees.
         # Heading values range from [0, 360).
         # Examples:
@@ -56,7 +56,7 @@ class OrientationConverter(Node):
         q.w = np.cos(np.deg2rad(90 - heading) / 2.0)
         return q
 
-    def attitude_callback(self, attitude_msg):
+    def attitude_callback(self, attitude_msg: AttEuler) -> None:
         # When septentrio driver cannot measure the heading, it will publish -20000000000.0
         if attitude_msg.heading < 0:
             return
@@ -77,7 +77,7 @@ class OrientationConverter(Node):
         self.publisher.publish(orientation_msg)
 
 
-def main(args=None):
+def main(args=None) -> None:
     rclpy.init(args=args)
 
     converter = OrientationConverter()
