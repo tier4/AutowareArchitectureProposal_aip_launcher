@@ -16,6 +16,9 @@
   <arg name="cloud_max_angle" default="360"/>
   <arg name="vehicle_mirror_param_file"/>
   <arg name="container_name" default="velodyne_node_container"/>
+  <arg name="pointcloud_container_name" default="pointcloud_container"/>
+  <arg name="use_pointcloud_container" default="false"/>
+  <arg name="use_cuda_preprocessor" default="false"/>
   <arg name="vertical_bins" default="16"/>
   <arg name="horizontal_ring_id" default="0"/>
   <arg name="is_channel_order_top2down" default="false"/>
@@ -39,6 +42,9 @@
     <arg name="use_intra_process" value="true"/>
     <arg name="use_multithread" value="true"/>
     <arg name="container_name" value="$(var container_name)"/>
+    <arg name="pointcloud_container_name" value="$(var pointcloud_container_name)"/>
+    <arg name="use_pointcloud_container" value="$(var use_pointcloud_container)"/>
+    <arg name="use_cuda_preprocessor" value="$(var use_cuda_preprocessor)"/>
     <arg name="vertical_bins" value="$(var vertical_bins)"/>
     <arg name="horizontal_ring_id" value="$(var horizontal_ring_id)"/>
     <arg name="is_channel_order_top2down" value="$(var is_channel_order_top2down)"/>
