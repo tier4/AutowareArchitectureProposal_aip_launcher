@@ -94,8 +94,7 @@ class Transformation:
                     "pandar" in self.type
                     or "livox" in self.type
                     or "camera" in self.type
-                    or "vls" in self.type.lower()
-                    or "vlp" in self.type.lower()
+                    or "velodyne" in self.type.lower()
                 ):
                     # For common sensor descriptions, LiDAR and camera macros will automatically
                     # be attached with a "base_link" name
