@@ -280,6 +280,8 @@ def launch_setup(context, *args, **kwargs):
                     "gnss_port",
                     "cloud_min_angle",
                     "cloud_max_angle",
+                    "min_range",
+                    "max_range",
                     "packet_mtu_size",
                     "dual_return_distance_threshold",
                     "setup_sensor",
