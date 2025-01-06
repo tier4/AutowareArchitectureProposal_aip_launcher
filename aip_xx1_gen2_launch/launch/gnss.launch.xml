@@ -19,7 +19,7 @@
     <node pkg="aip_xx1_gen2_launch" name="septentrio_heading_converter" exec="septentrio_heading_converter.py"/>
 
     <!-- NavSatFix to MGRS Pose -->
-    <include file="$(find-pkg-share gnss_poser)/launch/gnss_poser.launch.xml">
+    <include file="$(find-pkg-share autoware_gnss_poser)/launch/gnss_poser.launch.xml">
       <arg name="input_topic_fix" value="septentrio/nav_sat_fix" />
       <arg name="input_topic_orientation" value="septentrio/orientation"/>
 
