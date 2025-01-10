@@ -40,20 +40,6 @@
     yaw="${calibration['base_link']['rear_unit_base_link']['yaw']}"
   />
 
-  <!-- gnss -->
-  <xacro:imu_macro
-    name="gnss"
-    parent="base_link"
-    namespace=""
-    x="${calibration['base_link']['gnss_link']['x']}"
-    y="${calibration['base_link']['gnss_link']['y']}"
-    z="${calibration['base_link']['gnss_link']['z']}"
-    roll="${calibration['base_link']['gnss_link']['roll']}"
-    pitch="${calibration['base_link']['gnss_link']['pitch']}"
-    yaw="${calibration['base_link']['gnss_link']['yaw']}"
-    fps="100"
-  />
-
   <!-- radar -->
   <xacro:imu_macro
     name="ars408_front"

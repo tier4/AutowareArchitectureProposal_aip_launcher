@@ -63,39 +63,5 @@
       yaw="${calibration['rear_unit_base_link']['pandar_qt_rear_base_link']['yaw']}"
     />
 
-    <!-- radar -->
-    <xacro:radar_macro
-      name="rear_center/radar_link"
-      parent="rear_unit_base_link"
-      x="${calibration['rear_unit_base_link']['rear_center/radar_link']['x']}"
-      y="${calibration['rear_unit_base_link']['rear_center/radar_link']['y']}"
-      z="${calibration['rear_unit_base_link']['rear_center/radar_link']['z']}"
-      roll="${calibration['rear_unit_base_link']['rear_center/radar_link']['roll']}"
-      pitch="${calibration['rear_unit_base_link']['rear_center/radar_link']['pitch']}"
-      yaw="${calibration['rear_unit_base_link']['rear_center/radar_link']['yaw']}"
-    />
-
-    <xacro:radar_macro
-      name="rear_left/radar_link"
-      parent="rear_unit_base_link"
-      x="${calibration['rear_unit_base_link']['rear_left/radar_link']['x']}"
-      y="${calibration['rear_unit_base_link']['rear_left/radar_link']['y']}"
-      z="${calibration['rear_unit_base_link']['rear_left/radar_link']['z']}"
-      roll="${calibration['rear_unit_base_link']['rear_left/radar_link']['roll']}"
-      pitch="${calibration['rear_unit_base_link']['rear_left/radar_link']['pitch']}"
-      yaw="${calibration['rear_unit_base_link']['rear_left/radar_link']['yaw']}"
-    />
-
-    <xacro:radar_macro
-      name="rear_right/radar_link"
-      parent="rear_unit_base_link"
-      x="${calibration['rear_unit_base_link']['rear_right/radar_link']['x']}"
-      y="${calibration['rear_unit_base_link']['rear_right/radar_link']['y']}"
-      z="${calibration['rear_unit_base_link']['rear_right/radar_link']['z']}"
-      roll="${calibration['rear_unit_base_link']['rear_right/radar_link']['roll']}"
-      pitch="${calibration['rear_unit_base_link']['rear_right/radar_link']['pitch']}"
-      yaw="${calibration['rear_unit_base_link']['rear_right/radar_link']['yaw']}"
-    />
-
   </xacro:macro>
 </robot>
