@@ -55,6 +55,7 @@ def get_vehicle_info(context):
     p["max_height_offset"] = gp["vehicle_height"]
     return p
 
+
 def launch_setup(context, *args, **kwargs):
     def load_composable_node_param(param_path):
         with open(LaunchConfiguration(param_path).perform(context), "r") as f:
