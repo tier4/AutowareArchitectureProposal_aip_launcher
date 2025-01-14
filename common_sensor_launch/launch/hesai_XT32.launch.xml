@@ -1,20 +1,25 @@
 <launch>
 
   <!-- Params -->
-  <arg name="launch_driver" default="true"/>
+  <arg name="launch_driver" default="true" />
 
-  <arg name="model" default="PandarXT32"/>
-  <arg name="sensor_frame" default="pandar"/>
-  <arg name="return_mode" default="Strongest"/>
-  <arg name="sensor_ip" default="192.168.1.201"/>
-  <arg name="host_ip" default="255.255.255.255"/>
-  <arg name="data_port" default="2368"/>
-  <arg name="scan_phase" default="0.0"/>
-  <arg name="cloud_min_angle" default="0"/>
-  <arg name="cloud_max_angle" default="360"/>
+  <arg name="model" default="PandarXT32" />
+  <arg name="sensor_frame" default="pandar" />
+  <arg name="return_mode" default="Strongest" />
+  <arg name="sensor_ip" default="192.168.1.201" />
+  <arg name="host_ip" default="255.255.255.255" />
+  <arg name="multicast_ip" default="" />
+  <arg name="data_port" default="2368" />
+  <arg name="scan_phase" default="0.0" />
+  <arg name="cloud_min_angle" default="0" />
+  <arg name="cloud_max_angle" default="360" />
+  <arg name="cut_angle" default="0.0" />
+  <arg name="sync_angle" default="0" />
   <arg name="dual_return_distance_threshold" default="0.1"/>
   <arg name="vehicle_mirror_param_file"/>
   <arg name="container_name" default="hesai_node_container"/>
+  <arg name="udp_only" default="false"/>
+  <arg name="retry_hw" default="true"/>
 
   <include file="$(find-pkg-share common_sensor_launch)/launch/nebula_node_container.launch.py">
     <arg name="launch_driver" value="$(var launch_driver)"/>
@@ -23,10 +28,14 @@
     <arg name="frame_id" value="$(var sensor_frame)"/>
     <arg name="sensor_ip" value="$(var sensor_ip)"/>
     <arg name="host_ip" value="$(var host_ip)"/>
+    <arg name="multicast_ip" value="$(var multicast_ip)"/>
     <arg name="data_port" value="$(var data_port)"/>
     <arg name="scan_phase" value="$(var scan_phase)"/>
     <arg name="cloud_min_angle" value="$(var cloud_min_angle)"/>
     <arg name="cloud_max_angle" value="$(var cloud_max_angle)"/>
+    <arg name="cut_angle" value="$(var cut_angle)" />
+    <arg name="sync_angle" value="$(var sync_angle)"/>
+    <arg name="min_range" value="$(var min_range)"/>
     <arg name="max_range" value="$(var max_range)"/>
     <arg name="dual_return_distance_threshold" value="$(var dual_return_distance_threshold)"/>
     <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
@@ -35,8 +44,11 @@
     <arg name="ptp_profile" value="1588v2"/>
     <arg name="ptp_switch_type" value="TSN"/>
     <arg name="ptp_transport_type" value="UDP"/>
+    <arg name="ptp_domain" value="1"/>
     <arg name="setup_sensor" value="true"/>
     <arg name="retry_hw" value="true"/>
     <arg name="container_name" value="$(var container_name)"/>
+    <arg name="udp_only" value="$(var udp_only)"/>
+    <arg name="retry_hw" value="$(var retry_hw)"/>
   </include>
 </launch>
