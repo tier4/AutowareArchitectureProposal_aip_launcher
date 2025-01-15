@@ -12,7 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
 
+from ament_index_python.packages import get_package_share_directory
 import launch
 from launch.actions import DeclareLaunchArgument
 from launch.actions import OpaqueFunction
@@ -22,9 +24,18 @@ from launch.conditions import UnlessCondition
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import LoadComposableNodes
 from launch_ros.descriptions import ComposableNode
+from launch_ros.parameter_descriptions import ParameterFile
 
 
 def launch_setup(context, *args, **kwargs):
+    # concatenate node parameters
+    concatenate_and_time_sync_node_param = ParameterFile(
+        param_file=LaunchConfiguration("concatenate_and_time_sync_node_param_path").perform(
+            context
+        ),
+        allow_substs=True,
+    )
+
     # set concat filter as a component
     concat_component = ComposableNode(
         package="autoware_pointcloud_preprocessor",
@@ -34,20 +45,7 @@ def launch_setup(context, *args, **kwargs):
             ("~/input/twist", "/sensing/vehicle_velocity_converter/twist_with_covariance"),
             ("output", "concatenated/pointcloud"),
         ],
-        parameters=[
-            {
-                "input_topics": LaunchConfiguration("input_topics"),
-                "output_frame": LaunchConfiguration("base_frame"),
-                "input_offset": LaunchConfiguration(
-                    "input_offset"
-                ),  # each sensor will wait 60, 70, 70, 70ms
-                "timeout_sec": LaunchConfiguration("timeout_sec"),  # set shorter than 100ms
-                "input_twist_topic_type": LaunchConfiguration("input_twist_topic_type"),
-                "publish_synchronized_pointcloud": LaunchConfiguration(
-                    "publish_synchronized_pointcloud"
-                ),
-            }
-        ],
+        parameters=[concatenate_and_time_sync_node_param],
         extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
     )
 
@@ -67,19 +65,21 @@ def generate_launch_description():
     def add_launch_arg(name: str, default_value=None):
         launch_arguments.append(DeclareLaunchArgument(name, default_value=default_value))
 
-    add_launch_arg("base_frame", "base_link")
+    aip_xx1_gen2_launch_share_dir = get_package_share_directory("aip_xx1_gen2_launch")
+
     add_launch_arg("use_multithread", "False")
     add_launch_arg("use_intra_process", "False")
     add_launch_arg("pointcloud_container_name", "pointcloud_container")
     add_launch_arg("individual_container_name", "concatenate_container")
+
     add_launch_arg(
-        "input_topics",
-        "[/sensing/lidar/top/pointcloud, /sensing/lidar/left/pointcloud, /sensing/lidar/right/pointcloud, /sensing/lidar/rear/pointcloud]",
+        "concatenate_and_time_sync_node_param_path",
+        os.path.join(
+            aip_xx1_gen2_launch_share_dir,
+            "config",
+            "concatenate_and_time_sync_node.param.yaml",
+        ),
     )
-    add_launch_arg("input_offset", "[0.035, 0.025, 0.025, 0.025]")
-    add_launch_arg("timeout_sec", "0.095")
-    add_launch_arg("input_twist_topic_type", "twist")
-    add_launch_arg("publish_synchronized_pointcloud", "False")
 
     set_container_executable = SetLaunchConfiguration(
         "container_executable",
