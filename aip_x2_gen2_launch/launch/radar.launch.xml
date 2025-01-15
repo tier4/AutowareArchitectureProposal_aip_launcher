@@ -32,7 +32,7 @@
       </include>
 
 
-      <include file="$(find-pkg-share radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
+      <include file="$(find-pkg-share autoware_radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
         <arg name="input/radar_objects" value="objects_raw"/>
         <arg name="input/odometry" value="/localization/kinematic_state"/>
         <arg name="output/radar_detected_objects" value="detected_objects"/>
@@ -62,7 +62,7 @@
         <arg name="configuration_sensor_port" value="42101"/>
       </include>
 
-      <include file="$(find-pkg-share radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
+      <include file="$(find-pkg-share autoware_radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
         <arg name="input/radar_objects" value="objects_raw"/>
         <arg name="input/odometry" value="/localization/kinematic_state"/>
         <arg name="output/radar_detected_objects" value="detected_objects"/>
@@ -92,7 +92,7 @@
         <arg name="configuration_sensor_port" value="42101"/>
       </include>
 
-      <include file="$(find-pkg-share radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
+      <include file="$(find-pkg-share autoware_radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
         <arg name="input/radar_objects" value="objects_raw"/>
         <arg name="input/odometry" value="/localization/kinematic_state"/>
         <arg name="output/radar_detected_objects" value="detected_objects"/>
@@ -122,7 +122,7 @@
         <arg name="configuration_sensor_port" value="42101"/>
       </include>
 
-      <include file="$(find-pkg-share radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
+      <include file="$(find-pkg-share autoware_radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
         <arg name="input/radar_objects" value="objects_raw"/>
         <arg name="input/odometry" value="/localization/kinematic_state"/>
         <arg name="output/radar_detected_objects" value="detected_objects"/>
@@ -152,7 +152,7 @@
         <arg name="configuration_sensor_port" value="42101"/>
       </include>
 
-      <include file="$(find-pkg-share radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
+      <include file="$(find-pkg-share autoware_radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
         <arg name="input/radar_objects" value="objects_raw"/>
         <arg name="input/odometry" value="/localization/kinematic_state"/>
         <arg name="output/radar_detected_objects" value="detected_objects"/>
@@ -182,7 +182,7 @@
         <arg name="configuration_sensor_port" value="42101"/>
       </include>
 
-      <include file="$(find-pkg-share radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
+      <include file="$(find-pkg-share autoware_radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
         <arg name="input/radar_objects" value="objects_raw"/>
         <arg name="input/odometry" value="/localization/kinematic_state"/>
         <arg name="output/radar_detected_objects" value="detected_objects"/>
@@ -194,7 +194,7 @@
 
     <!-- merge radar objects -->
     <let name="merger_param_path" value="$(find-pkg-share aip_x2_gen2_launch)/config/simple_object_merger.param.yaml"/>
-    <node pkg="simple_object_merger" exec="simple_object_merger_node" name="simple_object_merger" output="screen">
+    <node pkg="autoware_simple_object_merger" exec="simple_object_merger_node" name="simple_object_merger" output="screen">
       <remap from="~/output/objects" to="detected_objects"/>
       <param from="$(var merger_param_path)"/>
     </node>

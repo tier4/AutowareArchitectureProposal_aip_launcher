@@ -143,8 +143,8 @@ def launch_setup(context, *args, **kwargs):
     cropbox_parameters["max_z"] = vehicle_info["max_height_offset"]
 
     self_crop_component = ComposableNode(
-        package="pointcloud_preprocessor",
-        plugin="pointcloud_preprocessor::CropBoxFilterComponent",
+        package="autoware_pointcloud_preprocessor",
+        plugin="autoware::pointcloud_preprocessor::CropBoxFilterComponent",
         name="crop_box_filter_self",
         remappings=[
             ("input", "pointcloud_raw_ex"),
@@ -166,8 +166,8 @@ def launch_setup(context, *args, **kwargs):
     )
 
     right_mirror_crop_component = ComposableNode(
-        package="pointcloud_preprocessor",
-        plugin="pointcloud_preprocessor::CropBoxFilterComponent",
+        package="autoware_pointcloud_preprocessor",
+        plugin="autoware::pointcloud_preprocessor::CropBoxFilterComponent",
         name="crop_box_filter_mirror_right",
         remappings=[
             ("input", "self_cropped/pointcloud_ex"),
@@ -188,8 +188,8 @@ def launch_setup(context, *args, **kwargs):
     )
 
     left_mirror_crop_component = ComposableNode(
-        package="pointcloud_preprocessor",
-        plugin="pointcloud_preprocessor::CropBoxFilterComponent",
+        package="autoware_pointcloud_preprocessor",
+        plugin="autoware::pointcloud_preprocessor::CropBoxFilterComponent",
         name="crop_box_filter_mirror_left",
         remappings=[
             ("input", "right_mirror_cropped/pointcloud_ex"),
@@ -200,8 +200,8 @@ def launch_setup(context, *args, **kwargs):
     )
 
     undistort_component = ComposableNode(
-        package="pointcloud_preprocessor",
-        plugin="pointcloud_preprocessor::DistortionCorrectorComponent",
+        package="autoware_pointcloud_preprocessor",
+        plugin="autoware::pointcloud_preprocessor::DistortionCorrectorComponent",
         name="distortion_corrector_node",
         remappings=[
             ("~/input/twist", "/sensing/vehicle_velocity_converter/twist_with_covariance"),
@@ -214,8 +214,8 @@ def launch_setup(context, *args, **kwargs):
     )
 
     ring_outlier_filter_component = ComposableNode(
-        package="pointcloud_preprocessor",
-        plugin="pointcloud_preprocessor::RingOutlierFilterComponent",
+        package="autoware_pointcloud_preprocessor",
+        plugin="autoware::pointcloud_preprocessor::RingOutlierFilterComponent",
         name="ring_outlier_filter",
         remappings=[
             ("input", "rectified/pointcloud_ex"),
@@ -225,8 +225,8 @@ def launch_setup(context, *args, **kwargs):
     )
 
     dual_return_filter_component = ComposableNode(
-        package="pointcloud_preprocessor",
-        plugin="pointcloud_preprocessor::DualReturnOutlierFilterComponent",
+        package="autoware_pointcloud_preprocessor",
+        plugin="autoware::pointcloud_preprocessor::DualReturnOutlierFilterComponent",
         name="dual_return_filter",
         remappings=[
             ("input", "rectified/pointcloud_ex"),
@@ -245,8 +245,8 @@ def launch_setup(context, *args, **kwargs):
 
     distance_range = str2vector(context.perform_substitution(LaunchConfiguration("distance_range")))
     blockage_diag_component = ComposableNode(
-        package="pointcloud_preprocessor",
-        plugin="pointcloud_preprocessor::BlockageDiagComponent",
+        package="autoware_pointcloud_preprocessor",
+        plugin="autoware::pointcloud_preprocessor::BlockageDiagComponent",
         name="blockage_return_diag",
         remappings=[
             ("input", "pointcloud_raw_ex"),
