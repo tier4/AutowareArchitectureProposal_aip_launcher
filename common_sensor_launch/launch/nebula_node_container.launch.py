@@ -146,9 +146,8 @@ def launch_setup(context, *args, **kwargs):
             remappings=[
                 # cSpell:ignore knzo25
                 # TODO(knzo25): fix the remapping once nebula gets updated
+                ("pandar_points", "pointcloud_raw_ex"),
                 ("velodyne_points", "pointcloud_raw_ex"),
-                # ("robosense_points", "pointcloud_raw_ex"), #for robosense
-                # ("pandar_points", "pointcloud_raw_ex"), # for hesai
             ],
             extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
         )
