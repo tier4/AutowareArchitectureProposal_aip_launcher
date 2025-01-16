@@ -1,0 +1,29 @@
+<launch>
+
+  <arg name="launch_driver" default="true" />
+
+  <group>
+    <push-ros-namespace namespace="gnss"/>
+
+    <!-- Septentrio Mosaic Driver -->
+    <node pkg="septentrio_gnss_driver" name="septentrio" exec="septentrio_gnss_driver_node" if="$(var launch_driver)">
+      <param from="$(find-pkg-share aip_x2_gen2_launch)/config/asterx_sb3_rover.param.yaml"/>
+      <remap from="navsatfix" to="~/nav_sat_fix"/>
+      <remap from="poscovgeodetic" to="~/poscovgeodetic"/>
+      <remap from="pvtgeodetic" to="~/pvtgeodetic"/>
+    </node>
+
+    <!-- NavSatFix to MGRS Pose -->
+    <include file="$(find-pkg-share autoware_gnss_poser)/launch/gnss_poser.launch.xml">
+      <arg name="input_topic_fix" value="septentrio/nav_sat_fix" />
+      <arg name="input_topic_navpvt" value="septentrio/navpvt/unused" />
+
+      <arg name="output_topic_gnss_pose" value="pose" />
+      <arg name="output_topic_gnss_pose_cov" value="pose_with_covariance" />
+      <arg name="output_topic_gnss_fixed" value="fixed" />
+
+      <arg name="use_ublox_receiver" value="true" />
+    </include>
+
+  </group>
+</launch>

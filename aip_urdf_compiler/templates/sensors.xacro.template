@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<robot name="vehicle" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:arg name="config_dir" default="{{ default_config_path }}"/>
+  <xacro:arg name="gpu" default="false"/>
+  <xacro:property name="calibration" value="${xacro.load_yaml('{{ sensor_calibration_yaml_path }}')}"/>
+
+  {% for item in sensor_units_includes %}
+  <xacro:include filename="{{ item }}"/>
+  {% endfor %}
+  {% for item in isolated_sensors_includes %}
+  <xacro:include filename="{{ item }}"/>
+  {% endfor %}
+
+  {% for item in sensor_units %}
+  <!-- sensor kit -->
+  <xacro:{{ item.macro_name }}
+    parent="{{ item.base_frame }}"
+    x="${calibration['{{ item.base_frame }}']['{{ item.child_frame }}']['x']}"
+    y="${calibration['{{ item.base_frame }}']['{{ item.child_frame }}']['y']}"
+    z="${calibration['{{ item.base_frame }}']['{{ item.child_frame }}']['z']}"
+    roll="${calibration['{{ item.base_frame }}']['{{ item.child_frame }}']['roll']}"
+    pitch="${calibration['{{ item.base_frame }}']['{{ item.child_frame }}']['pitch']}"
+    yaw="${calibration['{{ item.base_frame }}']['{{ item.child_frame }}']['yaw']}"
+  />
+  {% endfor %}
+
+  {% for item in isolated_sensors %}
+  <!-- embedded sensors -->
+  {{ item }}
+  {% endfor %}
+</robot>

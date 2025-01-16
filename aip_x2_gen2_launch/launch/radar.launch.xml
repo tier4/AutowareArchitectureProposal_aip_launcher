@@ -1,0 +1,203 @@
+<!-- cSpell: ignore autosar -->
+<launch>
+  <arg name="launch_driver" default="true" description="do launch driver"/>
+
+  <let name="odometry_topic" value="/sensing/vehicle_velocity_converter/twist_with_covariance"/>
+  <let name="acceleration_topic" value="/localization/acceleration"/>
+  <let name="steering_angle_topic" value="/vehicle/status/steering_status_scalar"/>
+  <arg name="radar_tracks_msgs_converter_param_path" default="$(find-pkg-share common_sensor_launch)/config/radar_tracks_msgs_converter.param.yaml"/>
+
+  <group>
+    <push-ros-namespace namespace="radar"/>
+    <node pkg="topic_tools" exec="transform" name="steer_angle_transform" output="screen" args="/vehicle/status/steering_status /vehicle/status/steering_status_scalar std_msgs/msg/Float32 'std_msgs.msg.Float32(data=m.steering_tire_angle)'  --import autoware_vehicle_msgs std_msgs --wait-for-start"/>
+
+    <group>
+      <push-ros-namespace namespace="front_center"/>
+      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/ars548.launch.xml">
+        <arg name="odometry_topic" value="$(var odometry_topic)"/>
+        <arg name="acceleration_topic" value="$(var acceleration_topic)"/>
+        <arg name="steering_angle_topic" value="$(var steering_angle_topic)"/>
+        <arg name="launch_hw" value="$(var launch_driver)"/>
+
+        <arg name="sensor_ip" value="10.13.1.114"/>
+        <arg name="frame_id" value="front_center/radar_link"/>
+        <arg name="object_frame" value="base_link"/>
+
+        <arg name="sensor_model" value="ARS548"/>
+        <arg name="host_ip" value="10.13.1.166"/>
+        <arg name="multicast_ip" value="224.0.2.2"/>
+        <arg name="data_port" value="42102"/>
+        <arg name="configuration_host_port" value="42401"/>
+        <arg name="configuration_sensor_port" value="42101"/>
+      </include>
+
+
+      <include file="$(find-pkg-share autoware_radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
+        <arg name="input/radar_objects" value="objects_raw"/>
+        <arg name="input/odometry" value="/localization/kinematic_state"/>
+        <arg name="output/radar_detected_objects" value="detected_objects"/>
+        <arg name="output/radar_tracked_objects" value="tracked_objects"/>
+        <arg name="use_twist_compensation" value="false"/>
+        <arg name="param_path" value="$(var radar_tracks_msgs_converter_param_path)"/>
+      </include>
+    </group>
+
+    <group>
+      <push-ros-namespace namespace="front_left"/>
+      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/ars548.launch.xml">
+        <arg name="odometry_topic" value="$(var odometry_topic)"/>
+        <arg name="acceleration_topic" value="$(var acceleration_topic)"/>
+        <arg name="steering_angle_topic" value="$(var steering_angle_topic)"/>
+        <arg name="launch_hw" value="$(var launch_driver)"/>
+
+        <arg name="sensor_ip" value="10.13.1.115"/>
+        <arg name="frame_id" value="front_left/radar_link"/>
+        <arg name="object_frame" value="front_left/radar_link"/>
+
+        <arg name="sensor_model" value="ARS548"/>
+        <arg name="host_ip" value="10.13.1.166"/>
+        <arg name="multicast_ip" value="224.0.2.2"/>
+        <arg name="data_port" value="42102"/>
+        <arg name="configuration_host_port" value="42401"/>
+        <arg name="configuration_sensor_port" value="42101"/>
+      </include>
+
+      <include file="$(find-pkg-share autoware_radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
+        <arg name="input/radar_objects" value="objects_raw"/>
+        <arg name="input/odometry" value="/localization/kinematic_state"/>
+        <arg name="output/radar_detected_objects" value="detected_objects"/>
+        <arg name="output/radar_tracked_objects" value="tracked_objects"/>
+        <arg name="use_twist_compensation" value="false"/>
+        <arg name="param_path" value="$(var radar_tracks_msgs_converter_param_path)"/>
+      </include>
+    </group>
+
+    <group>
+      <push-ros-namespace namespace="front_right"/>
+      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/ars548.launch.xml">
+        <arg name="odometry_topic" value="$(var odometry_topic)"/>
+        <arg name="acceleration_topic" value="$(var acceleration_topic)"/>
+        <arg name="steering_angle_topic" value="$(var steering_angle_topic)"/>
+        <arg name="launch_hw" value="$(var launch_driver)"/>
+
+        <arg name="sensor_ip" value="10.13.1.116"/>
+        <arg name="frame_id" value="front_right/radar_link"/>
+        <arg name="object_frame" value="front_right/radar_link"/>
+
+        <arg name="sensor_model" value="ARS548"/>
+        <arg name="host_ip" value="10.13.1.166"/>
+        <arg name="multicast_ip" value="224.0.2.2"/>
+        <arg name="data_port" value="42102"/>
+        <arg name="configuration_host_port" value="42401"/>
+        <arg name="configuration_sensor_port" value="42101"/>
+      </include>
+
+      <include file="$(find-pkg-share autoware_radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
+        <arg name="input/radar_objects" value="objects_raw"/>
+        <arg name="input/odometry" value="/localization/kinematic_state"/>
+        <arg name="output/radar_detected_objects" value="detected_objects"/>
+        <arg name="output/radar_tracked_objects" value="tracked_objects"/>
+        <arg name="use_twist_compensation" value="false"/>
+        <arg name="param_path" value="$(var radar_tracks_msgs_converter_param_path)"/>
+      </include>
+    </group>
+
+    <group>
+      <push-ros-namespace namespace="rear_center"/>
+      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/ars548.launch.xml">
+        <arg name="odometry_topic" value="$(var odometry_topic)"/>
+        <arg name="acceleration_topic" value="$(var acceleration_topic)"/>
+        <arg name="steering_angle_topic" value="$(var steering_angle_topic)"/>
+        <arg name="launch_hw" value="$(var launch_driver)"/>
+
+        <arg name="sensor_ip" value="10.13.1.117"/>
+        <arg name="frame_id" value="rear_center/radar_link"/>
+        <arg name="object_frame" value="base_link"/>
+
+        <arg name="sensor_model" value="ARS548"/>
+        <arg name="host_ip" value="10.13.1.166"/>
+        <arg name="multicast_ip" value="224.0.2.2"/>
+        <arg name="data_port" value="42102"/>
+        <arg name="configuration_host_port" value="42401"/>
+        <arg name="configuration_sensor_port" value="42101"/>
+      </include>
+
+      <include file="$(find-pkg-share autoware_radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
+        <arg name="input/radar_objects" value="objects_raw"/>
+        <arg name="input/odometry" value="/localization/kinematic_state"/>
+        <arg name="output/radar_detected_objects" value="detected_objects"/>
+        <arg name="output/radar_tracked_objects" value="tracked_objects"/>
+        <arg name="use_twist_compensation" value="false"/>
+        <arg name="param_path" value="$(var radar_tracks_msgs_converter_param_path)"/>
+      </include>
+    </group>
+
+    <group>
+      <push-ros-namespace namespace="rear_left"/>
+      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/ars548.launch.xml">
+        <arg name="odometry_topic" value="$(var odometry_topic)"/>
+        <arg name="acceleration_topic" value="$(var acceleration_topic)"/>
+        <arg name="steering_angle_topic" value="$(var steering_angle_topic)"/>
+        <arg name="launch_hw" value="$(var launch_driver)"/>
+
+        <arg name="sensor_ip" value="10.13.1.118"/>
+        <arg name="frame_id" value="rear_left/radar_link"/>
+        <arg name="object_frame" value="base_link"/>
+
+        <arg name="sensor_model" value="ARS548"/>
+        <arg name="host_ip" value="10.13.1.166"/>
+        <arg name="multicast_ip" value="224.0.2.2"/>
+        <arg name="data_port" value="42102"/>
+        <arg name="configuration_host_port" value="42401"/>
+        <arg name="configuration_sensor_port" value="42101"/>
+      </include>
+
+      <include file="$(find-pkg-share autoware_radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
+        <arg name="input/radar_objects" value="objects_raw"/>
+        <arg name="input/odometry" value="/localization/kinematic_state"/>
+        <arg name="output/radar_detected_objects" value="detected_objects"/>
+        <arg name="output/radar_tracked_objects" value="tracked_objects"/>
+        <arg name="use_twist_compensation" value="false"/>
+        <arg name="param_path" value="$(var radar_tracks_msgs_converter_param_path)"/>
+      </include>
+    </group>
+
+    <group>
+      <push-ros-namespace namespace="rear_right"/>
+      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/ars548.launch.xml">
+        <arg name="odometry_topic" value="$(var odometry_topic)"/>
+        <arg name="acceleration_topic" value="$(var acceleration_topic)"/>
+        <arg name="steering_angle_topic" value="$(var steering_angle_topic)"/>
+        <arg name="launch_hw" value="$(var launch_driver)"/>
+
+        <arg name="sensor_ip" value="10.13.1.119"/>
+        <arg name="frame_id" value="rear_right/radar_link"/>
+        <arg name="object_frame" value="base_link"/>
+
+        <arg name="sensor_model" value="ARS548"/>
+        <arg name="host_ip" value="10.13.1.166"/>
+        <arg name="multicast_ip" value="224.0.2.2"/>
+        <arg name="data_port" value="42102"/>
+        <arg name="configuration_host_port" value="42401"/>
+        <arg name="configuration_sensor_port" value="42101"/>
+      </include>
+
+      <include file="$(find-pkg-share autoware_radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
+        <arg name="input/radar_objects" value="objects_raw"/>
+        <arg name="input/odometry" value="/localization/kinematic_state"/>
+        <arg name="output/radar_detected_objects" value="detected_objects"/>
+        <arg name="output/radar_tracked_objects" value="tracked_objects"/>
+        <arg name="use_twist_compensation" value="false"/>
+        <arg name="param_path" value="$(var radar_tracks_msgs_converter_param_path)"/>
+      </include>
+    </group>
+
+    <!-- merge radar objects -->
+    <let name="merger_param_path" value="$(find-pkg-share aip_x2_gen2_launch)/config/simple_object_merger.param.yaml"/>
+    <node pkg="autoware_simple_object_merger" exec="simple_object_merger_node" name="simple_object_merger" output="screen">
+      <remap from="~/output/objects" to="detected_objects"/>
+      <param from="$(var merger_param_path)"/>
+    </node>
+
+  </group>
+</launch>

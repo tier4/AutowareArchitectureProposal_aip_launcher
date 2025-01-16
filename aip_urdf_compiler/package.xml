@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>aip_urdf_compiler</name>
+  <version>0.1.0</version>
+  <description>The aip_urdf_compiler package</description>
+
+  <maintainer email="yukihiro.saito@tier4.jp">Yukihiro Saito</maintainer>
+  <maintainer email="uken.ryu.2@tier4.jp">Yuxuan Liu</maintainer>
+  <license>Apache 2</license>
+
+  <buildtool_depend>ament_cmake_auto</buildtool_depend>
+  <depend>python3-jinja2</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
