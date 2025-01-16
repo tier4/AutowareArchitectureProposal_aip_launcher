@@ -353,7 +353,16 @@ def generate_launch_description():
     add_launch_arg("use_multithread", "False", "use multithread")
     add_launch_arg("use_intra_process", "False", "use ROS 2 component container communication")
     add_launch_arg("lidar_container_name", "nebula_node_container")
+    add_launch_arg("ptp_profile", "1588v2")
+    add_launch_arg("ptp_transport_type", "L2")
+    add_launch_arg("ptp_switch_type", "TSN")
+    add_launch_arg("ptp_domain", "0")
     add_launch_arg("output_as_sensor_frame", "True", "output final pointcloud in sensor frame")
+    add_launch_arg("enable_blockage_diag", "true")
+    add_launch_arg("horizontal_ring_id", "64")
+    add_launch_arg("vertical_bins", "128")
+    add_launch_arg("is_channel_order_top2down", "true")
+    add_launch_arg("horizontal_resolution", "0.4")
     add_launch_arg(
         "blockage_diagnostics_param_file",
         os.path.join(
