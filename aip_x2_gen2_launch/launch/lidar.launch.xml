@@ -35,8 +35,8 @@
         <arg name="data_port" value="2321"/>
         <arg name="sync_angle" value="0"/>
         <arg name="cut_angle" value="180.0" />
-        <arg name="cloud_min_angle" value="88"/>
-        <arg name="cloud_max_angle" value="274"/>
+        <arg name="cloud_min_angle" value="73"/>
+        <arg name="cloud_max_angle" value="287"/>
         <arg name="return_mode" value="LastStrongest"/>
         <arg name="ptp_profile" value="automotive"/>
         <arg name="ptp_transport_type" value="L2"/>
@@ -68,7 +68,9 @@
         <arg name="data_port" value="2322"/>
         <arg name="sync_angle" value="270"/>
         <arg name="cut_angle" value="359.0" />
-        <arg name="cloud_min_angle" value="90"/>
+        <!-- <arg name="cloud_min_angle" value="0"/> -->
+        <!-- <arg name="cloud_min_angle" value="80"/> -->
+        <arg name="cloud_min_angle" value="0"/>
         <arg name="cloud_max_angle" value="359"/>
         <arg name="return_mode" value="LastStrongest"/>
         <arg name="ptp_profile" value="automotive"/>
@@ -100,8 +102,8 @@
         <arg name="data_port" value="2376"/>
         <arg name="sync_angle" value="0"/>
         <arg name="cut_angle" value="180.0" />
-        <arg name="cloud_min_angle" value="90"/>
-        <arg name="cloud_max_angle" value="270"/>
+        <arg name="cloud_min_angle" value="70"/>
+        <arg name="cloud_max_angle" value="290"/>
         <arg name="return_mode" value="LastStrongest"/>
         <arg name="ptp_profile" value="automotive"/>
         <arg name="ptp_transport_type" value="L2"/>
@@ -132,8 +134,8 @@
         <arg name="data_port" value="2377"/>
         <arg name="sync_angle" value="270"/>
         <arg name="cut_angle" value="270.0" />
-        <arg name="cloud_min_angle" value="90"/>
-        <arg name="cloud_max_angle" value="270"/>
+        <arg name="cloud_min_angle" value="75"/>
+        <arg name="cloud_max_angle" value="285"/>
         <arg name="return_mode" value="LastStrongest"/>
         <arg name="ptp_profile" value="automotive"/>
         <arg name="ptp_transport_type" value="L2"/>
@@ -165,8 +167,8 @@
         <arg name="data_port" value="2323"/>
         <arg name="sync_angle" value="180"/>
         <arg name="cut_angle" value="275.0" />
-        <arg name="cloud_min_angle" value="85"/>
-        <arg name="cloud_max_angle" value="275"/>
+        <arg name="cloud_min_angle" value="70"/>
+        <arg name="cloud_max_angle" value="290"/>
         <arg name="return_mode" value="LastStrongest"/>
         <arg name="ptp_profile" value="automotive"/>
         <arg name="ptp_transport_type" value="L2"/>
@@ -197,8 +199,10 @@
         <arg name="data_port" value="2324"/>
         <arg name="sync_angle" value="90"/>
         <arg name="cut_angle" value="270.0" />
+        <!-- <arg name="cloud_min_angle" value="0"/> -->
+        <!-- <arg name="cloud_max_angle" value="280"/> -->
         <arg name="cloud_min_angle" value="0"/>
-        <arg name="cloud_max_angle" value="270"/>
+        <arg name="cloud_max_angle" value="359"/>
         <arg name="return_mode" value="LastStrongest"/>
         <arg name="ptp_profile" value="automotive"/>
         <arg name="ptp_transport_type" value="L2"/>
@@ -229,8 +233,8 @@
         <arg name="data_port" value="2378"/>
         <arg name="sync_angle" value="180"/>
         <arg name="cut_angle" value="270.0" />
-        <arg name="cloud_min_angle" value="90"/>
-        <arg name="cloud_max_angle" value="270"/>
+        <arg name="cloud_min_angle" value="65"/>
+        <arg name="cloud_max_angle" value="295"/>
         <arg name="return_mode" value="LastStrongest"/>
         <arg name="ptp_profile" value="automotive"/>
         <arg name="ptp_transport_type" value="L2"/>
@@ -261,8 +265,8 @@
         <arg name="data_port" value="2379"/>
         <arg name="sync_angle" value="90"/>
         <arg name="cut_angle" value="270.0" />
-        <arg name="cloud_min_angle" value="90"/>
-        <arg name="cloud_max_angle" value="270"/>
+        <arg name="cloud_min_angle" value="75"/>
+        <arg name="cloud_max_angle" value="285"/>
         <arg name="return_mode" value="LastStrongest"/>
         <arg name="ptp_profile" value="automotive"/>
         <arg name="ptp_transport_type" value="L2"/>

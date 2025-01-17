@@ -11,7 +11,7 @@
     configuration_host_port: 42401
     configuration_sensor_port: 42101
     use_sensor_time: false
-    configuration_vehicle_length: 7.2369
-    configuration_vehicle_width: 2.2916
-    configuration_vehicle_height: 3.08
-    configuration_vehicle_wheelbase: 4.76012
+    configuration_vehicle_length: 11.130
+    configuration_vehicle_width: 2.485
+    configuration_vehicle_height: 3.045
+    configuration_vehicle_wheelbase: 6.000
