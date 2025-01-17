@@ -56,13 +56,6 @@ def get_vehicle_info(context):
     return p
 
 
-def get_vehicle_mirror_info(context):
-    path = LaunchConfiguration("vehicle_mirror_param_file").perform(context)
-    with open(path, "r") as f:
-        p = yaml.safe_load(f)["/**"]["ros__parameters"]
-    return p
-
-
 def launch_setup(context, *args, **kwargs):
     def load_composable_node_param(param_path):
         with open(LaunchConfiguration(param_path).perform(context), "r") as f:
@@ -82,7 +75,7 @@ def launch_setup(context, *args, **kwargs):
     sensor_make, sensor_extension = get_lidar_make(sensor_model)
 
     glog_component = ComposableNode(
-        package="glog_component",
+        package="autoware_glog_component",
         plugin="GlogComponent",
         name="glog_component",
     )
@@ -149,51 +142,6 @@ def launch_setup(context, *args, **kwargs):
         remappings=[
             ("input", "pointcloud_raw_ex"),
             ("output", "self_cropped/pointcloud_ex"),
-        ],
-        parameters=[cropbox_parameters],
-        extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
-    )
-
-    mirror_info = load_composable_node_param("vehicle_mirror_param_file")
-    right = mirror_info["right"]
-    cropbox_parameters.update(
-        min_x=right["min_longitudinal_offset"],
-        max_x=right["max_longitudinal_offset"],
-        min_y=right["min_lateral_offset"],
-        max_y=right["max_lateral_offset"],
-        min_z=right["min_height_offset"],
-        max_z=right["max_height_offset"],
-    )
-
-    right_mirror_crop_component = ComposableNode(
-        package="autoware_pointcloud_preprocessor",
-        plugin="autoware::pointcloud_preprocessor::CropBoxFilterComponent",
-        name="crop_box_filter_mirror_right",
-        remappings=[
-            ("input", "self_cropped/pointcloud_ex"),
-            ("output", "right_mirror_cropped/pointcloud_ex"),
-        ],
-        parameters=[cropbox_parameters],
-        extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
-    )
-
-    left = mirror_info["left"]
-    cropbox_parameters.update(
-        min_x=left["min_longitudinal_offset"],
-        max_x=left["max_longitudinal_offset"],
-        min_y=left["min_lateral_offset"],
-        max_y=left["max_lateral_offset"],
-        min_z=left["min_height_offset"],
-        max_z=left["max_height_offset"],
-    )
-
-    left_mirror_crop_component = ComposableNode(
-        package="autoware_pointcloud_preprocessor",
-        plugin="autoware::pointcloud_preprocessor::CropBoxFilterComponent",
-        name="crop_box_filter_mirror_left",
-        remappings=[
-            ("input", "right_mirror_cropped/pointcloud_ex"),
-            ("output", "mirror_cropped/pointcloud_ex"),
         ],
         parameters=[cropbox_parameters],
         extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
@@ -268,15 +216,13 @@ def launch_setup(context, *args, **kwargs):
 
     container = ComposableNodeContainer(
         name="nebula_node_container",
-        namespace="pointcloud_preprocessor",
+        namespace="autoware_pointcloud_preprocessor",
         package="rclcpp_components",
         executable=LaunchConfiguration("container_executable"),
         composable_node_descriptions=[
             glog_component,
             nebula_component,
             self_crop_component,
-            # right_mirror_crop_component,
-            # left_mirror_crop_component,
             undistort_component,
         ],
     )
@@ -343,9 +289,6 @@ def generate_launch_description():
     add_launch_arg("frame_id", "lidar", "frame id")
     add_launch_arg("input_frame", LaunchConfiguration("base_frame"), "use for cropbox")
     add_launch_arg("output_frame", LaunchConfiguration("base_frame"), "use for cropbox")
-    add_launch_arg(
-        "vehicle_mirror_param_file", description="path to the file of vehicle mirror position yaml"
-    )
     add_launch_arg("diag_span", "1000")
     add_launch_arg("use_multithread", "False", "use multithread")
     add_launch_arg("use_intra_process", "False", "use ROS 2 component container communication")
