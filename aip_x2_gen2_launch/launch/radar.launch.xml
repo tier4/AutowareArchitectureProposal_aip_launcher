@@ -7,6 +7,14 @@
   <let name="steering_angle_topic" value="/vehicle/status/steering_status_scalar"/>
   <arg name="radar_tracks_msgs_converter_param_path" default="$(find-pkg-share common_sensor_launch)/config/radar_tracks_msgs_converter.param.yaml"/>
 
+  <let name="odometry_throttled_topic" value="$(var odometry_topic)_throttled"/>
+  <let name="acceleration_throttled_topic" value="$(var acceleration_topic)_throttled"/>
+  <let name="steering_angle_throttled_topic" value="$(var steering_angle_topic)_throttled"/>
+
+  <node pkg="topic_tools" exec="throttle" name="odometry_throttler" output="screen" args="messages $(var odometry_topic) 25.0 $(var odometry_throttled_topic)"/>
+  <node pkg="topic_tools" exec="throttle" name="acceleration_throttler" output="screen" args="messages $(var acceleration_topic) 25.0 $(var acceleration_throttled_topic)"/>
+  <node pkg="topic_tools" exec="throttle" name="steering_angle_throttler" output="screen" args="messages $(var steering_angle_topic) 25.0 $(var steering_angle_throttled_topic)"/>
+
   <group>
     <push-ros-namespace namespace="radar"/>
     <node pkg="topic_tools" exec="transform" name="steer_angle_transform" output="screen" args="/vehicle/status/steering_status /vehicle/status/steering_status_scalar std_msgs/msg/Float32 'std_msgs.msg.Float32(data=m.steering_tire_angle)'  --import autoware_vehicle_msgs std_msgs --wait-for-start"/>
@@ -14,9 +22,9 @@
     <group>
       <push-ros-namespace namespace="front_center"/>
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/ars548.launch.xml">
-        <arg name="odometry_topic" value="$(var odometry_topic)"/>
-        <arg name="acceleration_topic" value="$(var acceleration_topic)"/>
-        <arg name="steering_angle_topic" value="$(var steering_angle_topic)"/>
+        <arg name="odometry_topic" value="$(var odometry_throttled_topic)"/>
+        <arg name="acceleration_topic" value="$(var acceleration_throttled_topic)"/>
+        <arg name="steering_angle_topic" value="$(var steering_angle_throttled_topic)"/>
         <arg name="launch_hw" value="$(var launch_driver)"/>
 
         <arg name="sensor_ip" value="10.13.1.114"/>
@@ -45,9 +53,9 @@
     <group>
       <push-ros-namespace namespace="front_left"/>
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/ars548.launch.xml">
-        <arg name="odometry_topic" value="$(var odometry_topic)"/>
-        <arg name="acceleration_topic" value="$(var acceleration_topic)"/>
-        <arg name="steering_angle_topic" value="$(var steering_angle_topic)"/>
+        <arg name="odometry_topic" value="$(var odometry_throttled_topic)"/>
+        <arg name="acceleration_topic" value="$(var acceleration_throttled_topic)"/>
+        <arg name="steering_angle_topic" value="$(var steering_angle_throttled_topic)"/>
         <arg name="launch_hw" value="$(var launch_driver)"/>
 
         <arg name="sensor_ip" value="10.13.1.115"/>
@@ -75,9 +83,9 @@
     <group>
       <push-ros-namespace namespace="front_right"/>
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/ars548.launch.xml">
-        <arg name="odometry_topic" value="$(var odometry_topic)"/>
-        <arg name="acceleration_topic" value="$(var acceleration_topic)"/>
-        <arg name="steering_angle_topic" value="$(var steering_angle_topic)"/>
+        <arg name="odometry_topic" value="$(var odometry_throttled_topic)"/>
+        <arg name="acceleration_topic" value="$(var acceleration_throttled_topic)"/>
+        <arg name="steering_angle_topic" value="$(var steering_angle_throttled_topic)"/>
         <arg name="launch_hw" value="$(var launch_driver)"/>
 
         <arg name="sensor_ip" value="10.13.1.116"/>
@@ -105,9 +113,9 @@
     <group>
       <push-ros-namespace namespace="rear_center"/>
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/ars548.launch.xml">
-        <arg name="odometry_topic" value="$(var odometry_topic)"/>
-        <arg name="acceleration_topic" value="$(var acceleration_topic)"/>
-        <arg name="steering_angle_topic" value="$(var steering_angle_topic)"/>
+        <arg name="odometry_topic" value="$(var odometry_throttled_topic)"/>
+        <arg name="acceleration_topic" value="$(var acceleration_throttled_topic)"/>
+        <arg name="steering_angle_topic" value="$(var steering_angle_throttled_topic)"/>
         <arg name="launch_hw" value="$(var launch_driver)"/>
 
         <arg name="sensor_ip" value="10.13.1.117"/>
@@ -135,9 +143,9 @@
     <group>
       <push-ros-namespace namespace="rear_left"/>
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/ars548.launch.xml">
-        <arg name="odometry_topic" value="$(var odometry_topic)"/>
-        <arg name="acceleration_topic" value="$(var acceleration_topic)"/>
-        <arg name="steering_angle_topic" value="$(var steering_angle_topic)"/>
+        <arg name="odometry_topic" value="$(var odometry_throttled_topic)"/>
+        <arg name="acceleration_topic" value="$(var acceleration_throttled_topic)"/>
+        <arg name="steering_angle_topic" value="$(var steering_angle_throttled_topic)"/>
         <arg name="launch_hw" value="$(var launch_driver)"/>
 
         <arg name="sensor_ip" value="10.13.1.118"/>
@@ -165,9 +173,9 @@
     <group>
       <push-ros-namespace namespace="rear_right"/>
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/ars548.launch.xml">
-        <arg name="odometry_topic" value="$(var odometry_topic)"/>
-        <arg name="acceleration_topic" value="$(var acceleration_topic)"/>
-        <arg name="steering_angle_topic" value="$(var steering_angle_topic)"/>
+        <arg name="odometry_topic" value="$(var odometry_throttled_topic)"/>
+        <arg name="acceleration_topic" value="$(var acceleration_throttled_topic)"/>
+        <arg name="steering_angle_topic" value="$(var steering_angle_throttled_topic)"/>
         <arg name="launch_hw" value="$(var launch_driver)"/>
 
         <arg name="sensor_ip" value="10.13.1.119"/>
