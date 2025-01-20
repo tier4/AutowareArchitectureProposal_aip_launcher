@@ -1,15 +1,15 @@
 base_link:
   sensor_kit_base_link:
     x: 7.3618
-    y: 1.2200
-    z: 3.1790
+    y: 1.22
+    z: 3.179
     roll: 0.0
     pitch: 0.0
     yaw: 0.0
 
   # radar
   front_center/radar_link:
-    x: 8.4640
+    x: 8.465
     y: 0.0
     z: 0.6398
     roll: 0.0
@@ -33,9 +33,9 @@ base_link:
     yaw: -1.2211 # 70 [deg]
 
   rear_center/radar_link:
-    x: -2.7802
+    x: -2.8402
     y: 0.0
-    z: 0.8283
+    z: 0.4983
     roll: 0.0
     pitch: 0.0
     yaw: 3.141592 # 180 [deg]

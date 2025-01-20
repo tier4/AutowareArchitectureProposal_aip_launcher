@@ -1,173 +1,173 @@
 sensor_kit_base_link:
   # left upper
   left_upper/lidar_base_link:
-    x: 0.0 #####
-    y: 0.0 #####
-    z: 0.0 #####
-    roll: 0.0 #####
-    pitch: 0.0 #####
-    yaw: 3.141592 # 180 [deg] to turn the connector toward the vehicle #####
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    roll: 0.0
+    pitch: 0.0
+    yaw: 3.141592 # 180 [deg] to turn the connector toward the vehicle
   left_lower/lidar_base_link:
-    x: 0.0 #####
-    y: -0.029 #####
-    z: -0.264 ##### 
-    roll: 0.6981 # 40[deg] #####
-    pitch: 0.0 #####
-    yaw: 3.141592 # 180 [deg] to turn the connector toward the vehicle #####
+    x: 0.0
+    y: -0.029
+    z: -0.264 
+    roll: 0.6981 # 40[deg]
+    pitch: 0.0
+    yaw: 3.141592 # 180 [deg] to turn the connector toward the vehicle
   left_front/camera_link:
-    x: 0.128 #####
-    y: -0.0201 #####
-    z: -0.1560 #####
-    roll: 0.0 #####
-    pitch: 0.08722 # 5 [deg] #####
-    yaw: 0.85478 # 49 [deg] #####
+    x: 0.128
+    y: -0.0201
+    z: -0.156
+    roll: 0.0
+    pitch: 0.08722 # 5 [deg]
+    yaw: 0.85478 # 49 [deg]
   left_rear/camera_link:
-    x: -0.128 #####
-    y: -0.0201 #####
-    z: -0.156 #####
-    roll: 0.0 #####
-    pitch: 0.08722 # 5 [deg] #####
-    yaw: 2.2678 # 130 [deg] #####
+    x: -0.128
+    y: -0.0201
+    z: -0.156
+    roll: 0.0
+    pitch: 0.08722 # 5 [deg]
+    yaw: 2.2678 # 130 [deg]
   left_center/camera_link:
-    x: 0.0 #####
-    y: -0.0 #####
-    z: -0.401 #####
-    roll: 0.0 #####
-    pitch: 0.933278 # 53.50 [deg] #####
-    yaw: 1.570796 # 90 [deg] #####
+    x: 0.0
+    y: -0.0
+    z: -0.401
+    roll: 0.0
+    pitch: 0.933278 # 53.50 [deg]
+    yaw: 1.570796 # 90 [deg]
 
   # right upper
   right_upper/lidar_base_link:
-    x: 0.0 #####
-    y: -2.440 #####
-    z: 0.0 #####
-    roll: 0.0 #####
-    pitch: 0.0 #####
-    yaw: 0.0 # to turn the connector toward the vehicle #####
+    x: 0.0
+    y: -2.44
+    z: 0.0
+    roll: 0.0
+    pitch: 0.0
+    yaw: 0.0 # to turn the connector toward the vehicle
   right_lower/lidar_base_link:
-    x: 0.0 #####
-    y: -2.411 #####
-    z: -0.264 #####
-    roll: 0.6981 # 40 [deg] #####
-    pitch: 0.0 #####
-    yaw: 0.0 # to turn the connector toward the vehicle #####
+    x: 0.0
+    y: -2.411
+    z: -0.264
+    roll: 0.6981 # 40 [deg]
+    pitch: 0.0
+    yaw: 0.0 # to turn the connector toward the vehicle
   right_front/camera_link:
-    x: 0.128 #####
-    y: -2.46 #####
-    z: -0.156 #####
-    roll: 0.0 #####
-    pitch: 0.08722 # 5 [deg] #####
-    yaw: -0.85478 # -49 [deg] #####
+    x: 0.128
+    y: -2.46
+    z: -0.156
+    roll: 0.0
+    pitch: 0.08722 # 5 [deg]
+    yaw: -0.85478 # -49 [deg]
   right_rear/camera_link:
-    x: -0.128 #####
-    y: -2.46 #####
-    z: -0.156 #####
-    roll: 0.0 #####
-    pitch: 0.08722 # 5 [deg] #####
-    yaw: -2.2678 # -130 [deg] #####
+    x: -0.128
+    y: -2.46
+    z: -0.156
+    roll: 0.0
+    pitch: 0.08722 # 5 [deg]
+    yaw: -2.2678 # -130 [deg]
   right_center/camera_link:
-    x: 0.0 #####
-    y: -2.44 #####
-    z: -0.401 #####
-    roll: 0.0 #####
-    pitch: 0.933278 # 53.50 [deg] #####
-    yaw: -1.570796 # -90 [deg] #####
+    x: 0.0
+    y: -2.44
+    z: -0.401
+    roll: 0.0
+    pitch: 0.933278 # 53.50 [deg]
+    yaw: -1.570796 # -90 [deg]
 
   # front upper
   top_front_left/imu_link:
-    x: 0.4124 #####
-    y: -1.1448 #####
-    z: -0.3098 #####
-    roll: 3.141592 #####
-    pitch: 0.0 #####
-    yaw: 0.0 #####
+    x: 0.4124
+    y: -1.1448
+    z: -0.3098
+    roll: 3.141592
+    pitch: 0.0
+    yaw: 0.0
   top_front_right/imu_link:
-    x: 0.4124 #####
-    y: -1.2839 #####
-    z: -0.3098 #####
-    roll: 3.141592 #####
-    pitch: 0.0 #####
-    yaw: 0.0 #####
+    x: 0.4124
+    y: -1.2839
+    z: -0.3098
+    roll: 3.141592
+    pitch: 0.0
+    yaw: 0.0
   top_front_right/camera_link:
-    x: 0.7266 #####
-    y: -1.2577 #####
-    z: -0.3275 #####
-    roll: 0.0 #####
-    pitch: 0.9075 # 52 [deg] #####
-    yaw: 0.0 #####
+    x: 0.7266
+    y: -1.2577
+    z: -0.3275
+    roll: 0.0
+    pitch: 0.9075 # 52 [deg]
+    yaw: 0.0
   top_front_center_right/camera_link:
-    x: 0.746 #####
-    y: -1.3331 #####
-    z: -0.271 #####
-    roll: 0.0 #####
-    pitch: 0.0 #####
-    yaw: 0.0 #####
+    x: 0.746
+    y: -1.3331
+    z: -0.271
+    roll: 0.0
+    pitch: 0.0
+    yaw: 0.0
   top_front_center_left/camera_link:
-    x: 0.746 #####
-    y: -1.1823 #####
-    z: -0.271 #####
-    roll: 0.0 #####
-    pitch: 0.0 #####
-    yaw: 0.0 #####
+    x: 0.746
+    y: -1.1823
+    z: -0.271
+    roll: 0.0
+    pitch: 0.0
+    yaw: 0.0
   top_front_left/camera_link:
-    x: 0.746 #####
-    y: -1.1069 #####
-    z: -0.271 #####
-    roll: 0.0 #####
-    pitch: 0.0 #####
-    yaw: 0.0 #####
+    x: 0.746
+    y: -1.1069
+    z: -0.271
+    roll: 0.0
+    pitch: 0.0
+    yaw: 0.0
   top_front/gnss_link:
-    x: 0.0167 #####
-    y: -1.220 #####
-    z: -0.0193 #####
-    roll: 0.0 #####
-    pitch: 0.0 #####
-    yaw: 0.0 #####
+    x: 0.0167
+    y: -1.22
+    z: -0.0193
+    roll: 0.0
+    pitch: 0.0
+    yaw: 0.0
 
   # rear upper
   top_rear_center/camera_link:
-    x: -10.086 #####
-    y: -1.3399 #####
-    z: -0.329 #####
-    roll: 0.0 #####
-    pitch: 0.933278 # 53.50 [deg] #####
-    yaw: 3.141592 # 180 [deg] to turn the connector toward the vehicle #####
+    x: -10.086
+    y: -1.3399
+    z: -0.329
+    roll: 0.0
+    pitch: 0.933278 # 53.50 [deg]
+    yaw: 3.141592 # 180 [deg] to turn the connector toward the vehicle
   top_rear/gnss_link:
-    x: -7.3618 #####
-    y: -1.220 #####
-    z: -0.0193 #####
-    roll: 0.0 #####
-    pitch: 0.0 #####
-    yaw: 0.0 #####
+    x: -7.3618
+    y: -1.220
+    z: -0.0193
+    roll: 0.0
+    pitch: 0.0
+    yaw: 0.0
 
   # front lower
   front_upper/lidar_base_link:
-    x: 1.0411 #####
-    y: -1.220 #####
-    z: -2.4572 #####
-    roll: 0.0 #####
-    pitch: 0.0 #####
-    yaw: 1.570796 # 90 [deg] to turn the connector toward the vehicle #####
+    x: 1.0421
+    y: -1.22
+    z: -2.4572
+    roll: 0.0
+    pitch: 0.0
+    yaw: 1.570796 # 90 [deg] to turn the connector toward the vehicle
   front_lower/lidar_base_link:
-    x: 1.0141 #####
-    y: -1.220 #####
-    z: -2.6913 #####
-    roll: 0.6981 # 40[deg] #####
-    pitch: 0.0 #####
-    yaw: 1.570796 # 90 [deg] to turn the connector toward the vehicle #####
+    x: 1.0151
+    y: -1.22
+    z: -2.6913
+    roll: 0.6981 # 40[deg]
+    pitch: 0.0
+    yaw: 1.570796 # 90 [deg] to turn the connector toward the vehicle
 
   # rear lower
   rear_upper/lidar_base_link:
-    x: -10.1440 #####
-    y: -1.220 #####
-    z: -0.16 #####
-    roll: 0.0 #####
-    pitch: 0.0 #####
+    x: -10.144
+    y: -1.22
+    z: -0.16
+    roll: 0.0
+    pitch: 0.0
     yaw: -1.570796 # 90 [deg] to turn the connector toward the vehicle
   rear_lower/lidar_base_link:
-    x: -10.1190 #####
-    y: -1.220 #####
-    z: -0.275 #####
+    x: -10.119
+    y: -1.22
+    z: -0.275
     roll: 0.6981 # 40[deg]
-    pitch: 0.0 #####
-    yaw: -1.570796 # 90 [deg] to turn the connector toward the vehicle #####
+    pitch: 0.0
+    yaw: -1.570796 # 90 [deg] to turn the connector toward the vehicle
