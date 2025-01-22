@@ -21,4 +21,4 @@
     matching_strategy:
       type: advanced
       lidar_timestamp_offsets: [0.0, 0.02, 0.02, 0.02]
-      lidar_timestamp_noise_window: [0.02, 0.02, 0.02, 0.02]
+      lidar_timestamp_noise_window: [0.08, 0.08, 0.08, 0.08]
