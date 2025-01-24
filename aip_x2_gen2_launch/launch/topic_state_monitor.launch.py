@@ -20,7 +20,7 @@ from launch_ros.descriptions import ComposableNode
 def generate_launch_description():
     # GNSS topic monitor
     gnss_topic_monitor = ComposableNode(
-        package="topic_state_monitor",
+        package="autoware_topic_state_monitor",
         plugin="topic_state_monitor::TopicStateMonitorNode",
         name="topic_state_monitor_gnss_pose",
         parameters=[
@@ -40,7 +40,7 @@ def generate_launch_description():
 
     # IMU topic monitor
     imu_topic_monitor = ComposableNode(
-        package="topic_state_monitor",
+        package="autoware_topic_state_monitor",
         plugin="topic_state_monitor::TopicStateMonitorNode",
         name="topic_state_monitor_imu_data",
         parameters=[
@@ -60,7 +60,7 @@ def generate_launch_description():
 
     # Radar topic monitors
     radar_front_center_monitor = ComposableNode(
-        package="topic_state_monitor",
+        package="autoware_topic_state_monitor",
         plugin="topic_state_monitor::TopicStateMonitorNode",
         name="topic_state_monitor_radar_front_center",
         parameters=[
@@ -79,7 +79,7 @@ def generate_launch_description():
     )
 
     radar_front_left_monitor = ComposableNode(
-        package="topic_state_monitor",
+        package="autoware_topic_state_monitor",
         plugin="topic_state_monitor::TopicStateMonitorNode",
         name="topic_state_monitor_radar_front_left",
         parameters=[
@@ -98,7 +98,7 @@ def generate_launch_description():
     )
 
     radar_front_right_monitor = ComposableNode(
-        package="topic_state_monitor",
+        package="autoware_topic_state_monitor",
         plugin="topic_state_monitor::TopicStateMonitorNode",
         name="topic_state_monitor_radar_front_right",
         parameters=[
@@ -117,7 +117,7 @@ def generate_launch_description():
     )
 
     radar_rear_center_monitor = ComposableNode(
-        package="topic_state_monitor",
+        package="autoware_topic_state_monitor",
         plugin="topic_state_monitor::TopicStateMonitorNode",
         name="topic_state_monitor_radar_rear_center",
         parameters=[
@@ -136,7 +136,7 @@ def generate_launch_description():
     )
 
     radar_rear_left_monitor = ComposableNode(
-        package="topic_state_monitor",
+        package="autoware_topic_state_monitor",
         plugin="topic_state_monitor::TopicStateMonitorNode",
         name="topic_state_monitor_radar_rear_left",
         parameters=[
@@ -155,7 +155,7 @@ def generate_launch_description():
     )
 
     radar_rear_right_monitor = ComposableNode(
-        package="topic_state_monitor",
+        package="autoware_topic_state_monitor",
         plugin="topic_state_monitor::TopicStateMonitorNode",
         name="topic_state_monitor_radar_rear_right",
         parameters=[
