@@ -191,7 +191,6 @@ def launch_setup(context, *args, **kwargs):
         extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
     )
 
-    distance_range = str2vector(context.perform_substitution(LaunchConfiguration("distance_range")))
     blockage_diag_component = ComposableNode(
         package="pointcloud_preprocessor",
         plugin="pointcloud_preprocessor::BlockageDiagComponent",
@@ -206,7 +205,7 @@ def launch_setup(context, *args, **kwargs):
                 "horizontal_ring_id": LaunchConfiguration("horizontal_ring_id"),
                 "vertical_bins": LaunchConfiguration("vertical_bins"),
                 "is_channel_order_top2down": LaunchConfiguration("is_channel_order_top2down"),
-                "max_distance_range": distance_range[1],
+                "max_distance_range": LaunchConfiguration("max_range"),
                 "horizontal_resolution": LaunchConfiguration("horizontal_resolution"),
             }
         ]
