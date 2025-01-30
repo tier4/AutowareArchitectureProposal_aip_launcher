@@ -18,7 +18,6 @@
 
   <include file="$(find-pkg-share common_sensor_launch)/launch/nebula_node_container.launch.py">
     <arg name="launch_driver" value="$(var launch_driver)"/>
-    <arg name="launch_hw_monitor" value="$(var launch_hw_monitor)"/>
     <arg name="sensor_model" value="$(var model)"/>
     <arg name="return_mode" value="$(var return_mode)"/>
     <arg name="frame_id" value="$(var sensor_frame)"/>
