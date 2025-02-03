@@ -97,8 +97,8 @@ def launch_setup(context, *args, **kwargs):
     nodes.append(
         ComposableNode(
             package="nebula_ros",
-            plugin=sensor_make + "DriverRosWrapper",
-            name=sensor_make.lower() + "_driver_ros_wrapper_node",
+            plugin=sensor_make + "RosWrapper",
+            name=sensor_make.lower() + "_ros_wrapper_node",
             parameters=[
                 {
                     "calibration_file": sensor_calib_fp,
@@ -189,18 +189,30 @@ def launch_setup(context, *args, **kwargs):
         )
 
         preprocessor_parameters = {}
-        preprocessor_parameters["self_crop.min_x"] = vehicle_info["min_longitudinal_offset"]
-        preprocessor_parameters["self_crop.max_x"] = vehicle_info["max_longitudinal_offset"]
-        preprocessor_parameters["self_crop.min_y"] = vehicle_info["min_lateral_offset"]
-        preprocessor_parameters["self_crop.max_y"] = vehicle_info["max_lateral_offset"]
-        preprocessor_parameters["self_crop.min_z"] = vehicle_info["min_height_offset"]
-        preprocessor_parameters["self_crop.max_z"] = vehicle_info["max_height_offset"]
-        preprocessor_parameters["mirror_crop.min_x"] = mirror_info["min_longitudinal_offset"]
-        preprocessor_parameters["mirror_crop.max_x"] = mirror_info["max_longitudinal_offset"]
-        preprocessor_parameters["mirror_crop.min_y"] = mirror_info["min_lateral_offset"]
-        preprocessor_parameters["mirror_crop.max_y"] = mirror_info["max_lateral_offset"]
-        preprocessor_parameters["mirror_crop.min_z"] = mirror_info["min_height_offset"]
-        preprocessor_parameters["mirror_crop.max_z"] = mirror_info["max_height_offset"]
+        preprocessor_parameters["crop_box.min_x"] = [
+            vehicle_info["min_longitudinal_offset"],
+            mirror_info["min_longitudinal_offset"],
+        ]
+        preprocessor_parameters["crop_box.max_x"] = [
+            vehicle_info["max_longitudinal_offset"],
+            mirror_info["max_longitudinal_offset"],
+        ]
+        preprocessor_parameters["crop_box.min_y"] = [
+            vehicle_info["min_lateral_offset"],
+            mirror_info["min_lateral_offset"],
+        ]
+        preprocessor_parameters["crop_box.max_y"] = [
+            vehicle_info["max_lateral_offset"],
+            mirror_info["max_lateral_offset"],
+        ]
+        preprocessor_parameters["crop_box.min_z"] = [
+            vehicle_info["min_height_offset"],
+            mirror_info["min_height_offset"],
+        ]
+        preprocessor_parameters["crop_box.max_z"] = [
+            vehicle_info["max_height_offset"],
+            mirror_info["max_height_offset"],
+        ]
 
         ring_outlier_filter_node_param = ParameterFile(
             param_file=LaunchConfiguration("ring_outlier_filter_node_param_file").perform(context),
