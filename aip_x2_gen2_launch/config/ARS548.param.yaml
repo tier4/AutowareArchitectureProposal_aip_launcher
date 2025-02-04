@@ -10,8 +10,8 @@
     sensor_model: ARS548
     configuration_host_port: 42401
     configuration_sensor_port: 42101
-    use_sensor_time: false
-    configuration_vehicle_length: 7.2369
-    configuration_vehicle_width: 2.2916
+    use_sensor_time: true
+    configuration_vehicle_length: 7.2369 # wheel_base + front_overhang + rear_overhang
+    configuration_vehicle_width: 2.2916 # wheel_tread + left_overhang + right_overhang
     configuration_vehicle_height: 3.08
     configuration_vehicle_wheelbase: 4.76012
