@@ -272,7 +272,8 @@ def launch_setup(context, *args, **kwargs):
                 **create_parameter_dict(
                     "sensor_ip",
                     "host_ip",
-                    "scan_phase",
+                    "sync_angle",
+                    "cut_angle",
                     "return_mode",
                     "frame_id",
                     "rotation_speed",
@@ -293,6 +294,9 @@ def launch_setup(context, *args, **kwargs):
                     "diag_span",
                     "delay_monitor_ms",
                 ),
+                "ptp_lock_threshold": 100,
+                "multicast_ip": "",
+                "udp_only": False
             }
         ],
         remappings=[

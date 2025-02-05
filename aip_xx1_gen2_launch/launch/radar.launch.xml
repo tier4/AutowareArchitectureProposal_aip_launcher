@@ -38,25 +38,32 @@
     <group>
       <push-ros-namespace namespace="front_center"/>
       <group>
-        <include file="$(find-pkg-share nebula_ros)/launch/continental_launch_all_hw.xml" if="$(var launch_driver)">
+        <node pkg="nebula_ros" exec="continental_ars548_ros_wrapper_node" name="nebula_continental_ars548" output="screen">
+          <param name="launch_hw" value="true"/>
+          <remap from="/diagnostics" to="diagnostics"/>
+          <remap from="odometry_input" to="$(var odometry_topic)"/>
+          <remap from="acceleration_input" to="$(var acceleration_topic)"/>
+          <remap from="steering_angle_input" to="$(var steering_angle_topic)"/>
+          <param name="sensor_ip" value="10.13.1.114"/>
+          <param name="frame_id" value="front_center/radar_link"/>
+          <param name="object_frame" value="base_link"/>
 
-          <arg name="odometry_topic" value="$(var twist_topic)"/>
-          <arg name="acceleration_topic" value="$(var acceleration_topic)"/>
-          <arg name="steering_angle_topic" value="$(var steering_angle_topic)"/>
+          <param name="sensor_model" value="ARS548"/>
+          <param name="host_ip" value="10.13.1.166"/>
+          <param name="multicast_ip" value="224.0.2.2"/>
+          <param name="data_port" value="42102"/>
+          <param name="configuration_host_port" value="42401"/>
+          <param name="configuration_sensor_port" value="42101"/>
 
-          <arg name="sensor_ip" value="10.13.1.114"/>
-          <arg name="frame_id" value="front_center/radar_link"/>
-          <arg name="object_frame" value="base_link"/>
-
-          <arg name="sensor_model" value="ARS548"/>
-          <arg name="host_ip" value="10.13.1.166"/>
-          <arg name="multicast_ip" value="224.0.2.2"/>
-          <arg name="data_port" value="42102"/>
-          <arg name="configuration_host_port" value="42401"/>
-          <arg name="configuration_sensor_port" value="42101"/>
-
-          <arg name="new_plug_orientation" value="0"/>
-        </include>
+          <param name="new_plug_orientation" value="0"/>
+          <param name="base_frame" value="base_link" />
+          <param name="object_frame" value="base_link" />
+          <param name="use_sensor_time" value="false" />
+          <param name="configuration_vehicle_length" value="4.89" />
+          <param name="configuration_vehicle_width" value="1.896" />
+          <param name="configuration_vehicle_height" value="2.5" />
+          <param name="configuration_vehicle_wheelbase" value="2.79" />
+        </node>
       </group>
 
       <group>
@@ -74,25 +81,34 @@
     <group>
       <push-ros-namespace namespace="front_left"/>
       <group>
-        <include file="$(find-pkg-share nebula_ros)/launch/continental_launch_all_hw.xml" if="$(var launch_driver)">
+                <node pkg="nebula_ros" exec="continental_ars548_ros_wrapper_node" name="nebula_continental_ars548" output="screen">
 
-          <arg name="odometry_topic" value="$(var twist_topic)"/>
-          <arg name="acceleration_topic" value="$(var acceleration_topic)"/>
-          <arg name="steering_angle_topic" value="$(var steering_angle_topic)"/>
 
-          <arg name="sensor_ip" value="10.13.1.115"/>
-          <arg name="frame_id" value="front_left/radar_link"/>
-          <arg name="object_frame" value="front_left/radar_link"/>
+          <param name="launch_hw" value="true"/>
+          <remap from="/diagnostics" to="diagnostics"/>
+          <remap from="odometry_input" to="$(var odometry_topic)"/>
+          <remap from="acceleration_input" to="$(var acceleration_topic)"/>
+          <remap from="steering_angle_input" to="$(var steering_angle_topic)"/>
 
-          <arg name="sensor_model" value="ARS548"/>
-          <arg name="host_ip" value="10.13.1.166"/>
-          <arg name="multicast_ip" value="224.0.2.2"/>
-          <arg name="data_port" value="42102"/>
-          <arg name="configuration_host_port" value="42401"/>
-          <arg name="configuration_sensor_port" value="42101"/>
+          <param name="sensor_ip" value="10.13.1.115"/>
+          <param name="frame_id" value="front_left/radar_link"/>
+          <param name="object_frame" value="front_left/radar_link"/>
 
-          <arg name="new_plug_orientation" value="0"/>
-        </include>
+          <param name="sensor_model" value="ARS548"/>
+          <param name="host_ip" value="10.13.1.166"/>
+          <param name="multicast_ip" value="224.0.2.2"/>
+          <param name="data_port" value="42102"/>
+          <param name="configuration_host_port" value="42401"/>
+          <param name="configuration_sensor_port" value="42101"/>
+          <param name="new_plug_orientation" value="0"/>
+          <param name="base_frame" value="base_link" />
+          <param name="object_frame" value="base_link" />
+          <param name="use_sensor_time" value="false" />
+          <param name="configuration_vehicle_length" value="4.89" />
+          <param name="configuration_vehicle_width" value="1.896" />
+          <param name="configuration_vehicle_height" value="2.5" />
+          <param name="configuration_vehicle_wheelbase" value="2.79" />
+          </node>
       </group>
 
       <group>
@@ -110,25 +126,32 @@
     <group>
       <push-ros-namespace namespace="front_right"/>
       <group>
-        <include file="$(find-pkg-share nebula_ros)/launch/continental_launch_all_hw.xml" if="$(var launch_driver)">
+                <node pkg="nebula_ros" exec="continental_ars548_ros_wrapper_node" name="nebula_continental_ars548" output="screen">
+<param name="launch_hw" value="true"/>
+          <remap from="/diagnostics" to="diagnostics"/>
+          <remap from="odometry_input" to="$(var odometry_topic)"/>
+          <remap from="acceleration_input" to="$(var acceleration_topic)"/>
+          <remap from="steering_angle_input" to="$(var steering_angle_topic)"/>
 
-          <arg name="odometry_topic" value="$(var twist_topic)"/>
-          <arg name="acceleration_topic" value="$(var acceleration_topic)"/>
-          <arg name="steering_angle_topic" value="$(var steering_angle_topic)"/>
+          <param name="sensor_ip" value="10.13.1.116"/>
+          <param name="frame_id" value="front_right/radar_link"/>
+          <param name="object_frame" value="front_right/radar_link"/>
 
-          <arg name="sensor_ip" value="10.13.1.116"/>
-          <arg name="frame_id" value="front_right/radar_link"/>
-          <arg name="object_frame" value="front_right/radar_link"/>
-
-          <arg name="sensor_model" value="ARS548"/>
-          <arg name="host_ip" value="10.13.1.166"/>
-          <arg name="multicast_ip" value="224.0.2.2"/>
-          <arg name="data_port" value="42102"/>
-          <arg name="configuration_host_port" value="42401"/>
-          <arg name="configuration_sensor_port" value="42101"/>
-
-          <arg name="new_plug_orientation" value="0"/>
-        </include>
+          <param name="sensor_model" value="ARS548"/>
+          <param name="host_ip" value="10.13.1.166"/>
+          <param name="multicast_ip" value="224.0.2.2"/>
+          <param name="data_port" value="42102"/>
+          <param name="configuration_host_port" value="42401"/>
+          <param name="configuration_sensor_port" value="42101"/>
+          <param name="new_plug_orientation" value="0"/>
+          <param name="base_frame" value="base_link" />
+          <param name="object_frame" value="base_link" />
+          <param name="use_sensor_time" value="false" />
+          <param name="configuration_vehicle_length" value="4.89" />
+          <param name="configuration_vehicle_width" value="1.896" />
+          <param name="configuration_vehicle_height" value="2.5" />
+          <param name="configuration_vehicle_wheelbase" value="2.79" />
+          </node>
       </group>
 
       <group>
@@ -146,25 +169,34 @@
     <group>
       <push-ros-namespace namespace="rear_center"/>
       <group>
-        <include file="$(find-pkg-share nebula_ros)/launch/continental_launch_all_hw.xml" if="$(var launch_driver)">
+                <node pkg="nebula_ros" exec="continental_ars548_ros_wrapper_node" name="nebula_continental_ars548" output="screen">
 
-          <arg name="odometry_topic" value="$(var twist_topic)"/>
-          <arg name="acceleration_topic" value="$(var acceleration_topic)"/>
-          <arg name="steering_angle_topic" value="$(var steering_angle_topic)"/>
 
-          <arg name="sensor_ip" value="10.13.1.117"/>
-          <arg name="frame_id" value="rear_center/radar_link"/>
-          <arg name="object_frame" value="base_link"/>
+                    <param name="launch_hw" value="true"/>
+          <remap from="/diagnostics" to="diagnostics"/>
+          <remap from="odometry_input" to="$(var odometry_topic)"/>
+          <remap from="acceleration_input" to="$(var acceleration_topic)"/>
+          <remap from="steering_angle_input" to="$(var steering_angle_topic)"/>
 
-          <arg name="sensor_model" value="ARS548"/>
-          <arg name="host_ip" value="10.13.1.166"/>
-          <arg name="multicast_ip" value="224.0.2.2"/>
-          <arg name="data_port" value="42102"/>
-          <arg name="configuration_host_port" value="42401"/>
-          <arg name="configuration_sensor_port" value="42101"/>
+          <param name="sensor_ip" value="10.13.1.117"/>
+          <param name="frame_id" value="rear_center/radar_link"/>
+          <param name="object_frame" value="base_link"/>
 
-          <arg name="new_plug_orientation" value="0"/>
-        </include>
+          <param name="sensor_model" value="ARS548"/>
+          <param name="host_ip" value="10.13.1.166"/>
+          <param name="multicast_ip" value="224.0.2.2"/>
+          <param name="data_port" value="42102"/>
+          <param name="configuration_host_port" value="42401"/>
+          <param name="configuration_sensor_port" value="42101"/>
+          <param name="new_plug_orientation" value="0"/>
+          <param name="base_frame" value="base_link" />
+          <param name="object_frame" value="base_link" />
+          <param name="use_sensor_time" value="false" />
+          <param name="configuration_vehicle_length" value="4.89" />
+          <param name="configuration_vehicle_width" value="1.896" />
+          <param name="configuration_vehicle_height" value="2.5" />
+          <param name="configuration_vehicle_wheelbase" value="2.79" />
+          </node>
       </group>
 
       <group>
@@ -182,25 +214,34 @@
     <group>
       <push-ros-namespace namespace="rear_left"/>
       <group>
-        <include file="$(find-pkg-share nebula_ros)/launch/continental_launch_all_hw.xml" if="$(var launch_driver)">
+                <node pkg="nebula_ros" exec="continental_ars548_ros_wrapper_node" name="nebula_continental_ars548" output="screen">
 
-          <arg name="odometry_topic" value="$(var twist_topic)"/>
-          <arg name="acceleration_topic" value="$(var acceleration_topic)"/>
-          <arg name="steering_angle_topic" value="$(var steering_angle_topic)"/>
 
-          <arg name="sensor_ip" value="10.13.1.118"/>
-          <arg name="frame_id" value="rear_left/radar_link"/>
-          <arg name="object_frame" value="base_link"/>
+                    <param name="launch_hw" value="true"/>
+          <remap from="/diagnostics" to="diagnostics"/>
+          <remap from="odometry_input" to="$(var odometry_topic)"/>
+          <remap from="acceleration_input" to="$(var acceleration_topic)"/>
+          <remap from="steering_angle_input" to="$(var steering_angle_topic)"/>
 
-          <arg name="sensor_model" value="ARS548"/>
-          <arg name="host_ip" value="10.13.1.166"/>
-          <arg name="multicast_ip" value="224.0.2.2"/>
-          <arg name="data_port" value="42102"/>
-          <arg name="configuration_host_port" value="42401"/>
-          <arg name="configuration_sensor_port" value="42101"/>
+          <param name="sensor_ip" value="10.13.1.118"/>
+          <param name="frame_id" value="rear_left/radar_link"/>
+          <param name="object_frame" value="base_link"/>
 
-          <arg name="new_plug_orientation" value="0"/>
-        </include>
+          <param name="sensor_model" value="ARS548"/>
+          <param name="host_ip" value="10.13.1.166"/>
+          <param name="multicast_ip" value="224.0.2.2"/>
+          <param name="data_port" value="42102"/>
+          <param name="configuration_host_port" value="42401"/>
+          <param name="configuration_sensor_port" value="42101"/>
+          <param name="new_plug_orientation" value="0"/>
+          <param name="base_frame" value="base_link" />
+          <param name="object_frame" value="base_link" />
+          <param name="use_sensor_time" value="false" />
+          <param name="configuration_vehicle_length" value="4.89" />
+          <param name="configuration_vehicle_width" value="1.896" />
+          <param name="configuration_vehicle_height" value="2.5" />
+          <param name="configuration_vehicle_wheelbase" value="2.79" />
+          </node>
       </group>
       <group>
         <include file="$(find-pkg-share radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
@@ -217,25 +258,34 @@
     <group>
       <push-ros-namespace namespace="rear_right"/>
        <group>
-        <include file="$(find-pkg-share nebula_ros)/launch/continental_launch_all_hw.xml" if="$(var launch_driver)">
+                <node pkg="nebula_ros" exec="continental_ars548_ros_wrapper_node" name="nebula_continental_ars548" output="screen">
 
-          <arg name="odometry_topic" value="$(var twist_topic)"/>
-          <arg name="acceleration_topic" value="$(var acceleration_topic)"/>
-          <arg name="steering_angle_topic" value="$(var steering_angle_topic)"/>
 
-          <arg name="sensor_ip" value="10.13.1.119"/>
-          <arg name="frame_id" value="rear_right/radar_link"/>
-          <arg name="object_frame" value="base_link"/>
+                   <param name="launch_hw" value="true"/>
+          <remap from="/diagnostics" to="diagnostics"/>
+          <remap from="odometry_input" to="$(var odometry_topic)"/>
+          <remap from="acceleration_input" to="$(var acceleration_topic)"/>
+          <remap from="steering_angle_input" to="$(var steering_angle_topic)"/>
 
-          <arg name="sensor_model" value="ARS548"/>
-          <arg name="host_ip" value="10.13.1.166"/>
-          <arg name="multicast_ip" value="224.0.2.2"/>
-          <arg name="data_port" value="42102"/>
-          <arg name="configuration_host_port" value="42401"/>
-          <arg name="configuration_sensor_port" value="42101"/>
+          <param name="sensor_ip" value="10.13.1.119"/>
+          <param name="frame_id" value="rear_right/radar_link"/>
+          <param name="object_frame" value="base_link"/>
 
-          <arg name="new_plug_orientation" value="0"/>
-        </include>
+          <param name="sensor_model" value="ARS548"/>
+          <param name="host_ip" value="10.13.1.166"/>
+          <param name="multicast_ip" value="224.0.2.2"/>
+          <param name="data_port" value="42102"/>
+          <param name="configuration_host_port" value="42401"/>
+          <param name="configuration_sensor_port" value="42101"/>
+          <param name="new_plug_orientation" value="0"/>
+          <param name="base_frame" value="base_link" />
+          <param name="object_frame" value="base_link" />
+          <param name="use_sensor_time" value="false" />
+          <param name="configuration_vehicle_length" value="4.89" />
+          <param name="configuration_vehicle_width" value="1.896" />
+          <param name="configuration_vehicle_height" value="2.5" />
+          <param name="configuration_vehicle_wheelbase" value="2.79" />
+          </node>
       </group>
 
       <group>

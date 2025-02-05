@@ -6,7 +6,8 @@ launches:
       sensor_frame: hesai_top
       sensor_ip: 192.168.1.201
       data_port: 2368
-      scan_phase: 160.0
+      sync_angle: 160
+      cut_angle: 160.0
   - sensor_type: hesai_XT32
     namespace: front_left
     parameters:
@@ -14,9 +15,10 @@ launches:
       sensor_frame: hesai_front_left
       sensor_ip: 192.168.1.21
       data_port: 2369
-      scan_phase: 50.0
+      sync_angle: 50
       cloud_min_angle: 50
       cloud_max_angle: 320
+      cut_angle: 320.0
   - sensor_type: hesai_XT32
     namespace: front_right
     parameters:
@@ -24,9 +26,10 @@ launches:
       sensor_frame: hesai_front_right
       sensor_ip: 192.168.1.22
       data_port: 2370
-      scan_phase: 310.0
+      sync_angle: 310
       cloud_min_angle: 40
       cloud_max_angle: 310
+      cut_angle: 310.0
   - sensor_type: hesai_XT32
     namespace: side_left
     parameters:
@@ -34,9 +37,10 @@ launches:
       sensor_frame: hesai_side_left
       sensor_ip: 192.168.1.23
       data_port: 2371
-      scan_phase: 90.0
+      sync_angle: 90
       cloud_min_angle: 90
       cloud_max_angle: 270
+      cut_angle: 270.0
   - sensor_type: hesai_XT32
     namespace: side_right
     parameters:
@@ -44,9 +48,10 @@ launches:
       sensor_frame: hesai_side_right
       sensor_ip: 192.168.1.24
       data_port: 2372
-      scan_phase: 270.0
+      sync_angle: 270
       cloud_min_angle: 90
       cloud_max_angle: 270
+      cut_angle: 270.0
 
 preprocessor:
   input_topics:
