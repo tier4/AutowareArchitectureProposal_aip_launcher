@@ -207,7 +207,7 @@ def launch_setup(context, *args, **kwargs):
             ("~/input/twist", "/sensing/vehicle_velocity_converter/twist_with_covariance"),
             ("~/input/imu", "/sensing/imu/imu_data"),
             ("~/input/pointcloud", "mirror_cropped/pointcloud_ex"),
-            ("~/output/pointcloud", "rectified/pointcloud_ex"),
+            ("~/output/pointcloud", "pointcloud"),
         ],
         parameters=[load_composable_node_param("distortion_corrector_node_param_file")],
         extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
