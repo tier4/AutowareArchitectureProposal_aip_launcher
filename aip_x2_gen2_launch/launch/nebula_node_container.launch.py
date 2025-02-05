@@ -243,13 +243,13 @@ def launch_setup(context, *args, **kwargs):
     ring_outlier_filter_loader = LoadComposableNodes(
         composable_node_descriptions=[ring_outlier_filter_component],
         target_container=container,
-        condition=LaunchConfigurationNotEquals("return_mode", "Dual"),
+        condition=LaunchConfigurationNotEquals("return_mode", "LastStrongest"),
     )
 
     dual_return_filter_loader = LoadComposableNodes(
         composable_node_descriptions=[dual_return_filter_component],
         target_container=container,
-        condition=LaunchConfigurationEquals("return_mode", "Dual"),
+        condition=LaunchConfigurationEquals("return_mode", "LastStrongest"),
     )
 
     blockage_diag_loader = LoadComposableNodes(
