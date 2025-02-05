@@ -5,8 +5,8 @@
     rosbag_length: 10.0
     maximum_queue_size: 5
     timeout_sec: 0.2
-    is_motion_compensated: false
-    publish_synchronized_pointcloud: false
+    is_motion_compensated: true
+    publish_synchronized_pointcloud: true
     keep_input_frame_in_synchronized_pointcloud: true
     publish_previous_but_late_pointcloud: false
     synchronized_pointcloud_postfix: pointcloud
