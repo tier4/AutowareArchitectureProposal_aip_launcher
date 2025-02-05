@@ -26,6 +26,7 @@ from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import ComposableNodeContainer
 from launch_ros.actions import LoadComposableNodes
 from launch_ros.descriptions import ComposableNode
+from launch_ros.parameter_descriptions import ParameterFile
 from launch_ros.substitutions import FindPackageShare
 import yaml
 
@@ -76,7 +77,7 @@ def launch_setup(context, *args, **kwargs):
 
     glog_component = ComposableNode(
         package="autoware_glog_component",
-        plugin="GlogComponent",
+        plugin="autoware::glog_component::GlogComponent",
         name="glog_component",
     )
 
@@ -161,14 +162,27 @@ def launch_setup(context, *args, **kwargs):
         extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
     )
 
+    ring_outlier_filter_node_param = ParameterFile(
+        param_file=LaunchConfiguration("ring_outlier_filter_node_param_file").perform(context),
+        allow_substs=True,
+    )
+
+    # Ring Outlier Filter is the last component in the pipeline, so control the output frame here
+    if LaunchConfiguration("output_as_sensor_frame").perform(context).lower() == "true":
+        ring_outlier_output_frame = {"output_frame": LaunchConfiguration("frame_id")}
+    else:
+        # keep the output frame as the input frame
+        ring_outlier_output_frame = {"output_frame": ""}
+
     ring_outlier_filter_component = ComposableNode(
         package="autoware_pointcloud_preprocessor",
         plugin="autoware::pointcloud_preprocessor::RingOutlierFilterComponent",
         name="ring_outlier_filter",
         remappings=[
             ("input", "rectified/pointcloud_ex"),
-            ("output", "pointcloud"),
+            ("output", "pointcloud_before_sync"),
         ],
+        parameters=[ring_outlier_filter_node_param, ring_outlier_output_frame],
         extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
     )
 
@@ -178,7 +192,7 @@ def launch_setup(context, *args, **kwargs):
         name="dual_return_filter",
         remappings=[
             ("input", "rectified/pointcloud_ex"),
-            ("output", "pointcloud"),
+            ("output", "pointcloud_before_sync"),
         ],
         parameters=[
             {
@@ -191,7 +205,6 @@ def launch_setup(context, *args, **kwargs):
         extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
     )
 
-    distance_range = str2vector(context.perform_substitution(LaunchConfiguration("distance_range")))
     blockage_diag_component = ComposableNode(
         package="autoware_pointcloud_preprocessor",
         plugin="autoware::pointcloud_preprocessor::BlockageDiagComponent",
@@ -206,7 +219,7 @@ def launch_setup(context, *args, **kwargs):
                 "horizontal_ring_id": LaunchConfiguration("horizontal_ring_id"),
                 "vertical_bins": LaunchConfiguration("vertical_bins"),
                 "is_channel_order_top2down": LaunchConfiguration("is_channel_order_top2down"),
-                "max_distance_range": distance_range[1],
+                "max_distance_range": LaunchConfiguration("max_range"),
                 "horizontal_resolution": LaunchConfiguration("horizontal_resolution"),
             }
         ]
@@ -300,6 +313,10 @@ def generate_launch_description():
         [FindPackageShare("common_sensor_launch"), "/config/blockage_diagnostics.param.yaml"],
     )
     add_launch_arg(
+        "ring_outlier_filter_node_param_file",
+        [FindPackageShare("common_sensor_launch"), "/config/ring_outlier_filter_node.param.yaml"],
+    )
+    add_launch_arg(
         "distortion_corrector_node_param_file",
         [FindPackageShare("common_sensor_launch"), "/config/distortion_corrector_node.param.yaml"],
     )
@@ -313,6 +330,7 @@ def generate_launch_description():
     add_launch_arg("point_filters_param_file")
 
     add_launch_arg("calibration_file", "")
+    add_launch_arg("output_as_sensor_frame", "True", "output final pointcloud in sensor frame")
 
     set_container_executable = SetLaunchConfiguration(
         "container_executable",

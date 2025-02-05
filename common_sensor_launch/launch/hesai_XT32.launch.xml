@@ -2,9 +2,6 @@
 
   <!-- Params -->
   <arg name="launch_driver" default="true"/>
-  <!-- There is an issue where hw_monitor crashes due to data race,
-  so the monitor will now only be launched when explicitly specified with a launch command. -->
-  <arg name="launch_hw_monitor" default="false"/>
 
   <arg name="model" default="PandarXT32"/>
   <arg name="sensor_frame" default="pandar"/>
@@ -15,6 +12,7 @@
   <arg name="scan_phase" default="0.0"/>
   <arg name="cloud_min_angle" default="0"/>
   <arg name="cloud_max_angle" default="360"/>
+  <arg name="max_range" default="120.0"/>
   <arg name="dual_return_distance_threshold" default="0.1"/>
   <arg name="vehicle_mirror_param_file"/>
   <arg name="container_name" default="hesai_node_container"/>
@@ -22,10 +20,9 @@
 
   <include file="$(find-pkg-share common_sensor_launch)/launch/nebula_node_container.launch.py">
     <arg name="launch_driver" value="$(var launch_driver)"/>
-    <arg name="launch_hw_monitor" value="$(var launch_hw_monitor)"/>
     <arg name="sensor_model" value="$(var model)"/>
-    <arg name="return_mode" value="$(var return_mode)"/>
     <arg name="frame_id" value="$(var sensor_frame)"/>
+    <arg name="return_mode" value="$(var return_mode)"/>
     <arg name="sensor_ip" value="$(var sensor_ip)"/>
     <arg name="host_ip" value="$(var host_ip)"/>
     <arg name="data_port" value="$(var data_port)"/>
@@ -35,6 +32,7 @@
     <arg name="max_range" value="$(var max_range)"/>
     <arg name="dual_return_distance_threshold" value="$(var dual_return_distance_threshold)"/>
     <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
+    <arg name="container_name" value="$(var container_name)"/>
     <arg name="use_intra_process" value="true"/>
     <arg name="use_multithread" value="true"/>
     <arg name="ptp_profile" value="automotive"/>
@@ -43,6 +41,5 @@
     <arg name="setup_sensor" value="true"/>
     <arg name="udp_only" value="$(var udp_only)"/>
     <arg name="retry_hw" value="true"/>
-    <arg name="container_name" value="$(var container_name)"/>
   </include>
 </launch>
