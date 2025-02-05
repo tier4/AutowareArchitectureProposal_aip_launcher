@@ -37,7 +37,7 @@
         <arg name="cut_angle" value="180.0" />
         <arg name="cloud_min_angle" value="88"/>
         <arg name="cloud_max_angle" value="274"/>
-        <arg name="return_mode" value="LastStrongest"/>
+        <arg name="return_mode" value="Dual"/>
         <arg name="ptp_profile" value="automotive"/>
         <arg name="ptp_transport_type" value="L2"/>
         <arg name="ptp_switch_type" value="NON_TSN"/>
@@ -45,7 +45,6 @@
         <arg name="launch_driver" value="$(var launch_driver)"/>
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
         <arg name="container_name" value="$(var pointcloud_container_name)"/>
-
         <arg name="blockage_range" value="[90.0, 270.0]"/>
         <arg name="vertical_bins" value ="128" />
         <arg name="horizontal_ring_id" value="40" />
@@ -70,7 +69,7 @@
         <arg name="cut_angle" value="359.0" />
         <arg name="cloud_min_angle" value="90"/>
         <arg name="cloud_max_angle" value="359"/>
-        <arg name="return_mode" value="LastStrongest"/>
+        <arg name="return_mode" value="Dual"/>
         <arg name="ptp_profile" value="automotive"/>
         <arg name="ptp_transport_type" value="L2"/>
         <arg name="ptp_switch_type" value="NON_TSN"/>
@@ -86,6 +85,8 @@
         <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
         <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2_gen2/pandar/left_upper.csv" />
         <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
+        <arg name="min_azimuth_deg" value="225.0"/>
+        <arg name="max_azimuth_deg" value="315.0"/>
         <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/left_upper/point_filters_one_third.param.yaml" />
       </include>
     </group>
@@ -102,7 +103,7 @@
         <arg name="cut_angle" value="180.0" />
         <arg name="cloud_min_angle" value="90"/>
         <arg name="cloud_max_angle" value="270"/>
-        <arg name="return_mode" value="LastStrongest"/>
+        <arg name="return_mode" value="Dual"/>
         <arg name="ptp_profile" value="automotive"/>
         <arg name="ptp_transport_type" value="L2"/>
         <arg name="ptp_switch_type" value="NON_TSN"/>
@@ -134,7 +135,7 @@
         <arg name="cut_angle" value="270.0" />
         <arg name="cloud_min_angle" value="90"/>
         <arg name="cloud_max_angle" value="270"/>
-        <arg name="return_mode" value="LastStrongest"/>
+        <arg name="return_mode" value="Dual"/>
         <arg name="ptp_profile" value="automotive"/>
         <arg name="ptp_transport_type" value="L2"/>
         <arg name="ptp_switch_type" value="NON_TSN"/>
@@ -150,6 +151,8 @@
         <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
         <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2_gen2/pandar/left_lower.csv" />
         <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
+        <arg name="min_azimuth_deg" value="225.0"/>
+        <arg name="max_azimuth_deg" value="315.0"/>
         <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/left_lower/point_filters_full.param.yaml" />
       </include>
     </group>
@@ -167,7 +170,7 @@
         <arg name="cut_angle" value="275.0" />
         <arg name="cloud_min_angle" value="85"/>
         <arg name="cloud_max_angle" value="275"/>
-        <arg name="return_mode" value="LastStrongest"/>
+        <arg name="return_mode" value="Dual"/>
         <arg name="ptp_profile" value="automotive"/>
         <arg name="ptp_transport_type" value="L2"/>
         <arg name="ptp_switch_type" value="NON_TSN"/>
@@ -199,7 +202,7 @@
         <arg name="cut_angle" value="270.0" />
         <arg name="cloud_min_angle" value="0"/>
         <arg name="cloud_max_angle" value="270"/>
-        <arg name="return_mode" value="LastStrongest"/>
+        <arg name="return_mode" value="Dual"/>
         <arg name="ptp_profile" value="automotive"/>
         <arg name="ptp_transport_type" value="L2"/>
         <arg name="ptp_switch_type" value="NON_TSN"/>
@@ -215,6 +218,8 @@
         <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
         <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2_gen2/pandar/right_upper.csv" />
         <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
+        <arg name="min_azimuth_deg" value="45.0"/>
+        <arg name="max_azimuth_deg" value="135.0"/>
         <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/right_upper/point_filters_one_third.param.yaml" />
       </include>
     </group>
@@ -231,7 +236,7 @@
         <arg name="cut_angle" value="270.0" />
         <arg name="cloud_min_angle" value="90"/>
         <arg name="cloud_max_angle" value="270"/>
-        <arg name="return_mode" value="LastStrongest"/>
+        <arg name="return_mode" value="Dual"/>
         <arg name="ptp_profile" value="automotive"/>
         <arg name="ptp_transport_type" value="L2"/>
         <arg name="ptp_switch_type" value="NON_TSN"/>
@@ -263,7 +268,7 @@
         <arg name="cut_angle" value="270.0" />
         <arg name="cloud_min_angle" value="90"/>
         <arg name="cloud_max_angle" value="270"/>
-        <arg name="return_mode" value="LastStrongest"/>
+        <arg name="return_mode" value="Dual"/>
         <arg name="ptp_profile" value="automotive"/>
         <arg name="ptp_transport_type" value="L2"/>
         <arg name="ptp_switch_type" value="NON_TSN"/>
@@ -279,6 +284,8 @@
         <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
         <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2_gen2/pandar/right_lower.csv" />
         <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
+        <arg name="min_azimuth_deg" value="45.0"/>
+        <arg name="max_azimuth_deg" value="135.0"/>
         <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/right_lower/point_filters_full.param.yaml" />
       </include>
     </group>
