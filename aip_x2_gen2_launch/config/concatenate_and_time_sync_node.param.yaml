@@ -12,17 +12,17 @@
     synchronized_pointcloud_postfix: pointcloud
     input_twist_topic_type: twist
     input_topics: [
-                    "/sensing/lidar/left_lower/pointcloud_before_sync",
-                    "/sensing/lidar/left_upper/pointcloud_before_sync",
-                    "/sensing/lidar/front_lower/pointcloud_before_sync",
-                    "/sensing/lidar/front_upper/pointcloud_before_sync",
-                    "/sensing/lidar/right_upper/pointcloud_before_sync",
-                    "/sensing/lidar/right_lower/pointcloud_before_sync",
-                    "/sensing/lidar/rear_lower/pointcloud_before_sync",
-                    "/sensing/lidar/rear_upper/pointcloud_before_sync"
+                    "/sensing/lidar/rear_upper/pointcloud_before_sync", # 0.047
+                    "/sensing/lidar/rear_lower/pointcloud_before_sync", # 0.048
+                    "/sensing/lidar/left_upper/pointcloud_before_sync", # 0.048
+                    "/sensing/lidar/left_lower/pointcloud_before_sync", # 0.047
+                    "/sensing/lidar/front_upper/pointcloud_before_sync", # 0.072
+                    "/sensing/lidar/front_lower/pointcloud_before_sync", # 0.072
+                    "/sensing/lidar/right_upper/pointcloud_before_sync", # 0.073
+                    "/sensing/lidar/right_lower/pointcloud_before_sync" # 0.097
                 ]
     output_frame: base_link
     matching_strategy:
       type: advanced
-      lidar_timestamp_offsets: [0.0, 0.0, 0.025, 0.028, 0.026, 0.05, 0.075, 0.076]
+      lidar_timestamp_offsets: [0.0, 0.01, 0.01, 0.0, 0.025, 0.025, 0.026, 0.050]
       lidar_timestamp_noise_window: [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
