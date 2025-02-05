@@ -1,0 +1,287 @@
+<launch>
+
+  <arg name="launch_driver" default="true"/>
+  <arg name="setup_sensor" default="true"/>
+  <arg name="host_ip" default="192.168.1.11"/>
+  <!-- <arg name="host_ip" default="224.0.3.3"/> -->
+  <arg name="use_concat_filter" default="true"/>
+  <arg name="vehicle_id" default="$(env VEHICLE_ID default)"/>
+  <arg name="vehicle_mirror_param_file"/>
+  <arg name="use_pointcloud_container" default="false" description="launch pointcloud container"/>
+  <arg name="pointcloud_container_name" default="pointcloud_container"/>
+
+  <arg name="dual_return_filter_param_file" default="$(find-pkg-share aip_x2_gen2_launch)/config/dual_return_filter.param.yaml"/>
+  <arg name="enable_blockage_diag" default="true"/>
+
+  <group>
+    <push-ros-namespace namespace="lidar" />
+
+    <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/pointcloud_preprocessor.launch.py">
+      <arg name="base_frame" value="base_link" />
+      <arg name="use_intra_process" value="true" />
+      <arg name="use_multithread" value="true" />
+      <arg name="use_pointcloud_container" value="true"/>
+      <arg name="pointcloud_container_name" value="$(var pointcloud_container_name)"/>
+    </include>
+
+    <!-- LiDARs connected to Main ECU -->
+    <group>
+      <push-ros-namespace namespace="rear_upper" />
+      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_OT128.launch.xml">
+        <arg name="setup_sensor" value="$(var setup_sensor)"/>
+        <arg name="sensor_frame" value="rear_upper/lidar"/>
+        <arg name="sensor_ip" value="192.168.1.202"/>
+        <arg name="host_ip" value="$(var host_ip)"/>
+        <arg name="data_port" value="2321"/>
+        <arg name="sync_angle" value="0"/>
+        <arg name="cut_angle" value="180.0" />
+        <arg name="cloud_min_angle" value="88"/>
+        <arg name="cloud_max_angle" value="274"/>
+        <arg name="return_mode" value="LastStrongest"/>
+        <arg name="ptp_profile" value="automotive"/>
+        <arg name="ptp_transport_type" value="L2"/>
+        <arg name="ptp_switch_type" value="NON_TSN"/>
+        <arg name="ptp_domain" value="0"/>
+        <arg name="launch_driver" value="$(var launch_driver)"/>
+        <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
+        <arg name="container_name" value="$(var pointcloud_container_name)"/>
+
+        <arg name="blockage_range" value="[90.0, 270.0]"/>
+        <arg name="vertical_bins" value ="128" />
+        <arg name="horizontal_ring_id" value="40" />
+        <arg name="is_channel_order_top2down" value="true"/>
+        <arg name="horizontal_resolution" value="0.4"/>
+        <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
+        <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2_gen2/pandar/rear_upper.csv" />
+        <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
+        <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/rear_upper/point_filters_one_third.param.yaml" />
+      </include>
+    </group>
+
+    <group>
+      <push-ros-namespace namespace="left_upper" />
+      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_OT128.launch.xml">
+        <arg name="setup_sensor" value="$(var setup_sensor)"/>
+        <arg name="sensor_frame" value="left_upper/lidar"/>
+        <arg name="sensor_ip" value="192.168.1.203"/>
+        <arg name="host_ip" value="$(var host_ip)"/>
+        <arg name="data_port" value="2322"/>
+        <arg name="sync_angle" value="270"/>
+        <arg name="cut_angle" value="359.0" />
+        <arg name="cloud_min_angle" value="90"/>
+        <arg name="cloud_max_angle" value="359"/>
+        <arg name="return_mode" value="LastStrongest"/>
+        <arg name="ptp_profile" value="automotive"/>
+        <arg name="ptp_transport_type" value="L2"/>
+        <arg name="ptp_switch_type" value="NON_TSN"/>
+        <arg name="ptp_domain" value="0"/>
+        <arg name="launch_driver" value="$(var launch_driver)"/>
+        <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
+        <arg name="container_name" value="$(var pointcloud_container_name)"/>
+        <arg name="blockage_range" value="[90.0, 270.0]"/>
+        <arg name="vertical_bins" value ="128" />
+        <arg name="horizontal_ring_id" value="40" />
+        <arg name="is_channel_order_top2down" value="true"/>
+        <arg name="horizontal_resolution" value="0.4"/>
+        <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
+        <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2_gen2/pandar/left_upper.csv" />
+        <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
+        <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/left_upper/point_filters_one_third.param.yaml" />
+      </include>
+    </group>
+
+    <group>
+      <push-ros-namespace namespace="rear_lower" />
+      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_QT128.launch.xml">
+        <arg name="setup_sensor" value="$(var setup_sensor)"/>
+        <arg name="sensor_frame" value="rear_lower/lidar"/>
+        <arg name="sensor_ip" value="192.168.1.212"/>
+        <arg name="host_ip" value="$(var host_ip)"/>
+        <arg name="data_port" value="2376"/>
+        <arg name="sync_angle" value="0"/>
+        <arg name="cut_angle" value="180.0" />
+        <arg name="cloud_min_angle" value="90"/>
+        <arg name="cloud_max_angle" value="270"/>
+        <arg name="return_mode" value="LastStrongest"/>
+        <arg name="ptp_profile" value="automotive"/>
+        <arg name="ptp_transport_type" value="L2"/>
+        <arg name="ptp_switch_type" value="NON_TSN"/>
+        <arg name="ptp_domain" value="0"/>
+        <arg name="launch_driver" value="$(var launch_driver)"/>
+        <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
+        <arg name="container_name" value="$(var pointcloud_container_name)"/>
+        <arg name="blockage_range" value="[130.0, 230.0]"/>
+        <arg name="vertical_bins" value ="128" />
+        <arg name="horizontal_ring_id" value="118" />
+        <arg name="is_channel_order_top2down" value="false"/>
+        <arg name="horizontal_resolution" value="0.4"/>
+        <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
+        <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2_gen2/pandar/rear_lower.csv" />
+        <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
+        <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/rear_lower/point_filters_full.param.yaml" />
+      </include>
+    </group>
+
+    <group>
+      <push-ros-namespace namespace="left_lower" />
+      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_QT128.launch.xml">
+        <arg name="setup_sensor" value="$(var setup_sensor)"/>
+        <arg name="sensor_frame" value="left_lower/lidar"/>
+        <arg name="sensor_ip" value="192.168.1.213"/>
+        <arg name="host_ip" value="$(var host_ip)"/>
+        <arg name="data_port" value="2377"/>
+        <arg name="sync_angle" value="270"/>
+        <arg name="cut_angle" value="270.0" />
+        <arg name="cloud_min_angle" value="90"/>
+        <arg name="cloud_max_angle" value="270"/>
+        <arg name="return_mode" value="LastStrongest"/>
+        <arg name="ptp_profile" value="automotive"/>
+        <arg name="ptp_transport_type" value="L2"/>
+        <arg name="ptp_switch_type" value="NON_TSN"/>
+        <arg name="ptp_domain" value="0"/>
+        <arg name="launch_driver" value="$(var launch_driver)"/>
+        <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
+        <arg name="container_name" value="$(var pointcloud_container_name)"/>
+        <arg name="blockage_range" value="[140.0, 230.0]"/>
+        <arg name="vertical_bins" value ="128" />
+        <arg name="horizontal_ring_id" value="118" />
+        <arg name="is_channel_order_top2down" value="false"/>
+        <arg name="horizontal_resolution" value="0.4"/>
+        <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
+        <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2_gen2/pandar/left_lower.csv" />
+        <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
+        <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/left_lower/point_filters_full.param.yaml" />
+      </include>
+    </group>
+
+    <!-- LiDARs connected to Sub ECU -->
+    <group>
+      <push-ros-namespace namespace="front_upper" />
+      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_OT128.launch.xml">
+        <arg name="setup_sensor" value="$(var setup_sensor)"/>
+        <arg name="sensor_frame" value="front_upper/lidar"/>
+        <arg name="sensor_ip" value="192.168.1.204"/>
+        <arg name="host_ip" value="$(var host_ip)"/>
+        <arg name="data_port" value="2323"/>
+        <arg name="sync_angle" value="180"/>
+        <arg name="cut_angle" value="275.0" />
+        <arg name="cloud_min_angle" value="85"/>
+        <arg name="cloud_max_angle" value="275"/>
+        <arg name="return_mode" value="LastStrongest"/>
+        <arg name="ptp_profile" value="automotive"/>
+        <arg name="ptp_transport_type" value="L2"/>
+        <arg name="ptp_switch_type" value="NON_TSN"/>
+        <arg name="ptp_domain" value="0"/>
+        <arg name="launch_driver" value="$(var launch_driver)"/>
+        <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
+        <arg name="container_name" value="$(var pointcloud_container_name)"/>
+        <arg name="blockage_range" value="[90.0, 270.0]"/>
+        <arg name="vertical_bins" value ="128" />
+        <arg name="horizontal_ring_id" value="40" />
+        <arg name="is_channel_order_top2down" value="true"/>
+        <arg name="horizontal_resolution" value="0.4"/>
+        <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
+        <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2_gen2/pandar/front_upper.csv" />
+        <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
+        <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/front_upper/point_filters_one_third.param.yaml" />
+      </include>
+    </group>
+
+    <group>
+      <push-ros-namespace namespace="right_upper" />
+      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_OT128.launch.xml">
+        <arg name="setup_sensor" value="$(var setup_sensor)"/>
+        <arg name="sensor_frame" value="right_upper/lidar"/>
+        <arg name="sensor_ip" value="192.168.1.205"/>
+        <arg name="host_ip" value="$(var host_ip)"/>
+        <arg name="data_port" value="2324"/>
+        <arg name="sync_angle" value="90"/>
+        <arg name="cut_angle" value="270.0" />
+        <arg name="cloud_min_angle" value="0"/>
+        <arg name="cloud_max_angle" value="270"/>
+        <arg name="return_mode" value="LastStrongest"/>
+        <arg name="ptp_profile" value="automotive"/>
+        <arg name="ptp_transport_type" value="L2"/>
+        <arg name="ptp_switch_type" value="NON_TSN"/>
+        <arg name="ptp_domain" value="0"/>
+        <arg name="launch_driver" value="$(var launch_driver)"/>
+        <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
+        <arg name="container_name" value="$(var pointcloud_container_name)"/>
+        <arg name="blockage_range" value="[90.0, 270.0]"/>
+        <arg name="vertical_bins" value ="128" />
+        <arg name="horizontal_ring_id" value="40" />
+        <arg name="is_channel_order_top2down" value="true"/>
+        <arg name="horizontal_resolution" value="0.4"/>
+        <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
+        <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2_gen2/pandar/right_upper.csv" />
+        <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
+        <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/right_upper/point_filters_one_third.param.yaml" />
+      </include>
+    </group>
+
+    <group>
+      <push-ros-namespace namespace="front_lower" />
+      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_QT128.launch.xml">
+        <arg name="setup_sensor" value="$(var setup_sensor)"/>
+        <arg name="sensor_frame" value="front_lower/lidar"/>
+        <arg name="sensor_ip" value="192.168.1.214"/>
+        <arg name="host_ip" value="$(var host_ip)"/>
+        <arg name="data_port" value="2378"/>
+        <arg name="sync_angle" value="180"/>
+        <arg name="cut_angle" value="270.0" />
+        <arg name="cloud_min_angle" value="90"/>
+        <arg name="cloud_max_angle" value="270"/>
+        <arg name="return_mode" value="LastStrongest"/>
+        <arg name="ptp_profile" value="automotive"/>
+        <arg name="ptp_transport_type" value="L2"/>
+        <arg name="ptp_switch_type" value="NON_TSN"/>
+        <arg name="ptp_domain" value="0"/>
+        <arg name="launch_driver" value="$(var launch_driver)"/>
+        <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
+        <arg name="container_name" value="$(var pointcloud_container_name)"/>
+        <arg name="blockage_range" value="[130.0, 230.0]"/>
+        <arg name="vertical_bins" value ="128" />
+        <arg name="horizontal_ring_id" value="118" />
+        <arg name="is_channel_order_top2down" value="false"/>
+        <arg name="horizontal_resolution" value="0.4"/>
+        <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
+        <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2_gen2/pandar/front_lower.csv" />
+        <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
+        <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/front_lower/point_filters_full.param.yaml" />
+      </include>
+    </group>
+
+    <group>
+      <push-ros-namespace namespace="right_lower" />
+      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_QT128.launch.xml">
+        <arg name="setup_sensor" value="$(var setup_sensor)"/>
+        <arg name="sensor_frame" value="right_lower/lidar"/>
+        <arg name="sensor_ip" value="192.168.1.215"/>
+        <arg name="host_ip" value="$(var host_ip)"/>
+        <arg name="data_port" value="2379"/>
+        <arg name="sync_angle" value="90"/>
+        <arg name="cut_angle" value="270.0" />
+        <arg name="cloud_min_angle" value="90"/>
+        <arg name="cloud_max_angle" value="270"/>
+        <arg name="return_mode" value="LastStrongest"/>
+        <arg name="ptp_profile" value="automotive"/>
+        <arg name="ptp_transport_type" value="L2"/>
+        <arg name="ptp_switch_type" value="NON_TSN"/>
+        <arg name="ptp_domain" value="0"/>
+        <arg name="launch_driver" value="$(var launch_driver)"/>
+        <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
+        <arg name="container_name" value="$(var pointcloud_container_name)"/>
+        <arg name="blockage_range" value="[145.0, 225.0]"/>
+        <arg name="vertical_bins" value ="128" />
+        <arg name="horizontal_ring_id" value="118" />
+        <arg name="is_channel_order_top2down" value="false"/>
+        <arg name="horizontal_resolution" value="0.4"/>
+        <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
+        <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2_gen2/pandar/right_lower.csv" />
+        <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
+        <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/right_lower/point_filters_full.param.yaml" />
+      </include>
+    </group>
+
+  </group>
+</launch>

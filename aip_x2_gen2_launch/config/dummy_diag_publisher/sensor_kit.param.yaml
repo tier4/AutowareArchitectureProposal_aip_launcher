@@ -1,0 +1,69 @@
+# Description:
+#   name: diag name
+#   is_active: Force update or not
+#   status: diag status set by dummy diag publisher "OK, Warn, Error, Stale"
+#
+# Note:
+#
+# default values are:
+#   is_active: "true"
+#   status: "OK"
+---
+/**:
+  ros__parameters:
+    required_diags:
+      # gnss
+      "topic_state_monitor_gnss_pose: gnss_topic_status": default
+      "septentrio_driver: Quality indicators": default
+
+      # imu
+      "imu_monitor: yaw_rate_status": default
+      "topic_state_monitor_imu_data: imu_topic_status": default
+      "gyro_bias_validator: gyro_bias_validator": default
+
+      # lidar
+      "/sensing/lidar/front_lower/hesai_ros_wrapper_node: hesai_status": default
+      "/sensing/lidar/front_upper/hesai_ros_wrapper_node: hesai_status": default
+      "/sensing/lidar/left_lower/hesai_ros_wrapper_node: hesai_status": default
+      "/sensing/lidar/left_upper/hesai_ros_wrapper_node: hesai_status": default
+      "/sensing/lidar/right_lower/hesai_ros_wrapper_node: hesai_status": default
+      "/sensing/lidar/right_upper/hesai_ros_wrapper_node: hesai_status": default
+      "/sensing/lidar/rear_lower/hesai_ros_wrapper_node: hesai_status": default
+      "/sensing/lidar/rear_upper/hesai_ros_wrapper_node: hesai_status": default
+
+      "/sensing/lidar/front_lower/hesai_ros_wrapper_node: hesai_ptp": default
+      "/sensing/lidar/front_upper/hesai_ros_wrapper_node: hesai_ptp": default
+      "/sensing/lidar/left_lower/hesai_ros_wrapper_node: hesai_ptp": default
+      "/sensing/lidar/left_upper/hesai_ros_wrapper_node: hesai_ptp": default
+      "/sensing/lidar/right_lower/hesai_ros_wrapper_node: hesai_ptp": default
+      "/sensing/lidar/right_upper/hesai_ros_wrapper_node: hesai_ptp": default
+      "/sensing/lidar/rear_lower/hesai_ros_wrapper_node: hesai_ptp": default
+      "/sensing/lidar/rear_upper/hesai_ros_wrapper_node: hesai_ptp": default
+
+      "/sensing/lidar/front_lower/hesai_ros_wrapper_node: hesai_temperature": default
+      "/sensing/lidar/front_upper/hesai_ros_wrapper_node: hesai_temperature": default
+      "/sensing/lidar/left_lower/hesai_ros_wrapper_node: hesai_temperature": default
+      "/sensing/lidar/left_upper/hesai_ros_wrapper_node: hesai_temperature": default
+      "/sensing/lidar/right_lower/hesai_ros_wrapper_node: hesai_temperature": default
+      "/sensing/lidar/right_upper/hesai_ros_wrapper_node: hesai_temperature": default
+      "/sensing/lidar/rear_lower/hesai_ros_wrapper_node: hesai_temperature": default
+      "/sensing/lidar/rear_upper/hesai_ros_wrapper_node: hesai_temperature": default
+      "concatenate_data: concat_status": default
+
+      # camera
+      "v4l2_camera_camera0: capture_status": default
+      "v4l2_camera_camera1: capture_status": default
+      "v4l2_camera_camera2: capture_status": default
+      "v4l2_camera_camera3: capture_status": default
+      "v4l2_camera_camera4: capture_status": default
+      "v4l2_camera_camera5: capture_status": default
+      "v4l2_camera_camera6: capture_status": default
+      "v4l2_camera_camera7: capture_status": default
+
+      # radar
+      "topic_state_monitor_radar_front_center: radar_front_center_topic_status": default
+      "topic_state_monitor_radar_front_left: radar_front_left_topic_status": default
+      "topic_state_monitor_radar_front_right: radar_front_right_topic_status": default
+      "topic_state_monitor_radar_rear_center: radar_rear_center_topic_status": default
+      "topic_state_monitor_radar_rear_left: radar_rear_left_topic_status": default
+      "topic_state_monitor_radar_rear_right: radar_rear_right_topic_status": default

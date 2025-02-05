@@ -12,11 +12,11 @@
 
   <buildtool_depend>ament_cmake_auto</buildtool_depend>
 
+  <exec_depend>autoware_dummy_diag_publisher</exec_depend>
   <exec_depend>autoware_radar_tracks_msgs_converter</exec_depend>
   <exec_depend>autoware_radar_tracks_noise_filter</exec_depend>
-  <exec_depend>dummy_diag_publisher</exec_depend>
+  <exec_depend>autoware_velodyne_monitor</exec_depend>
   <exec_depend>nebula_sensor_driver</exec_depend>
-  <exec_depend>velodyne_monitor</exec_depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>autoware_lint_common</test_depend>

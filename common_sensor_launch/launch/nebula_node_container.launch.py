@@ -26,7 +26,6 @@ from launch_ros.actions import ComposableNodeContainer
 from launch_ros.actions import LoadComposableNodes
 from launch_ros.descriptions import ComposableNode
 from launch_ros.parameter_descriptions import ParameterFile
-from launch_ros.substitutions import FindPackageShare
 import yaml
 
 
@@ -35,6 +34,8 @@ def get_lidar_make(sensor_name):
         return "Hesai", ".csv"
     elif sensor_name[:3].lower() in ["hdl", "vlp", "vls"]:
         return "Velodyne", ".yaml"
+    elif sensor_name.lower() in ["helios", "bpearl"]:
+        return "Robosense", None
     return "unrecognized_sensor_model"
 
 
@@ -56,6 +57,13 @@ def get_vehicle_info(context):
     return p
 
 
+def get_vehicle_mirror_info(context):
+    path = LaunchConfiguration("vehicle_mirror_param_file").perform(context)
+    with open(path, "r") as f:
+        p = yaml.safe_load(f)["/**"]["ros__parameters"]
+    return p
+
+
 def launch_setup(context, *args, **kwargs):
     def load_composable_node_param(param_path):
         with open(LaunchConfiguration(param_path).perform(context), "r") as f:
@@ -73,15 +81,28 @@ def launch_setup(context, *args, **kwargs):
     nebula_decoders_share_dir = get_package_share_directory("nebula_decoders")
 
     # Calibration file
-    sensor_calib_fp = os.path.join(
-        nebula_decoders_share_dir,
-        "calibration",
-        sensor_make.lower(),
-        sensor_model + sensor_extension,
+    if sensor_extension is not None:  # Velodyne and Hesai
+        sensor_calib_fp = os.path.join(
+            nebula_decoders_share_dir,
+            "calibration",
+            sensor_make.lower(),
+            sensor_model + sensor_extension,
+        )
+        assert os.path.exists(
+            sensor_calib_fp
+        ), "Sensor calib file under calibration/ was not found: {}".format(sensor_calib_fp)
+    else:  # Robosense
+        sensor_calib_fp = ""
+
+    # Pointcloud preprocessor parameters
+    distortion_corrector_node_param = ParameterFile(
+        param_file=LaunchConfiguration("distortion_correction_node_param_path").perform(context),
+        allow_substs=True,
     )
-    assert os.path.exists(
-        sensor_calib_fp
-    ), "Sensor calib file under calibration/ was not found: {}".format(sensor_calib_fp)
+    ring_outlier_filter_node_param = ParameterFile(
+        param_file=LaunchConfiguration("ring_outlier_filter_node_param_path").perform(context),
+        allow_substs=True,
+    )
 
     nodes = []
 
@@ -103,10 +124,12 @@ def launch_setup(context, *args, **kwargs):
                 {
                     "calibration_file": sensor_calib_fp,
                     "sensor_model": sensor_model,
+                    "launch_hw": LaunchConfiguration("launch_driver"),
                     **create_parameter_dict(
                         "host_ip",
                         "sensor_ip",
                         "data_port",
+                        "gnss_port",
                         "return_mode",
                         "min_range",
                         "max_range",
@@ -115,8 +138,9 @@ def launch_setup(context, *args, **kwargs):
                         "cloud_min_angle",
                         "cloud_max_angle",
                         "dual_return_distance_threshold",
+                        "rotation_speed",
+                        "packet_mtu_size",
                         "setup_sensor",
-                        "retry_hw",
                     ),
                 },
             ],
@@ -130,64 +154,10 @@ def launch_setup(context, *args, **kwargs):
         )
     )
 
-    # There is an issue where hw_monitor crashes due to data race,
-    # so the monitor will now only be launched when explicitly specified with a launch command.
-    launch_hw_monitor: bool = IfCondition(LaunchConfiguration("launch_hw_monitor")).evaluate(
-        context
-    )
-    launch_driver: bool = IfCondition(LaunchConfiguration("launch_driver")).evaluate(context)
-    if launch_hw_monitor and launch_driver:
-        nodes.append(
-            ComposableNode(
-                package="nebula_ros",
-                plugin=sensor_make + "HwMonitorRosWrapper",
-                name=sensor_make.lower() + "_hw_monitor_ros_wrapper_node",
-                parameters=[
-                    {
-                        "sensor_model": sensor_model,
-                        **create_parameter_dict(
-                            "return_mode",
-                            "frame_id",
-                            "scan_phase",
-                            "sensor_ip",
-                            "host_ip",
-                            "data_port",
-                            "gnss_port",
-                            "packet_mtu_size",
-                            "rotation_speed",
-                            "cloud_min_angle",
-                            "cloud_max_angle",
-                            "diag_span",
-                            "dual_return_distance_threshold",
-                            "delay_monitor_ms",
-                        ),
-                    },
-                ],
-                extra_arguments=[
-                    {"use_intra_process_comms": LaunchConfiguration("use_intra_process")}
-                ],
-            )
-        )
-
     vehicle_info = get_vehicle_info(context)
     mirror_info = load_composable_node_param("vehicle_mirror_param_file")
 
     if IfCondition(LaunchConfiguration("use_cuda_preprocessor")).evaluate(context):
-        nodes.append(
-            ComposableNode(
-                package="autoware_cuda_pointcloud_preprocessor",
-                plugin="autoware::cuda_organized_pointcloud_adapter::CudaOrganizedPointcloudAdapterNode",
-                name="cuda_organized_pointcloud_adapter_node",
-                remappings=[
-                    ("~/input/pointcloud", "pointcloud_raw_ex"),
-                    ("~/output/pointcloud", "cuda_points"),
-                    ("~/output/pointcloud/cuda", "cuda_points/cuda"),
-                ],
-                # The whole node can not set use_intra_process due to type negotiation internal topics
-                # extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
-            )
-        )
-
         preprocessor_parameters = {}
         preprocessor_parameters["crop_box.min_x"] = [
             vehicle_info["min_longitudinal_offset"],
@@ -214,11 +184,6 @@ def launch_setup(context, *args, **kwargs):
             mirror_info["max_height_offset"],
         ]
 
-        ring_outlier_filter_node_param = ParameterFile(
-            param_file=LaunchConfiguration("ring_outlier_filter_node_param_file").perform(context),
-            allow_substs=True,
-        )
-
         nodes.append(
             ComposableNode(
                 package="autoware_cuda_pointcloud_preprocessor",
@@ -226,12 +191,11 @@ def launch_setup(context, *args, **kwargs):
                 name="cuda_pointcloud_preprocessor_node",
                 parameters=[
                     preprocessor_parameters,
-                    load_composable_node_param("distortion_corrector_node_param_file"),
+                    distortion_corrector_node_param,
                     ring_outlier_filter_node_param,
                 ],
                 remappings=[
-                    ("~/input/pointcloud", "cuda_points"),
-                    ("~/input/pointcloud/cuda", "cuda_points/cuda"),
+                    ("~/input/pointcloud", "pointcloud_raw_ex"),
                     ("~/input/twist", "/sensing/vehicle_velocity_converter/twist_with_covariance"),
                     ("~/input/imu", "/sensing/imu/imu_data"),
                     ("~/output/pointcloud", "pointcloud_before_sync"),
@@ -269,7 +233,7 @@ def launch_setup(context, *args, **kwargs):
             )
         )
 
-        mirror_info = load_composable_node_param("vehicle_mirror_param_file")
+        mirror_info = get_vehicle_mirror_info(context)
         cropbox_parameters["min_x"] = mirror_info["min_longitudinal_offset"]
         cropbox_parameters["max_x"] = mirror_info["max_longitudinal_offset"]
         cropbox_parameters["min_y"] = mirror_info["min_lateral_offset"]
@@ -304,16 +268,11 @@ def launch_setup(context, *args, **kwargs):
                     ("~/input/pointcloud", "mirror_cropped/pointcloud_ex"),
                     ("~/output/pointcloud", "rectified/pointcloud_ex"),
                 ],
-                parameters=[load_composable_node_param("distortion_corrector_node_param_file")],
+                parameters=[distortion_corrector_node_param],
                 extra_arguments=[
                     {"use_intra_process_comms": LaunchConfiguration("use_intra_process")}
                 ],
             )
-        )
-
-        ring_outlier_filter_node_param = ParameterFile(
-            param_file=LaunchConfiguration("ring_outlier_filter_node_param_file").perform(context),
-            allow_substs=True,
         )
 
         # Ring Outlier Filter is the last component in the pipeline, so control the output frame here
@@ -339,7 +298,7 @@ def launch_setup(context, *args, **kwargs):
             )
         )
 
-    if launch_driver:
+    if IfCondition(LaunchConfiguration("launch_driver")).evaluate(context):
         nodes.append(
             ComposableNode(
                 package="nebula_ros",
@@ -440,14 +399,11 @@ def generate_launch_description():
             DeclareLaunchArgument(name, default_value=default_value, description=description)
         )
 
+    common_sensor_share_dir = get_package_share_directory("common_sensor_launch")
+
     add_launch_arg("sensor_model", description="sensor model name")
     add_launch_arg("config_file", "", description="sensor configuration file")
     add_launch_arg("launch_driver", "True", "do launch driver")
-    add_launch_arg(
-        "launch_hw_monitor",
-        "False",
-        "do launch hardware monitor. Due to an issue where hw_monitor crashes due to data conflicts, the monitor in launched only when explicitly specified",
-    )
     add_launch_arg("setup_sensor", "True", "configure sensor")
     add_launch_arg("retry_hw", "false", "retry hw")
     add_launch_arg("sensor_ip", "192.168.1.201", "device ip address")
@@ -466,12 +422,9 @@ def generate_launch_description():
     add_launch_arg("frame_id", "lidar", "frame id")
     add_launch_arg("input_frame", LaunchConfiguration("base_frame"), "use for cropbox")
     add_launch_arg("output_frame", LaunchConfiguration("base_frame"), "use for cropbox")
-    add_launch_arg(
-        "vehicle_mirror_param_file", description="path to the file of vehicle mirror position yaml"
-    )
     add_launch_arg("use_multithread", "False", "use multithread")
     add_launch_arg("use_intra_process", "False", "use ROS 2 component container communication")
-    add_launch_arg("container_name", "nebula_node_container")
+    add_launch_arg("lidar_container_name", "nebula_node_container")
     add_launch_arg("pointcloud_container_name", "pointcloud_container")
     add_launch_arg("use_pointcloud_container", "False")
     add_launch_arg("use_cuda_preprocessor", "False")
@@ -480,10 +433,6 @@ def generate_launch_description():
     add_launch_arg("ptp_switch_type", "TSN")
     add_launch_arg("ptp_domain", "0")
     add_launch_arg("output_as_sensor_frame", "True", "output final pointcloud in sensor frame")
-    add_launch_arg("diag_span", "1000", "")
-    add_launch_arg("delay_monitor_ms", "2000", "")
-    add_launch_arg("output_as_sensor_frame", "True", "output final pointcloud in sensor frame")
-
     add_launch_arg("enable_blockage_diag", "true")
     add_launch_arg("horizontal_ring_id", "64")
     add_launch_arg("vertical_bins", "128")
@@ -491,15 +440,34 @@ def generate_launch_description():
     add_launch_arg("horizontal_resolution", "0.4")
     add_launch_arg(
         "blockage_diagnostics_param_file",
-        [FindPackageShare("common_sensor_launch"), "/config/blockage_diagnostics.param.yaml"],
+        os.path.join(
+            common_sensor_share_dir,
+            "config",
+            "blockage_diagnostics.param.yaml",
+        ),
+        description="path to parameter file of blockage diagnostics node",
     )
     add_launch_arg(
-        "distortion_corrector_node_param_file",
-        [FindPackageShare("common_sensor_launch"), "/config/distortion_corrector_node.param.yaml"],
+        "vehicle_mirror_param_file",
+        description="path to the file of vehicle mirror position yaml",
     )
     add_launch_arg(
-        "ring_outlier_filter_node_param_file",
-        [FindPackageShare("common_sensor_launch"), "/config/ring_outlier_filter_node.param.yaml"],
+        "distortion_correction_node_param_path",
+        os.path.join(
+            common_sensor_share_dir,
+            "config",
+            "distortion_corrector_node.param.yaml",
+        ),
+        description="path to parameter file of distortion correction node",
+    )
+    add_launch_arg(
+        "ring_outlier_filter_node_param_path",
+        os.path.join(
+            common_sensor_share_dir,
+            "config",
+            "ring_outlier_filter_node.param.yaml",
+        ),
+        description="path to parameter file of ring outlier filter node",
     )
 
     set_container_executable = SetLaunchConfiguration(
