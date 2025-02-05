@@ -11,6 +11,6 @@
     weak_first_distance_ratio: 1.004
     general_distance_ratio: 1.03
     weak_first_local_noise_threshold: 2
-    roi_mode: "Fixed_xyz_ROI"
+    roi_mode: "Fixed_azimuth_ROI"
     visibility_error_threshold: 0.92
     visibility_warn_threshold: 0.95
