@@ -57,6 +57,7 @@
         <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2_gen2/pandar/rear_upper.csv" />
         <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
         <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/rear_upper/point_filters_one_third.param.yaml" />
+        <arg name="dual_return_distance_threshold" value="0.1"/>
       </include>
     </group>
 
@@ -92,6 +93,7 @@
         <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2_gen2/pandar/left_upper.csv" />
         <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
         <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/left_upper/point_filters_one_third.param.yaml" />
+        <arg name="dual_return_distance_threshold" value="0.1"/>
       </include>
     </group>
 
@@ -127,6 +129,7 @@
         <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2_gen2/pandar/rear_lower.csv" />
         <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
         <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/rear_lower/point_filters_full.param.yaml" />
+        <arg name="dual_return_distance_threshold" value="0.1"/>
       </include>
     </group>
 
@@ -162,6 +165,7 @@
         <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2_gen2/pandar/left_lower.csv" />
         <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
         <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/left_lower/point_filters_full.param.yaml" />
+        <arg name="dual_return_distance_threshold" value="0.1"/>
       </include>
     </group>
 
@@ -198,6 +202,7 @@
         <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2_gen2/pandar/front_upper.csv" />
         <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
         <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/front_upper/point_filters_one_third.param.yaml" />
+        <arg name="dual_return_distance_threshold" value="0.1"/>
       </include>
     </group>
 
@@ -233,6 +238,7 @@
         <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2_gen2/pandar/right_upper.csv" />
         <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
         <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/right_upper/point_filters_one_third.param.yaml" />
+        <arg name="dual_return_distance_threshold" value="0.1"/>
       </include>
     </group>
 
@@ -268,6 +274,7 @@
         <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2_gen2/pandar/front_lower.csv" />
         <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
         <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/front_lower/point_filters_full.param.yaml" />
+        <arg name="dual_return_distance_threshold" value="0.1"/>
       </include>
     </group>
 
@@ -303,6 +310,7 @@
         <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2_gen2/pandar/right_lower.csv" />
         <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
         <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/right_lower/point_filters_full.param.yaml" />
+        <arg name="dual_return_distance_threshold" value="0.1"/>
       </include>
     </group>
 
