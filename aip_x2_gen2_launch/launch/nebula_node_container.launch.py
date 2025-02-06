@@ -19,8 +19,6 @@ from launch.actions import SetLaunchConfiguration
 
 # from launch.conditions import LaunchConfigurationNotEquals
 from launch.conditions import IfCondition
-from launch.conditions import LaunchConfigurationEquals
-from launch.conditions import LaunchConfigurationNotEquals
 from launch.conditions import UnlessCondition
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import ComposableNodeContainer
@@ -245,13 +243,13 @@ def launch_setup(context, *args, **kwargs):
     ring_outlier_filter_loader = LoadComposableNodes(
         composable_node_descriptions=[ring_outlier_filter_component],
         target_container=container,
-        condition=LaunchConfigurationNotEquals("return_mode", "Dual"),
+        condition=launch.conditions.UnlessCondition(LaunchConfiguration("use_dual_return_filter")),
     )
 
     dual_return_filter_loader = LoadComposableNodes(
         composable_node_descriptions=[dual_return_filter_component],
         target_container=container,
-        condition=LaunchConfigurationEquals("return_mode", "Dual"),
+        condition=launch.conditions.IfCondition(LaunchConfiguration("use_dual_return_filter")),
     )
 
     blockage_diag_loader = LoadComposableNodes(
@@ -335,6 +333,7 @@ def generate_launch_description():
 
     add_launch_arg("calibration_file", "")
     add_launch_arg("output_as_sensor_frame", "True", "output final pointcloud in sensor frame")
+    add_launch_arg("use_dual_return_filter", "false")
 
     set_container_executable = SetLaunchConfiguration(
         "container_executable",
