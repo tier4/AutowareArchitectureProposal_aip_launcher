@@ -291,7 +291,7 @@ def generate_launch_description():
     add_launch_arg("sync_angle", "0")
     add_launch_arg("cut_angle", "0.0")
     add_launch_arg("ptp_lock_threshold", "100")
-    add_launch_arg("udp_only", "False")
+    add_launch_arg("udp_only", "false")
     # add_launch_arg("point_filters", "{}", "point filter definitions in JSON format")
     add_launch_arg("base_frame", "base_link", "base frame id")
     add_launch_arg("min_range", "0.3", "minimum view range for Velodyne sensors")

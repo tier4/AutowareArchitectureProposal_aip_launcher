@@ -43,6 +43,7 @@
         <arg name="ptp_switch_type" value="NON_TSN"/>
         <arg name="ptp_domain" value="0"/>
         <arg name="ptp_lock_threshold" value="100"/>
+        <arg name="udp_only" value="false"/>
         <arg name="launch_driver" value="$(var launch_driver)"/>
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
         <arg name="container_name" value="$(var pointcloud_container_name)"/>
@@ -76,6 +77,7 @@
         <arg name="ptp_switch_type" value="NON_TSN"/>
         <arg name="ptp_domain" value="0"/>
         <arg name="ptp_lock_threshold" value="100"/>
+        <arg name="udp_only" value="false"/>
         <arg name="launch_driver" value="$(var launch_driver)"/>
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
         <arg name="container_name" value="$(var pointcloud_container_name)"/>
@@ -109,6 +111,7 @@
         <arg name="ptp_switch_type" value="NON_TSN"/>
         <arg name="ptp_domain" value="0"/>
         <arg name="ptp_lock_threshold" value="100"/>
+        <arg name="udp_only" value="false"/>
         <arg name="launch_driver" value="$(var launch_driver)"/>
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
         <arg name="container_name" value="$(var pointcloud_container_name)"/>
@@ -142,6 +145,7 @@
         <arg name="ptp_switch_type" value="NON_TSN"/>
         <arg name="ptp_domain" value="0"/>
         <arg name="ptp_lock_threshold" value="100"/>
+        <arg name="udp_only" value="false"/>
         <arg name="launch_driver" value="$(var launch_driver)"/>
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
         <arg name="container_name" value="$(var pointcloud_container_name)"/>
@@ -176,6 +180,7 @@
         <arg name="ptp_switch_type" value="NON_TSN"/>
         <arg name="ptp_domain" value="0"/>
         <arg name="ptp_lock_threshold" value="100"/>
+        <arg name="udp_only" value="false"/>
         <arg name="launch_driver" value="$(var launch_driver)"/>
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
         <arg name="container_name" value="$(var pointcloud_container_name)"/>
@@ -209,6 +214,7 @@
         <arg name="ptp_switch_type" value="NON_TSN"/>
         <arg name="ptp_domain" value="0"/>
         <arg name="ptp_lock_threshold" value="100"/>
+        <arg name="udp_only" value="false"/>
         <arg name="launch_driver" value="$(var launch_driver)"/>
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
         <arg name="container_name" value="$(var pointcloud_container_name)"/>
@@ -242,6 +248,7 @@
         <arg name="ptp_switch_type" value="NON_TSN"/>
         <arg name="ptp_domain" value="0"/>
         <arg name="ptp_lock_threshold" value="100"/>
+        <arg name="udp_only" value="false"/>
         <arg name="launch_driver" value="$(var launch_driver)"/>
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
         <arg name="container_name" value="$(var pointcloud_container_name)"/>
@@ -275,6 +282,7 @@
         <arg name="ptp_switch_type" value="NON_TSN"/>
         <arg name="ptp_domain" value="0"/>
         <arg name="ptp_lock_threshold" value="100"/>
+        <arg name="udp_only" value="false"/>
         <arg name="launch_driver" value="$(var launch_driver)"/>
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
         <arg name="container_name" value="$(var pointcloud_container_name)"/>
