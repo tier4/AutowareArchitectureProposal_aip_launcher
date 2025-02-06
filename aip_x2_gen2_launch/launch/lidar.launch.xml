@@ -28,6 +28,7 @@
     <group>
       <push-ros-namespace namespace="rear_upper" />
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_OT128.launch.xml">
+        <arg name="sensor_model" default="Pandar128E4X"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
         <arg name="sensor_frame" value="rear_upper/lidar"/>
         <arg name="sensor_ip" value="192.168.1.202"/>
@@ -44,7 +45,7 @@
         <arg name="ptp_domain" value="0"/>
         <arg name="ptp_lock_threshold" value="100"/>
         <arg name="udp_only" value="false"/>
-        <arg name="launch_driver" value="$(var launch_driver)"/>
+        <arg name="launch_hw" value="$(var launch_driver)"/>
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
         <arg name="container_name" value="$(var pointcloud_container_name)"/>
         <arg name="blockage_range" value="[90.0, 270.0]"/>
@@ -62,6 +63,7 @@
     <group>
       <push-ros-namespace namespace="left_upper" />
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_OT128.launch.xml">
+        <arg name="sensor_model" default="Pandar128E4X"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
         <arg name="sensor_frame" value="left_upper/lidar"/>
         <arg name="sensor_ip" value="192.168.1.203"/>
@@ -78,7 +80,7 @@
         <arg name="ptp_domain" value="0"/>
         <arg name="ptp_lock_threshold" value="100"/>
         <arg name="udp_only" value="false"/>
-        <arg name="launch_driver" value="$(var launch_driver)"/>
+        <arg name="launch_hw" value="$(var launch_driver)"/>
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
         <arg name="container_name" value="$(var pointcloud_container_name)"/>
         <arg name="blockage_range" value="[90.0, 270.0]"/>
@@ -96,6 +98,7 @@
     <group>
       <push-ros-namespace namespace="rear_lower" />
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_QT128.launch.xml">
+        <arg name="sensor_model" default="PandarQT128"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
         <arg name="sensor_frame" value="rear_lower/lidar"/>
         <arg name="sensor_ip" value="192.168.1.212"/>
@@ -112,7 +115,7 @@
         <arg name="ptp_domain" value="0"/>
         <arg name="ptp_lock_threshold" value="100"/>
         <arg name="udp_only" value="false"/>
-        <arg name="launch_driver" value="$(var launch_driver)"/>
+        <arg name="launch_hw" value="$(var launch_driver)"/>
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
         <arg name="container_name" value="$(var pointcloud_container_name)"/>
         <arg name="blockage_range" value="[130.0, 230.0]"/>
@@ -130,6 +133,7 @@
     <group>
       <push-ros-namespace namespace="left_lower" />
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_QT128.launch.xml">
+        <arg name="sensor_model" default="PandarQT128"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
         <arg name="sensor_frame" value="left_lower/lidar"/>
         <arg name="sensor_ip" value="192.168.1.213"/>
@@ -146,7 +150,7 @@
         <arg name="ptp_domain" value="0"/>
         <arg name="ptp_lock_threshold" value="100"/>
         <arg name="udp_only" value="false"/>
-        <arg name="launch_driver" value="$(var launch_driver)"/>
+        <arg name="launch_hw" value="$(var launch_driver)"/>
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
         <arg name="container_name" value="$(var pointcloud_container_name)"/>
         <arg name="blockage_range" value="[140.0, 230.0]"/>
@@ -165,6 +169,7 @@
     <group>
       <push-ros-namespace namespace="front_upper" />
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_OT128.launch.xml">
+        <arg name="sensor_model" default="Pandar128E4X"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
         <arg name="sensor_frame" value="front_upper/lidar"/>
         <arg name="sensor_ip" value="192.168.1.204"/>
@@ -181,7 +186,7 @@
         <arg name="ptp_domain" value="0"/>
         <arg name="ptp_lock_threshold" value="100"/>
         <arg name="udp_only" value="false"/>
-        <arg name="launch_driver" value="$(var launch_driver)"/>
+        <arg name="launch_hw" value="$(var launch_driver)"/>
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
         <arg name="container_name" value="$(var pointcloud_container_name)"/>
         <arg name="blockage_range" value="[90.0, 270.0]"/>
@@ -199,6 +204,7 @@
     <group>
       <push-ros-namespace namespace="right_upper" />
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_OT128.launch.xml">
+        <arg name="sensor_model" default="Pandar128E4X"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
         <arg name="sensor_frame" value="right_upper/lidar"/>
         <arg name="sensor_ip" value="192.168.1.205"/>
@@ -215,7 +221,7 @@
         <arg name="ptp_domain" value="0"/>
         <arg name="ptp_lock_threshold" value="100"/>
         <arg name="udp_only" value="false"/>
-        <arg name="launch_driver" value="$(var launch_driver)"/>
+        <arg name="launch_hw" value="$(var launch_driver)"/>
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
         <arg name="container_name" value="$(var pointcloud_container_name)"/>
         <arg name="blockage_range" value="[90.0, 270.0]"/>
@@ -233,6 +239,7 @@
     <group>
       <push-ros-namespace namespace="front_lower" />
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_QT128.launch.xml">
+        <arg name="sensor_model" default="PandarQT128"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
         <arg name="sensor_frame" value="front_lower/lidar"/>
         <arg name="sensor_ip" value="192.168.1.214"/>
@@ -249,7 +256,7 @@
         <arg name="ptp_domain" value="0"/>
         <arg name="ptp_lock_threshold" value="100"/>
         <arg name="udp_only" value="false"/>
-        <arg name="launch_driver" value="$(var launch_driver)"/>
+        <arg name="launch_hw" value="$(var launch_driver)"/>
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
         <arg name="container_name" value="$(var pointcloud_container_name)"/>
         <arg name="blockage_range" value="[130.0, 230.0]"/>
@@ -267,6 +274,7 @@
     <group>
       <push-ros-namespace namespace="right_lower" />
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_QT128.launch.xml">
+        <arg name="sensor_model" default="PandarQT128"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
         <arg name="sensor_frame" value="right_lower/lidar"/>
         <arg name="sensor_ip" value="192.168.1.215"/>
@@ -283,7 +291,7 @@
         <arg name="ptp_domain" value="0"/>
         <arg name="ptp_lock_threshold" value="100"/>
         <arg name="udp_only" value="false"/>
-        <arg name="launch_driver" value="$(var launch_driver)"/>
+        <arg name="launch_hw" value="$(var launch_driver)"/>
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
         <arg name="container_name" value="$(var pointcloud_container_name)"/>
         <arg name="blockage_range" value="[145.0, 225.0]"/>
