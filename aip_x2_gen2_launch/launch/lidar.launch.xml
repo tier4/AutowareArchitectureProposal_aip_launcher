@@ -30,7 +30,7 @@
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/nebula_node_container.launch.py">
         <arg name="sensor_model" value="Pandar128E4X"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
-        <arg name="sensor_frame" value="rear_upper/lidar"/>
+        <arg name="frame_id" value="rear_upper/lidar"/>
         <arg name="sensor_ip" value="192.168.1.202"/>
         <arg name="host_ip" value="$(var host_ip)"/>
         <arg name="data_port" value="2321"/>
@@ -67,7 +67,7 @@
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/nebula_node_container.launch.py">
         <arg name="sensor_model" value="Pandar128E4X"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
-        <arg name="sensor_frame" value="left_upper/lidar"/>
+        <arg name="frame_id" value="left_upper/lidar"/>
         <arg name="sensor_ip" value="192.168.1.203"/>
         <arg name="host_ip" value="$(var host_ip)"/>
         <arg name="data_port" value="2322"/>
@@ -104,7 +104,7 @@
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/nebula_node_container.launch.py">
         <arg name="sensor_model" value="PandarQT128"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
-        <arg name="sensor_frame" value="rear_lower/lidar"/>
+        <arg name="frame_id" value="rear_lower/lidar"/>
         <arg name="sensor_ip" value="192.168.1.212"/>
         <arg name="host_ip" value="$(var host_ip)"/>
         <arg name="data_port" value="2376"/>
@@ -141,7 +141,7 @@
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/nebula_node_container.launch.py">
         <arg name="sensor_model" value="PandarQT128"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
-        <arg name="sensor_frame" value="left_lower/lidar"/>
+        <arg name="frame_id" value="left_lower/lidar"/>
         <arg name="sensor_ip" value="192.168.1.213"/>
         <arg name="host_ip" value="$(var host_ip)"/>
         <arg name="data_port" value="2377"/>
@@ -179,7 +179,7 @@
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/nebula_node_container.launch.py">
         <arg name="sensor_model" value="Pandar128E4X"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
-        <arg name="sensor_frame" value="front_upper/lidar"/>
+        <arg name="frame_id" value="front_upper/lidar"/>
         <arg name="sensor_ip" value="192.168.1.204"/>
         <arg name="host_ip" value="$(var host_ip)"/>
         <arg name="data_port" value="2323"/>
@@ -216,7 +216,7 @@
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/nebula_node_container.launch.py">
         <arg name="sensor_model" value="Pandar128E4X"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
-        <arg name="sensor_frame" value="right_upper/lidar"/>
+        <arg name="frame_id" value="right_upper/lidar"/>
         <arg name="sensor_ip" value="192.168.1.205"/>
         <arg name="host_ip" value="$(var host_ip)"/>
         <arg name="data_port" value="2324"/>
@@ -253,7 +253,7 @@
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/nebula_node_container.launch.py">
         <arg name="sensor_model" value="PandarQT128"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
-        <arg name="sensor_frame" value="front_lower/lidar"/>
+        <arg name="frame_id" value="front_lower/lidar"/>
         <arg name="sensor_ip" value="192.168.1.214"/>
         <arg name="host_ip" value="$(var host_ip)"/>
         <arg name="data_port" value="2378"/>
@@ -290,7 +290,7 @@
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/nebula_node_container.launch.py">
         <arg name="sensor_model" value="PandarQT128"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
-        <arg name="sensor_frame" value="right_lower/lidar"/>
+        <arg name="frame_id" value="right_lower/lidar"/>
         <arg name="sensor_ip" value="192.168.1.215"/>
         <arg name="host_ip" value="$(var host_ip)"/>
         <arg name="data_port" value="2379"/>
