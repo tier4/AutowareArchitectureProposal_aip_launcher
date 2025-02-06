@@ -27,7 +27,7 @@
     <!-- LiDARs connected to Main ECU -->
     <group>
       <push-ros-namespace namespace="rear_upper" />
-      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_OT128.launch.xml">
+      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/nebula_node_container.launch.py">
         <arg name="sensor_model" default="Pandar128E4X"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
         <arg name="sensor_frame" value="rear_upper/lidar"/>
@@ -64,7 +64,7 @@
 
     <group>
       <push-ros-namespace namespace="left_upper" />
-      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_OT128.launch.xml">
+      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/nebula_node_container.launch.py">
         <arg name="sensor_model" default="Pandar128E4X"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
         <arg name="sensor_frame" value="left_upper/lidar"/>
@@ -101,7 +101,7 @@
 
     <group>
       <push-ros-namespace namespace="rear_lower" />
-      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_QT128.launch.xml">
+      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/nebula_node_container.launch.py">
         <arg name="sensor_model" default="PandarQT128"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
         <arg name="sensor_frame" value="rear_lower/lidar"/>
@@ -138,7 +138,7 @@
 
     <group>
       <push-ros-namespace namespace="left_lower" />
-      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_QT128.launch.xml">
+      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/nebula_node_container.launch.py">
         <arg name="sensor_model" default="PandarQT128"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
         <arg name="sensor_frame" value="left_lower/lidar"/>
@@ -176,7 +176,7 @@
     <!-- LiDARs connected to Sub ECU -->
     <group>
       <push-ros-namespace namespace="front_upper" />
-      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_OT128.launch.xml">
+      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/nebula_node_container.launch.py">
         <arg name="sensor_model" default="Pandar128E4X"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
         <arg name="sensor_frame" value="front_upper/lidar"/>
@@ -213,7 +213,7 @@
 
     <group>
       <push-ros-namespace namespace="right_upper" />
-      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_OT128.launch.xml">
+      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/nebula_node_container.launch.py">
         <arg name="sensor_model" default="Pandar128E4X"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
         <arg name="sensor_frame" value="right_upper/lidar"/>
@@ -250,7 +250,7 @@
 
     <group>
       <push-ros-namespace namespace="front_lower" />
-      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_QT128.launch.xml">
+      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/nebula_node_container.launch.py">
         <arg name="sensor_model" default="PandarQT128"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
         <arg name="sensor_frame" value="front_lower/lidar"/>
@@ -287,7 +287,7 @@
 
     <group>
       <push-ros-namespace namespace="right_lower" />
-      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/hesai_QT128.launch.xml">
+      <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/nebula_node_container.launch.py">
         <arg name="sensor_model" default="PandarQT128"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
         <arg name="sensor_frame" value="right_lower/lidar"/>
