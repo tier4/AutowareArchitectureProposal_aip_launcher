@@ -28,7 +28,7 @@
     <group>
       <push-ros-namespace namespace="rear_upper" />
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/nebula_node_container.launch.py">
-        <arg name="sensor_model" default="Pandar128E4X"/>
+        <arg name="sensor_model" value="Pandar128E4X"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
         <arg name="sensor_frame" value="rear_upper/lidar"/>
         <arg name="sensor_ip" value="192.168.1.202"/>
@@ -58,14 +58,14 @@
         <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
         <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/rear_upper/point_filters_one_third.param.yaml" />
         <arg name="dual_return_distance_threshold" value="0.1"/>
-        <arg name="blockage_diagnostics_param_file" default="$(find-pkg-share aip_x2_gen2_launch)/config/blockage_diagnostics_param_file.yaml" />
+        <arg name="blockage_diagnostics_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/blockage_diagnostics_param_file.yaml" />
       </include>
     </group>
 
     <group>
       <push-ros-namespace namespace="left_upper" />
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/nebula_node_container.launch.py">
-        <arg name="sensor_model" default="Pandar128E4X"/>
+        <arg name="sensor_model" value="Pandar128E4X"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
         <arg name="sensor_frame" value="left_upper/lidar"/>
         <arg name="sensor_ip" value="192.168.1.203"/>
@@ -95,14 +95,14 @@
         <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
         <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/left_upper/point_filters_one_third.param.yaml" />
         <arg name="dual_return_distance_threshold" value="0.1"/>
-        <arg name="blockage_diagnostics_param_file" default="$(find-pkg-share aip_x2_gen2_launch)/config/blockage_diagnostics_param_file.yaml" />
+        <arg name="blockage_diagnostics_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/blockage_diagnostics_param_file.yaml" />
       </include>
     </group>
 
     <group>
       <push-ros-namespace namespace="rear_lower" />
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/nebula_node_container.launch.py">
-        <arg name="sensor_model" default="PandarQT128"/>
+        <arg name="sensor_model" value="PandarQT128"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
         <arg name="sensor_frame" value="rear_lower/lidar"/>
         <arg name="sensor_ip" value="192.168.1.212"/>
@@ -132,14 +132,14 @@
         <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
         <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/rear_lower/point_filters_full.param.yaml" />
         <arg name="dual_return_distance_threshold" value="0.1"/>
-        <arg name="blockage_diagnostics_param_file" default="$(find-pkg-share aip_x2_gen2_launch)/config/blockage_diagnostics_param_file.yaml" />
+        <arg name="blockage_diagnostics_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/blockage_diagnostics_param_file.yaml" />
       </include>
     </group>
 
     <group>
       <push-ros-namespace namespace="left_lower" />
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/nebula_node_container.launch.py">
-        <arg name="sensor_model" default="PandarQT128"/>
+        <arg name="sensor_model" value="PandarQT128"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
         <arg name="sensor_frame" value="left_lower/lidar"/>
         <arg name="sensor_ip" value="192.168.1.213"/>
@@ -169,7 +169,7 @@
         <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
         <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/left_lower/point_filters_full.param.yaml" />
         <arg name="dual_return_distance_threshold" value="0.1"/>
-        <arg name="blockage_diagnostics_param_file" default="$(find-pkg-share aip_x2_gen2_launch)/config/blockage_diagnostics_param_file.yaml" />
+        <arg name="blockage_diagnostics_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/blockage_diagnostics_param_file.yaml" />
       </include>
     </group>
 
@@ -177,7 +177,7 @@
     <group>
       <push-ros-namespace namespace="front_upper" />
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/nebula_node_container.launch.py">
-        <arg name="sensor_model" default="Pandar128E4X"/>
+        <arg name="sensor_model" value="Pandar128E4X"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
         <arg name="sensor_frame" value="front_upper/lidar"/>
         <arg name="sensor_ip" value="192.168.1.204"/>
@@ -207,14 +207,14 @@
         <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
         <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/front_upper/point_filters_one_third.param.yaml" />
         <arg name="dual_return_distance_threshold" value="0.1"/>
-        <arg name="blockage_diagnostics_param_file" default="$(find-pkg-share aip_x2_gen2_launch)/config/blockage_diagnostics_param_file.yaml" />
+        <arg name="blockage_diagnostics_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/blockage_diagnostics_param_file.yaml" />
       </include>
     </group>
 
     <group>
       <push-ros-namespace namespace="right_upper" />
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/nebula_node_container.launch.py">
-        <arg name="sensor_model" default="Pandar128E4X"/>
+        <arg name="sensor_model" value="Pandar128E4X"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
         <arg name="sensor_frame" value="right_upper/lidar"/>
         <arg name="sensor_ip" value="192.168.1.205"/>
@@ -244,14 +244,14 @@
         <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
         <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/right_upper/point_filters_one_third.param.yaml" />
         <arg name="dual_return_distance_threshold" value="0.1"/>
-        <arg name="blockage_diagnostics_param_file" default="$(find-pkg-share aip_x2_gen2_launch)/config/blockage_diagnostics_param_file.yaml" />
+        <arg name="blockage_diagnostics_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/blockage_diagnostics_param_file.yaml" />
       </include>
     </group>
 
     <group>
       <push-ros-namespace namespace="front_lower" />
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/nebula_node_container.launch.py">
-        <arg name="sensor_model" default="PandarQT128"/>
+        <arg name="sensor_model" value="PandarQT128"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
         <arg name="sensor_frame" value="front_lower/lidar"/>
         <arg name="sensor_ip" value="192.168.1.214"/>
@@ -281,14 +281,14 @@
         <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
         <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/front_lower/point_filters_full.param.yaml" />
         <arg name="dual_return_distance_threshold" value="0.1"/>
-        <arg name="blockage_diagnostics_param_file" default="$(find-pkg-share aip_x2_gen2_launch)/config/blockage_diagnostics_param_file.yaml" />
+        <arg name="blockage_diagnostics_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/blockage_diagnostics_param_file.yaml" />
       </include>
     </group>
 
     <group>
       <push-ros-namespace namespace="right_lower" />
       <include file="$(find-pkg-share aip_x2_gen2_launch)/launch/nebula_node_container.launch.py">
-        <arg name="sensor_model" default="PandarQT128"/>
+        <arg name="sensor_model" value="PandarQT128"/>
         <arg name="setup_sensor" value="$(var setup_sensor)"/>
         <arg name="sensor_frame" value="right_lower/lidar"/>
         <arg name="sensor_ip" value="192.168.1.215"/>
@@ -318,7 +318,7 @@
         <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
         <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/right_lower/point_filters_full.param.yaml" />
         <arg name="dual_return_distance_threshold" value="0.1"/>
-        <arg name="blockage_diagnostics_param_file" default="$(find-pkg-share aip_x2_gen2_launch)/config/blockage_diagnostics_param_file.yaml" />
+        <arg name="blockage_diagnostics_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/blockage_diagnostics_param_file.yaml" />
       </include>
     </group>
 
