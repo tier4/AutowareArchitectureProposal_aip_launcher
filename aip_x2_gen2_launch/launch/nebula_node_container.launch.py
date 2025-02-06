@@ -110,9 +110,11 @@ def launch_setup(context, *args, **kwargs):
                     "ptp_transport_type",
                     "ptp_switch_type",
                     "ptp_domain",
+                    "ptp_lock_threshold",
                     "diag_span",
                     "calibration_file",
                     "launch_hw",
+                    "udp_only",
                 ),
                 "retry_hw": True,
             },
@@ -288,6 +290,8 @@ def generate_launch_description():
     add_launch_arg("host_ip", "255.255.255.255", "host ip address")
     add_launch_arg("sync_angle", "0")
     add_launch_arg("cut_angle", "0.0")
+    add_launch_arg("ptp_lock_threshold", "100")
+    add_launch_arg("udp_only", "False")
     # add_launch_arg("point_filters", "{}", "point filter definitions in JSON format")
     add_launch_arg("base_frame", "base_link", "base frame id")
     add_launch_arg("min_range", "0.3", "minimum view range for Velodyne sensors")
