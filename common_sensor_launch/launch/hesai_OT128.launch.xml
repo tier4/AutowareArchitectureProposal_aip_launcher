@@ -15,6 +15,7 @@
   <arg name="dual_return_distance_threshold" default="0.1"/>
   <arg name="vehicle_mirror_param_file"/>
   <arg name="container_name" default="hesai_node_container"/>
+  <arg name="udp_only" default="false"/>
 
   <include file="$(find-pkg-share common_sensor_launch)/launch/nebula_node_container.launch.py">
     <arg name="launch_driver" value="$(var launch_driver)"/>
@@ -36,6 +37,8 @@
     <arg name="ptp_transport_type" value="L2"/>
     <arg name="ptp_switch_type" value="NON_TSN"/>
     <arg name="ptp_domain" value="0"/>
+    <arg name="ptp_lock_threshold" value="100"/>
     <arg name="setup_sensor" value="true"/>
+    <arg name="udp_only" value="$(var udp_only)"/>
   </include>
 </launch>

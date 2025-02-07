@@ -140,6 +140,7 @@ def launch_setup(context, *args, **kwargs):
                         "rotation_speed",
                         "packet_mtu_size",
                         "setup_sensor",
+                        "udp_only",
                     ),
                 },
             ],
@@ -274,6 +275,7 @@ def launch_setup(context, *args, **kwargs):
                     "ptp_transport_type",
                     "ptp_switch_type",
                     "ptp_domain",
+                    "ptp_lock_threshold",
                     "retry_hw",
                 ),
             }
@@ -334,6 +336,7 @@ def generate_launch_description():
     add_launch_arg("config_file", "", description="sensor configuration file")
     add_launch_arg("launch_driver", "True", "do launch driver")
     add_launch_arg("setup_sensor", "True", "configure sensor")
+    add_launch_arg("udp_only", "False", "use UDP only")
     add_launch_arg("retry_hw", "false", "retry hw")
     add_launch_arg("sensor_ip", "192.168.1.201", "device ip address")
     add_launch_arg("host_ip", "255.255.255.255", "host ip address")
@@ -358,6 +361,7 @@ def generate_launch_description():
     add_launch_arg("ptp_transport_type", "L2")
     add_launch_arg("ptp_switch_type", "TSN")
     add_launch_arg("ptp_domain", "0")
+    add_launch_arg("ptp_lock_threshold", "100")
     add_launch_arg("output_as_sensor_frame", "True", "output final pointcloud in sensor frame")
     add_launch_arg("enable_blockage_diag", "true")
     add_launch_arg("horizontal_ring_id", "64")
