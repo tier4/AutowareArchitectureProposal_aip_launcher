@@ -274,7 +274,7 @@
         <arg name="blockage_diagnostics_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/blockage_diagnostics_param_file.yaml" />
         <arg name="min_azimuth_deg" value="45.0"/>
         <arg name="max_azimuth_deg" value="135.0"/>
-        <arg name="use_dual_return_filter" value="false"/>
+        <arg name="use_dual_return_filter" value="true"/>
       </include>
     </group>
 
@@ -316,7 +316,7 @@
         <arg name="blockage_diagnostics_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/blockage_diagnostics_param_file.yaml" />
         <arg name="min_azimuth_deg" value="135.0"/>
         <arg name="max_azimuth_deg" value="225.0"/>
-        <arg name="use_dual_return_filter" value="false"/>
+        <arg name="use_dual_return_filter" value="true"/>
       </include>
     </group>
 
