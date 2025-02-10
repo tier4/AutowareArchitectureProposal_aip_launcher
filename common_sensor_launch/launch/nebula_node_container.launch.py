@@ -286,7 +286,7 @@ def launch_setup(context, *args, **kwargs):
         condition=IfCondition(LaunchConfiguration("enable_blockage_diag")),
     )
 
-    return [container,  blockage_diag_loader]
+    return [container, blockage_diag_loader]
 
 
 def generate_launch_description():
