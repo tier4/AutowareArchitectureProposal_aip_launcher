@@ -3,7 +3,7 @@
     <push-ros-namespace namespace="imu"/>
 
     <arg name="launch_driver" default="true" />
-    <arg name="interface" default="canIMU"/>
+    <arg name="interface" default="fintekcan3"/>
     <arg name="receiver_interval_sec" default="0.01"/>
     <arg name ="vehicle_id" default="$(env VEHICLE_ID default)" />
 

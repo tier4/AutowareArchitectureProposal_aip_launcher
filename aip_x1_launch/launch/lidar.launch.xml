@@ -1,7 +1,7 @@
 <launch>
 
   <arg name="launch_driver" default="true" />
-  <arg name="host_ip" default="127.0.0.1"/>
+  <arg name="host_ip" default="192.168.1.100"/>
   <arg name="use_concat_filter" default="true" />
   <arg name="vehicle_id" default="$(env VEHICLE_ID default)" />
   <arg name="vehicle_mirror_param_file" />
@@ -28,15 +28,14 @@
         <arg name="launch_driver" value="$(var launch_driver)" />
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)" />
         <arg name="container_name" value="pointcloud_container"/>
-        <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
       </include>
     </group>
     <group>
       <push-ros-namespace namespace="front_center" />
       <include file="$(find-pkg-share common_sensor_launch)/launch/hesai_XT32.launch.xml">
         <arg name="sensor_frame" value="pandar_xt32_front_center" />
-        <arg name="sensor_ip" value="192.168.3.201" />
-        <arg name="data_port" value="2321" />
+        <arg name="sensor_ip" value="192.168.1.202" />
+        <arg name="data_port" value="2369" />
         <arg name="gnss_port" value="10121" />
         <arg name="scan_phase" value="0.0" />
         <arg name="cloud_min_angle" value="0"/>
