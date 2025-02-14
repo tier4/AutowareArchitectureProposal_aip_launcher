@@ -180,6 +180,7 @@ def generate_launch_description():
     )
     add_launch_arg("vehicle_mirror_param_file")
     add_launch_arg("use_pointcloud_container", "false", description="launch pointcloud container")
+    add_launch_arg("use_cuda_preprocessor", "true", description="use the cuda layer")
     add_launch_arg("pointcloud_container_name", "pointcloud_container")
     add_launch_arg("enable_blockage_diag", "false")
     add_launch_arg("return_mode", "Dual")
