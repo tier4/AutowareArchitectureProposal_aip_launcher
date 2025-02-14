@@ -24,6 +24,7 @@
   <arg name="is_channel_order_top2down" default="false"/>
   <arg name="horizontal_resolution" default="0.4"/>
   <arg name="enable_blockage_diag" default="true"/>
+  <arg name="udp_only" default="false"/>
 
   <include file="$(find-pkg-share common_sensor_launch)/launch/nebula_node_container.launch.py">
     <arg name="launch_driver" value="$(var launch_driver)"/>
@@ -50,6 +51,7 @@
     <arg name="is_channel_order_top2down" value="$(var is_channel_order_top2down)"/>
     <arg name="horizontal_resolution" value="$(var horizontal_resolution)"/>
     <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
+    <arg name="udp_only" value="$(var udp_only)"/>
   </include>
 
   <!-- Velodyne Monitor -->

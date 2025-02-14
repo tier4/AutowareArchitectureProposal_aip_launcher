@@ -128,19 +128,27 @@ def launch_setup(context, *args, **kwargs):
                     **create_parameter_dict(
                         "host_ip",
                         "sensor_ip",
+                        "multicast_ip",
+                        "advanced_diagnostics",
                         "data_port",
-                        "gnss_port",
                         "return_mode",
                         "min_range",
                         "max_range",
                         "frame_id",
                         "scan_phase",
-                        "cloud_min_angle",
-                        "cloud_max_angle",
                         "dual_return_distance_threshold",
                         "rotation_speed",
+                        "cloud_min_angle",
+                        "cloud_max_angle",
+                        "gnss_port",
                         "packet_mtu_size",
                         "setup_sensor",
+                        "udp_only",
+                        "ptp_profile",
+                        "ptp_transport_type",
+                        "ptp_switch_type",
+                        "ptp_domain",
+                        "diag_span",
                     ),
                 },
             ],
@@ -298,42 +306,6 @@ def launch_setup(context, *args, **kwargs):
             )
         )
 
-    if IfCondition(LaunchConfiguration("launch_driver")).evaluate(context):
-        nodes.append(
-            ComposableNode(
-                package="nebula_ros",
-                plugin=sensor_make + "HwInterfaceRosWrapper",
-                # node is created in a global context, need to avoid name clash
-                name=sensor_make.lower() + "_hw_interface_ros_wrapper_node",
-                parameters=[
-                    {
-                        "sensor_model": sensor_model,
-                        "calibration_file": sensor_calib_fp,
-                        **create_parameter_dict(
-                            "sensor_ip",
-                            "host_ip",
-                            "scan_phase",
-                            "return_mode",
-                            "frame_id",
-                            "rotation_speed",
-                            "data_port",
-                            "gnss_port",
-                            "cloud_min_angle",
-                            "cloud_max_angle",
-                            "packet_mtu_size",
-                            "dual_return_distance_threshold",
-                            "setup_sensor",
-                            "ptp_profile",
-                            "ptp_transport_type",
-                            "ptp_switch_type",
-                            "ptp_domain",
-                            "retry_hw",
-                        ),
-                    }
-                ],
-            )
-        )
-
     if IfCondition(LaunchConfiguration("enable_blockage_diag")).evaluate(context):
         nodes.append(
             ComposableNode(
@@ -377,8 +349,8 @@ def launch_setup(context, *args, **kwargs):
         package="rclcpp_components",
         executable=LaunchConfiguration("container_executable"),
         composable_node_descriptions=nodes,
-        condition=UnlessCondition(LaunchConfiguration("use_pointcloud_container")),
         output="both",
+        condition=UnlessCondition(LaunchConfiguration("use_pointcloud_container")),
     )
 
     load_composable_nodes = LoadComposableNodes(
@@ -405,10 +377,17 @@ def generate_launch_description():
     add_launch_arg("config_file", "", description="sensor configuration file")
     add_launch_arg("launch_driver", "True", "do launch driver")
     add_launch_arg("setup_sensor", "True", "configure sensor")
+    add_launch_arg("udp_only", "False", "use UDP only")
     add_launch_arg("retry_hw", "false", "retry hw")
     add_launch_arg("sensor_ip", "192.168.1.201", "device ip address")
+    add_launch_arg(
+        "multicast_ip",
+        "",
+        "the multicast group the sensor shall broadcast to. leave empty to disable multicast",
+    )
     add_launch_arg("host_ip", "255.255.255.255", "host ip address")
-    add_launch_arg("scan_phase", "0.0")
+    add_launch_arg("sync_angle", "0")
+    add_launch_arg("cut_angle", "0.0")
     add_launch_arg("base_frame", "base_link", "base frame id")
     add_launch_arg("min_range", "0.3", "minimum view range for Velodyne sensors")
     add_launch_arg("max_range", "300.0", "maximum view range for Velodyne sensors")
@@ -422,6 +401,8 @@ def generate_launch_description():
     add_launch_arg("frame_id", "lidar", "frame id")
     add_launch_arg("input_frame", LaunchConfiguration("base_frame"), "use for cropbox")
     add_launch_arg("output_frame", LaunchConfiguration("base_frame"), "use for cropbox")
+    add_launch_arg("diag_span", "1000")
+    add_launch_arg("advanced_diagnostics", "false")
     add_launch_arg("use_multithread", "False", "use multithread")
     add_launch_arg("use_intra_process", "False", "use ROS 2 component container communication")
     add_launch_arg("lidar_container_name", "nebula_node_container")
@@ -432,6 +413,7 @@ def generate_launch_description():
     add_launch_arg("ptp_transport_type", "L2")
     add_launch_arg("ptp_switch_type", "TSN")
     add_launch_arg("ptp_domain", "0")
+    add_launch_arg("ptp_lock_threshold", "100")
     add_launch_arg("output_as_sensor_frame", "True", "output final pointcloud in sensor frame")
     add_launch_arg("enable_blockage_diag", "true")
     add_launch_arg("horizontal_ring_id", "64")
