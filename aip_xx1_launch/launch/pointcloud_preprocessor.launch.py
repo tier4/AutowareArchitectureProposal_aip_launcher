@@ -37,19 +37,32 @@ def launch_setup(context, *args, **kwargs):
     )
 
     # set concat filter as a component
-    concat_component = ComposableNode(
-        package="autoware_pointcloud_preprocessor",
-        plugin="autoware::pointcloud_preprocessor::PointCloudConcatenateDataSynchronizerComponent",
-        name="concatenate_data",
-        remappings=[
-            ("~/input/twist", "/sensing/vehicle_velocity_converter/twist_with_covariance"),
-            ("output", "concatenated/pointcloud"),
-            ("output/cuda", "concatenated/pointcloud/cuda"),
-        ],
-        parameters=[concatenate_and_time_sync_node_param],
-        # NOTE(knzo25): when using  the cuda blackboard, this setting can not be made global
-        # extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
-    )
+    if LaunchConfiguration("use_cuda_preprocessor").perform(context):
+        concat_component = ComposableNode(
+            package="autoware_cuda_pointcloud_preprocessor",
+            plugin="autoware::cuda_pointcloud_preprocessor::CudaPointCloudConcatenateDataSynchronizerComponent",
+            name="concatenate_data",
+            remappings=[
+                ("~/input/twist", "/sensing/vehicle_velocity_converter/twist_with_covariance"),
+                ("output", "concatenated/pointcloud"),
+                ("output/cuda", "concatenated/pointcloud/cuda"),
+            ],
+            parameters=[concatenate_and_time_sync_node_param],
+            # NOTE(knzo25): when using  the cuda blackboard, this setting can not be made global
+            # extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
+        )
+    else:
+        concat_component = ComposableNode(
+            package="autoware_pointcloud_preprocessor",
+            plugin="autoware::pointcloud_preprocessor::PointCloudConcatenateDataSynchronizerComponent",
+            name="concatenate_data",
+            remappings=[
+                ("~/input/twist", "/sensing/vehicle_velocity_converter/twist_with_covariance"),
+                ("output", "concatenated/pointcloud"),
+            ],
+            parameters=[concatenate_and_time_sync_node_param],
+            extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
+        )
 
     # load concat or passthrough filter
     concat_loader = LoadComposableNodes(
@@ -71,6 +84,7 @@ def generate_launch_description():
 
     add_launch_arg("use_multithread", "False")
     add_launch_arg("use_intra_process", "False")
+    add_launch_arg("use_cuda_preprocessor", "True")
     add_launch_arg("pointcloud_container_name", "pointcloud_container")
     add_launch_arg(
         "concatenate_and_time_sync_node_param_path",
