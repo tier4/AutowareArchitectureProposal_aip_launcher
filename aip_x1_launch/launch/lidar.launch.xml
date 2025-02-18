@@ -25,7 +25,7 @@
         <arg name="min_range" value="0.05"/>
         <arg name="max_range" value="200.0"/>
         <arg name="return_mode" value="Strongest" />
-        <arg name="config_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x1/xt32.csv" />
+        <arg name="config_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x1/xt32_top.csv" />
         <arg name="launch_driver" value="$(var launch_driver)" />
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)" />
         <arg name="container_name" value="pointcloud_container"/>
@@ -44,7 +44,7 @@
         <arg name="min_range" value="0.05"/>
         <arg name="max_range" value="200.0"/>
         <arg name="return_mode" value="Strongest" />
-        <arg name="config_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x1/xt32.csv" />
+        <arg name="config_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x1/xt32_front_center.csv" />
         <arg name="launch_driver" value="$(var launch_driver)" />
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)" />
         <arg name="container_name" value="pointcloud_container"/>
