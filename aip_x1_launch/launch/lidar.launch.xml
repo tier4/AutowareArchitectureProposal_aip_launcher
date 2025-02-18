@@ -13,20 +13,24 @@
     <push-ros-namespace namespace="lidar"/>
 
     <group>
-      <push-ros-namespace namespace="top"/>
-      <include file="$(find-pkg-share common_sensor_launch)/launch/velodyne_VLP16.launch.xml">
-        <arg name="sensor_frame" value="velodyne_top" />
-        <arg name="device_ip" value="192.168.1.20"/>
-        <arg name="host_ip" value="$(var host_ip)"/>
-        <arg name="data_port" value="2368"/>
+      <push-ros-namespace namespace="top" />
+      <include file="$(find-pkg-share common_sensor_launch)/launch/hesai_XT32.launch.xml">
+        <arg name="sensor_frame" value="pandar_xt32_top" />
+        <arg name="sensor_ip" value="192.168.1.20" />
+        <arg name="data_port" value="2368" />
+        <arg name="gnss_port" value="10121" />
         <arg name="scan_phase" value="180.0" />
+        <arg name="cloud_min_angle" value="0"/>
+        <arg name="cloud_max_angle" value="360"/>
+        <arg name="min_range" value="0.05"/>
+        <arg name="max_range" value="200.0"/>
+        <arg name="return_mode" value="Strongest" />
+        <arg name="config_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x1/xt32.csv" />
         <arg name="launch_driver" value="$(var launch_driver)" />
         <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)" />
         <arg name="container_name" value="pointcloud_container"/>
-        <arg name="enable_blockage_diag" value="$(var enable_blockage_diag)"/>
       </include>
     </group>
-
     <group>
       <push-ros-namespace namespace="front_center" />
       <include file="$(find-pkg-share common_sensor_launch)/launch/hesai_XT32.launch.xml">
