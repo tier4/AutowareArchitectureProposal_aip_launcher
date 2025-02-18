@@ -10,7 +10,6 @@
   <buildtool_depend>ament_cmake_auto</buildtool_depend>
 
   <depend>pandar_description</depend>
-  <depend>velodyne_description</depend>
 
   <export>
     <build_type>ament_cmake</build_type>
