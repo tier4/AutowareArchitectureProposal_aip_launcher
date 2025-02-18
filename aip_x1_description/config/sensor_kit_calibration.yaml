@@ -1,5 +1,5 @@
 sensor_kit_base_link:
-  velodyne_top_base_link:
+  pandar_xt32_top_base_link:
     x: 0.000
     y: 0.000
     z: 0.000
