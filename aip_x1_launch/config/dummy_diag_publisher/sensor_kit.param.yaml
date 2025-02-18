@@ -15,11 +15,6 @@
       # sensing
       sensing_topic_status: default
 
-      # velodyne
-      velodyne_connection: default
-      velodyne_temperature: default
-      velodyne_rpm: default
-
       # pandar
       pandar_connection: default
       pandar_temperature: default
@@ -33,6 +28,8 @@
       gnss_spoofing: default
       gnss_jamming: default
       fix topic status: default
+
+      sensing_topic_status: default
 
       # imu
       gyro_bias_estimator: default
