@@ -275,7 +275,7 @@
         <arg name="calibration_file" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2_gen2/pandar/right_upper.csv" />
         <arg name="dual_return_filter_param_file" value="$(var dual_return_filter_param_file)" />
         <arg name="point_filters_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/right_upper/point_filters_one_third.param.yaml" />
-        <arg name="point_filters.downsample_mask.path" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/right_lower/point_filters_one_third.param.png" />
+        <arg name="point_filters.downsample_mask.path" value="$(find-pkg-share aip_x2_gen2_launch)/config/point_filters/right_upper/point_filters_one_third.param.png" />
         <arg name="dual_return_distance_threshold" value="0.1"/>
         <arg name="blockage_diagnostics_param_file" value="$(find-pkg-share aip_x2_gen2_launch)/config/blockage_diagnostics_param_file.yaml" />
         <arg name="min_azimuth_deg" value="45.0"/>
