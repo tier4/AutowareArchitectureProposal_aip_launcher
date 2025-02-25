@@ -65,12 +65,12 @@ def generate_launch_description():
         name="topic_state_monitor_radar_front_center",
         parameters=[
             {
-                "topic": "/sensing/radar/front_center/objects_raw",
+                "topic": "/sensing/radar/front_center/nebula_packets",
                 "topic_type": "radar_msgs/msg/RadarTracks",
                 "best_effort": True,
                 "diag_name": "radar_front_center_topic_status",
-                "warn_rate": 5.0,
-                "error_rate": 1.0,
+                "warn_rate": 20.0,
+                "error_rate": 5.0,
                 "timeout": 5.0,
                 "window_size": 10,
             }
@@ -84,12 +84,12 @@ def generate_launch_description():
         name="topic_state_monitor_radar_front_left",
         parameters=[
             {
-                "topic": "/sensing/radar/front_left/objects_raw",
+                "topic": "/sensing/radar/front_left/nebula_packets",
                 "topic_type": "radar_msgs/msg/RadarTracks",
                 "best_effort": True,
                 "diag_name": "radar_front_left_topic_status",
-                "warn_rate": 5.0,
-                "error_rate": 1.0,
+                "warn_rate": 20.0,
+                "error_rate": 5.0,
                 "timeout": 5.0,
                 "window_size": 10,
             }
@@ -103,12 +103,12 @@ def generate_launch_description():
         name="topic_state_monitor_radar_front_right",
         parameters=[
             {
-                "topic": "/sensing/radar/front_right/objects_raw",
+                "topic": "/sensing/radar/front_right/nebula_packets",
                 "topic_type": "radar_msgs/msg/RadarTracks",
                 "best_effort": True,
                 "diag_name": "radar_front_right_topic_status",
-                "warn_rate": 5.0,
-                "error_rate": 1.0,
+                "warn_rate": 20.0,
+                "error_rate": 5.0,
                 "timeout": 5.0,
                 "window_size": 10,
             }
@@ -122,12 +122,12 @@ def generate_launch_description():
         name="topic_state_monitor_radar_rear_center",
         parameters=[
             {
-                "topic": "/sensing/radar/rear_center/objects_raw",
+                "topic": "/sensing/radar/rear_center/nebula_packets",
                 "topic_type": "radar_msgs/msg/RadarTracks",
                 "best_effort": True,
                 "diag_name": "radar_rear_center_topic_status",
-                "warn_rate": 5.0,
-                "error_rate": 1.0,
+                "warn_rate": 20.0,
+                "error_rate": 5.0,
                 "timeout": 5.0,
                 "window_size": 10,
             }
@@ -141,12 +141,12 @@ def generate_launch_description():
         name="topic_state_monitor_radar_rear_left",
         parameters=[
             {
-                "topic": "/sensing/radar/rear_left/objects_raw",
+                "topic": "/sensing/radar/rear_left/nebula_packets",
                 "topic_type": "radar_msgs/msg/RadarTracks",
                 "best_effort": True,
                 "diag_name": "radar_rear_left_topic_status",
-                "warn_rate": 5.0,
-                "error_rate": 1.0,
+                "warn_rate": 20.0,
+                "error_rate": 5.0,
                 "timeout": 5.0,
                 "window_size": 10,
             }
@@ -160,12 +160,12 @@ def generate_launch_description():
         name="topic_state_monitor_radar_rear_right",
         parameters=[
             {
-                "topic": "/sensing/radar/rear_right/objects_raw",
+                "topic": "/sensing/radar/rear_right/nebula_packets",
                 "topic_type": "radar_msgs/msg/RadarTracks",
                 "best_effort": True,
                 "diag_name": "radar_rear_right_topic_status",
-                "warn_rate": 5.0,
-                "error_rate": 1.0,
+                "warn_rate": 20.0,
+                "error_rate": 5.0,
                 "timeout": 5.0,
                 "window_size": 10,
             }
