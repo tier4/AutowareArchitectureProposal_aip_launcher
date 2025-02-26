@@ -15,7 +15,7 @@
       <push-ros-namespace namespace="top" />
       <include file="$(find-pkg-share common_sensor_launch)/launch/hesai_XT32.launch.xml">
         <arg name="sensor_frame" value="pandar_xt32_top" />
-        <arg name="sensor_ip" value="192.168.1.20" />
+        <arg name="sensor_ip" value="192.168.1.201" />
         <arg name="data_port" value="2368" />
         <arg name="gnss_port" value="10121" />
         <arg name="scan_phase" value="180.0" />
