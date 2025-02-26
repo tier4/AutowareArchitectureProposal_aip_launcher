@@ -65,6 +65,7 @@
       pitch="${calibration['sensor_kit_base_link']['tamagawa/imu_link']['pitch']}"
       yaw="${calibration['sensor_kit_base_link']['tamagawa/imu_link']['yaw']}"
       fps="100"
+<<<<<<< HEAD
     />
     <!-- gnss -->
     <xacro:imu_macro
@@ -91,6 +92,8 @@
       pitch="${calibration['sensor_kit_base_link']['tamagawa/imu_link']['pitch']}"
       yaw="${calibration['sensor_kit_base_link']['tamagawa/imu_link']['yaw']}"
       fps="100"
+=======
+>>>>>>> cadb756181b1fc0cad1f0bb232ad79bc63f59197
     />
   </xacro:macro>
 </robot>
