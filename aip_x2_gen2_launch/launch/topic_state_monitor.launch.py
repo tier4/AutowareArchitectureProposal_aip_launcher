@@ -66,7 +66,7 @@ def generate_launch_description():
         parameters=[
             {
                 "topic": "/sensing/radar/front_center/nebula_packets",
-                "topic_type": "radar_msgs/msg/RadarTracks",
+                "topic_type": "nebula_msgs/msg/NebulaPackets",
                 "best_effort": True,
                 "diag_name": "radar_front_center_topic_status",
                 "warn_rate": 20.0,
@@ -85,7 +85,7 @@ def generate_launch_description():
         parameters=[
             {
                 "topic": "/sensing/radar/front_left/nebula_packets",
-                "topic_type": "radar_msgs/msg/RadarTracks",
+                "topic_type": "nebula_msgs/msg/NebulaPackets",
                 "best_effort": True,
                 "diag_name": "radar_front_left_topic_status",
                 "warn_rate": 20.0,
@@ -104,7 +104,7 @@ def generate_launch_description():
         parameters=[
             {
                 "topic": "/sensing/radar/front_right/nebula_packets",
-                "topic_type": "radar_msgs/msg/RadarTracks",
+                "topic_type": "nebula_msgs/msg/NebulaPackets",
                 "best_effort": True,
                 "diag_name": "radar_front_right_topic_status",
                 "warn_rate": 20.0,
@@ -123,7 +123,7 @@ def generate_launch_description():
         parameters=[
             {
                 "topic": "/sensing/radar/rear_center/nebula_packets",
-                "topic_type": "radar_msgs/msg/RadarTracks",
+                "topic_type": "nebula_msgs/msg/NebulaPackets",
                 "best_effort": True,
                 "diag_name": "radar_rear_center_topic_status",
                 "warn_rate": 20.0,
@@ -142,7 +142,7 @@ def generate_launch_description():
         parameters=[
             {
                 "topic": "/sensing/radar/rear_left/nebula_packets",
-                "topic_type": "radar_msgs/msg/RadarTracks",
+                "topic_type": "nebula_msgs/msg/NebulaPackets",
                 "best_effort": True,
                 "diag_name": "radar_rear_left_topic_status",
                 "warn_rate": 20.0,
@@ -161,7 +161,7 @@ def generate_launch_description():
         parameters=[
             {
                 "topic": "/sensing/radar/rear_right/nebula_packets",
-                "topic_type": "radar_msgs/msg/RadarTracks",
+                "topic_type": "nebula_msgs/msg/NebulaPackets",
                 "best_effort": True,
                 "diag_name": "radar_rear_right_topic_status",
                 "warn_rate": 20.0,
