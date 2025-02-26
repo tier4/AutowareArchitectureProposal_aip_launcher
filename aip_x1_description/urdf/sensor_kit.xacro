@@ -66,5 +66,31 @@
       yaw="${calibration['sensor_kit_base_link']['tamagawa/imu_link']['yaw']}"
       fps="100"
     />
+    <!-- gnss -->
+    <xacro:imu_macro
+      name="gnss"
+      parent="sensor_kit_base_link"
+      namespace=""
+      x="${calibration['sensor_kit_base_link']['gnss_link']['x']}"
+      y="${calibration['sensor_kit_base_link']['gnss_link']['y']}"
+      z="${calibration['sensor_kit_base_link']['gnss_link']['z']}"
+      roll="${calibration['sensor_kit_base_link']['gnss_link']['roll']}"
+      pitch="${calibration['sensor_kit_base_link']['gnss_link']['pitch']}"
+      yaw="${calibration['sensor_kit_base_link']['gnss_link']['yaw']}"
+      fps="100"
+    />
+    <!-- imu -->
+    <xacro:imu_macro
+      name="tamagawa/imu"
+      parent="sensor_kit_base_link"
+      namespace=""
+      x="${calibration['sensor_kit_base_link']['tamagawa/imu_link']['x']}"
+      y="${calibration['sensor_kit_base_link']['tamagawa/imu_link']['y']}"
+      z="${calibration['sensor_kit_base_link']['tamagawa/imu_link']['z']}"
+      roll="${calibration['sensor_kit_base_link']['tamagawa/imu_link']['roll']}"
+      pitch="${calibration['sensor_kit_base_link']['tamagawa/imu_link']['pitch']}"
+      yaw="${calibration['sensor_kit_base_link']['tamagawa/imu_link']['yaw']}"
+      fps="100"
+    />
   </xacro:macro>
 </robot>

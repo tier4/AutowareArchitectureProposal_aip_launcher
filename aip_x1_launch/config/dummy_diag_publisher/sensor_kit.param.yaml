@@ -12,14 +12,6 @@
 /**:
   ros__parameters:
     required_diags:
-      # sensing
-      sensing_topic_status: default
-
-      # pandar
-      pandar_connection: default
-      pandar_temperature: default
-      pandar_ptp: default
-
       # gnss
       gnss_connection: default
       gnss_data: default
@@ -29,7 +21,11 @@
       gnss_jamming: default
       fix topic status: default
 
-      sensing_topic_status: default
+      # pandar
+      pandar_connection: default
+      pandar_temperature: default
+      pandar_ptp: default
+
 
       # imu
       gyro_bias_estimator: default
